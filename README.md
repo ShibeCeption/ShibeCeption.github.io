@@ -14,4 +14,4 @@ _____________
 _____________  
   
   
-[1]: <https://www.lifewire.com/md-file-4143558 "This will lead to a page about .md/markdown files">
+[1]: <https://www.lifewire.com/md-file-4143558> "This will lead to a page about .md/markdown files"
