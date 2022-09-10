@@ -9,7 +9,7 @@ Here's a list of things i'll be adding to my website
 
 _____________  
   
-[Click this to learn how to use markdown/.md files] [This will lead to a page about .md/markdown files][MD]  
+[This will lead to a page about .md/markdown files][MD]  
   
 _____________  
   
