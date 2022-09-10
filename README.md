@@ -9,8 +9,9 @@ Here's a list of things i'll be adding to my website
 
 _____________  
   
-[Click this to learn how to use markdown/.md files](https://www.lifewire.com/md-file-4143558 "This will lead to a page about .md/markdown files")  
+[Click this to learn how to use markdown/.md files] [1]  
   
 _____________  
   
-
+  
+[1]: <https://www.lifewire.com/md-file-4143558 "This will lead to a page about .md/markdown files">
