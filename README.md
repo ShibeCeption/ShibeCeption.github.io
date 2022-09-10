@@ -6,5 +6,7 @@ Here's a list of things i'll be adding to my website
 - Animations 
 - Games
 - Extras  
-[Click this to learn how to use markdown/.md files](https://www.lifewire.com/md-file-4143558)  
-`dogs`
+
+_____________  
+  
+- [Click this to learn how to use markdown/.md files](https://www.lifewire.com/md-file-4143558)  
