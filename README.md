@@ -6,3 +6,4 @@ Here's a list of things i'll be adding to my website
 - Animations 
 - Games
 - Extras
+![Tux, the Linux mascot](/assets/images/tux.png)
