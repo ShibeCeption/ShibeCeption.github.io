@@ -1,86 +1,64 @@
-
 body {
-  background-color: #4d4d4d;
-  color: whitesmoke;
-  padding-left: 50px;
-  padding-top: 10px;
-  margin-right: 25px;
-  background: linear-gradient(#4d4d4d 50%, #4c535c, #495666);
+  background-color: rgb(245, 245, 245);
+  font-family: Aldrich, monospace;
+  margin: 0;
+}
+
+.top-bar {
+  width: 100vw;
+  height: 7.5vh;
+  position: fixed;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 25px;
+  background-color: rgb(211, 211, 211);
+  padding-left: 1.5vw;
+  overflow: hidden;
 }
-.img {
-  border: solid 10px;
-  height: 100px; width: 100px; border-radius: 100px;
-  border-color: #686868;
+@media (max-width: 1000px) {
+  .top-bar {
+    height: 10vh;
+    flex-shrink: 2;
+  }
 }
-.header {
-  border: solid 10px darkgrey;
-  border-color: #686868;
-  border-radius: 100px;
-  max-width: 1500px;
-  min-width: 500px;
-  min-height: 90px;
-  max-height: 200px;
-  background-color: darkgray;
-  text-align: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  box-shadow: 0 0 20px #00ffff;
-  display: flex;
-  flex-direction: column;
-  padding-left: 0px;
-  flex-grow: 2;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-left: 30px;
-  padding-right: 30px;
+@media (max-width: 1500px) {
+  .top-bar {
+    height: 10vh;
+  }
 }
-.img2 {
-  width: 150px;
-  height: 250px;
-  border: solid 10px;
-  border-radius: 50px 10px 50px 10px;
-  border-color: #686868;
-  box-shadow: 0 0 4px #00e1ff;
+.home:hover,
+.logo:hover,
+.logo-text:hover,
+.nav-bar-option:hover,
+.games:hover,
+.contact:hover {
+  transform: scale(125%);
+}
+.nav-bar-option:hover {
+  top: 25px;
 }
 a {
-  color: white;
+  color: black;
+  text-decoration: none;
 }
-a:hover {
-  color: rgb(0, 255, 255);
+.home {
+  font-weight: bold;
 }
-a:active {
-  color: rgb(152, 255, 255);
+.nav-bar-option {
+  position: relative;
+  top: 17.5px;
 }
-.CSS-Verify {
-  box-shadow: 0 0 5px 2px #9ef9ff;
+.logo {
+  position: relative;
+  top: -2px;
+  left: -10px;
+  font-weight: bold;
 }
-.CSS-Verify:hover {
-filter: brightness(130%);
+audio {
+  position: fixed;
+  right: 0;
 }
-img:hover {
-filter: hue-rotate(10deg);
-filter: brightness(115%);
-}
-* {
-scroll-behavior: smooth;
-}
-.link-b {
-  font-size: 32px;
-}
-.flex-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-.imgFC {
-  width: 300px;
-  height: 300px;
-  border-radius: 75px;
-  object-fit: cover;
-}
-.snake {
-  width: 200px;
+.fa-gamepad {
+  position: relative;
+  top: 2px;
 }
