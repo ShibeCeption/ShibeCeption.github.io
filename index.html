@@ -8,86 +8,10 @@
     <meta name="description" content="A Arcade with fun games to play!" />
     <title>The Arcade</title>
     <link rel="icon" type="image/x-icon" href="/images/Favicon.ico" />
-    <link rel="stylesheet" href="arcade-styles.css" />
+    <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
-    <style>
-body {
-  background-color: rgb(245, 245, 245);
-  font-family: Aldrich, monospace;
-  margin: 0;
-}
-
-.top-bar {
-  width: 100vw;
-  height: 7.5vh;
-  position: fixed;
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-  background-color: rgb(211, 211, 211);
-  padding-left: 1.5vw;
-  overflow: hidden;
-}
-@media (max-width: 1000px) {
-  .top-bar {
-    height: 10vh;
-    flex-shrink: 2;
-  }
-}
-@media (max-width: 1500px) {
-  .top-bar {
-    height: 10vh;
-  }
-}
-@media (max-width: 500px) {
-  .top-bar {
-    gap: 15px;
-  }
-}
-.home:hover,
-.logo-text:hover,
-.nav-bar-option:hover,
-.games:hover,
-.contact:hover {
-  transform: scale(125%);
-  font-weight: bold;
-}
-.nav-bar-option:hover {
-  top: 25px;
-}
-a {
-  color: black;
-  text-decoration: none;
-}
-.nav-bar-option {
-  position: relative;
-  top: 17.5px;
-}
-.logo {
-  position: relative;
-
-  top: 4px;
-  left: 0px;
-  font-weight: bold;
-}
-.logo-text {
-  position: relative;
-  top: -10px;
-}
-audio {
-  position: fixed;
-  right: 0;
-}
-.fa-gamepad {
-  position: relative;
-  top: 2px;
-}
-.games-selection {
-  display: grid;
-}
-    </style>
   </head>
  <body>
     <div id="top" class="top-bar">
