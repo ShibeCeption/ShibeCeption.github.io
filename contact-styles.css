@@ -71,6 +71,11 @@ body {
   padding-bottom: 0;
   z-index: -2;
 }
+@media (max-width: 500px) {
+  .bar {
+    height: 150px;
+  }
+}
 body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
