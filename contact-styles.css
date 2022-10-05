@@ -73,7 +73,7 @@ body {
 }
 @media (max-width: 500px) {
   .bar {
-    height: 150px;
+    padding-bottom: 50px;
   }
 }
 body {
