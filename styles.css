@@ -28,7 +28,7 @@ body {
 }
 @media (max-width: 500px) {
   .top-bar {
-    gap: 15px;
+    gap: 5px;
   }
 }
 .home:hover,
@@ -60,10 +60,6 @@ a {
 .logo-text {
   position: relative;
   top: -10px;
-}
-audio {
-  position: fixed;
-  right: 0;
 }
 .fa-gamepad {
   position: relative;
