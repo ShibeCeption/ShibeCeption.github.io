@@ -1,6 +1,8 @@
 body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
+  margin: 0;
+  font-size: 100%;
 }
 .home:hover,
 .logo-text:hover,
@@ -106,6 +108,29 @@ a {
   position: relative;
   top: 2px;
 }
-.grid-contact {
-  margin-left: 35%;
+.contact-area {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact-info {
+  padding: 10px;
+  border: 2px dashed black;
+}
+
+.contact-info:hover {
+  animation-name: contact;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-delay: 5s;
+}
+@keyframes contact {
+  33% {
+    transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg);
+  }
+}
+* ::selection {
+  background-color: hsl(212, 22%, 51%);
 }
