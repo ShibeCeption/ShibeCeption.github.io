@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,10 +7,17 @@
     <meta name="keywords" content="HTML, CSS" />
     <meta name="description" content="A Arcade with fun games to play!" />
     <title>The Arcade</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="arcade-styles.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap"
+      rel="stylesheet" />
+    <script src="arcade-scripts.js"></script>
   </head>
   <body>
     <div id="top" class="top-bar">
@@ -29,6 +36,25 @@
       </p>
     </div>
     <nav class="nav-bar"></nav>
-    <div id="games-selection" class="games-selection"></div>
+    <div class="textContainer"><h1>Games</h1></div>
+    <div id="games-selection" class="games-selection">
+      <div class="item 1">
+        <a class="snakeLink" href="/snake.html">
+          <img
+            class="snakeimg"
+            src="/images/snakeiconconsole2-export.png"
+            alt="a image of a snake" />
+        </a>
+      </div>
+      <div class="item 2">
+        <img src="/images/CMtext.png" alt="Coming soon" />
+      </div>
+      <div class="item 3">
+        <img src="/images/CMtext.png" alt="Coming soon" />
+      </div>
+      <div class="item i4">
+        <img src="/images/CMtext.png" alt="Coming soon" />
+      </div>
+    </div>
   </body>
 </html>
