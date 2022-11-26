@@ -2,6 +2,7 @@ body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
   margin: 0;
+  font-size: 100%;
 }
 
 .top-bar {
@@ -52,7 +53,6 @@ a {
 }
 .logo {
   position: relative;
-
   top: 4px;
   left: 0px;
   font-weight: bold;
@@ -66,5 +66,52 @@ a {
   top: 2px;
 }
 .games-selection {
-  display: grid;
+  display: flex;
+  padding-top: 20vh;
+  padding-left: 5vw;
+  width: 90vw;
+  height: 80vh;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5vw;
+}
+.item {
+  width: 25vh;
+  height: 25vh;
+  background-color: #d3d3d3;
+  border: 4vh groove rgb(192, 192, 192);
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+}
+
+.item:hover {
+  animation: wiggle 5s;
+}
+.item img {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes wiggle {
+  40% {
+    transform: rotateZ(5deg);
+  }
+  60% {
+    transform: rotateZ(-5deg);
+  }
+}
+
+.textContainer {
+  width: 100vw;
+  height: 80vh;
+  z-index: -1;
+  position: absolute;
+  top: 4%;
+  font-family: "Roboto", monospace;
+  display: flex;
+  align-items: bottom;
+  justify-content: center;
+  font-size: 4vh;
 }
