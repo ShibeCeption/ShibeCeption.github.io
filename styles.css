@@ -78,8 +78,8 @@ a {
 .item {
   width: 25vh;
   height: 25vh;
-  background-color: #d3d3d3;
-  border: 4vh groove rgb(192, 192, 192);
+  background-color: #c7c7c7;
+  border: 4vh groove rgb(211, 211, 211);
   display: inherit;
   justify-content: center;
   align-items: center;
