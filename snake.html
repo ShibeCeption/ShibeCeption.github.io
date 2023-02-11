@@ -7,7 +7,7 @@
     <meta name="keywords" content="HTML, CSS" />
     <meta name="description" content="A Arcade with fun games to play!" />
     <title>The Arcade</title>
-    <link rel="icon" type="image/x-icon" href="/webLogo.png" />
+    <link rel="icon" type="image/x-icon" href="/images/ArcadeLogo2Trim.gif" />
     <link rel="stylesheet" href="snake-styles.css" />
     <link
       rel="stylesheet"
@@ -17,19 +17,22 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap"
       rel="stylesheet" />
-  </head>  
+  </head>
   <body>
     <div id="top" class="top-bar">
       <i class="fa-solid fa-bars nav-bar-option"></i>
       <p class="logo-text">
         The Arcade
-        <img class="logo" src="/arcade.png" alt="The Arcade logo" />
+        <img
+          class="logo"
+          src="/images/ArcadeLogo2Trim.gif"
+          alt="The Arcade logo" />
       </p>
       <p class="home">
-        <a href="/index.html#top">Home <i class="fa-solid fa-house"></i></a>
+        <a href="/arcade.html#top">Home <i class="fa-solid fa-house"></i></a>
       </p>
       <p class="games">
-        <a href="/index.html#games-selection"
+        <a href="/arcade.html#games-selection"
           >Games <i class="fa-solid fa-gamepad"></i
         ></a>
       </p>
@@ -38,15 +41,12 @@
       </p>
     </div>
     <div class="container-game">
-      <div class="game">
-        <p class="game text">
-          Use inspect to play⠀ <i class="fa-solid fa-magnifying-glass"> </i>
-        </p>
-      </div>
+      <div class="game"></div>
     </div>
     <audio controls autoplay>
       <source src="/images/Background_music.mp3" />
       Audio not supported
     </audio>
+    <script src="/snake-script.js"></script>
   </body>
 </html>
