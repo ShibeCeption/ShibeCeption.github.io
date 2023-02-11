@@ -53,13 +53,13 @@ a {
 }
 .logo {
   position: relative;
-  top: 4px;
+  top: 10px;
   left: 0px;
   font-weight: bold;
 }
 .logo-text {
   position: relative;
-  top: -10px;
+  top: -20px;
 }
 .fa-gamepad {
   position: relative;
@@ -79,7 +79,8 @@ a {
   width: 25vh;
   height: 25vh;
   background-color: #c7c7c7;
-  border: 4vh groove rgb(211, 211, 211);
+  border: 4vh double rgb(230, 230, 230);
+  border-radius: 10%;
   display: inherit;
   justify-content: center;
   align-items: center;
@@ -101,17 +102,4 @@ a {
   60% {
     transform: rotateZ(-5deg);
   }
-}
-
-.textContainer {
-  width: 100vw;
-  height: 80vh;
-  z-index: -1;
-  position: absolute;
-  top: 4%;
-  font-family: "Roboto", monospace;
-  display: flex;
-  align-items: bottom;
-  justify-content: center;
-  font-size: 4vh;
 }
