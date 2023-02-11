@@ -96,13 +96,13 @@ a {
 .logo {
   position: relative;
 
-  top: 4px;
+  top: 10px;
   left: 0px;
   font-weight: bold;
 }
 .logo-text {
   position: relative;
-  top: -10px;
+  top: -20px;
 }
 .fa-gamepad {
   position: relative;
@@ -117,20 +117,33 @@ a {
 }
 .contact-info {
   padding: 10px;
-  border: 2px dashed black;
+  border: 6px double rgb(97, 97, 97);
 }
-
 .contact-info:hover {
   animation-name: contact;
   animation-duration: 3s;
   animation-iteration-count: 1;
   animation-delay: 5s;
 }
+
 @keyframes contact {
   33% {
-    transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg);
+    transform: rotateX(180deg);
   }
 }
+
 * ::selection {
   background-color: hsl(212, 22%, 51%);
+}
+.virtual-text {
+  width: 100vw;
+  background-color: rgb(150, 150, 150);
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  font-family: "Roboto", monospace;
+  font-weight: 900;
+  border: 2% groove rgb(34, 34, 34);
+  color: rgb(0, 0, 0);
+  border-left: none;
+  border-right: none;
 }
