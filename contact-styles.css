@@ -2,49 +2,6 @@ body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
   margin: 0;
-  font-size: 100%;
-}
-.home:hover,
-.logo-text:hover,
-.nav-bar-option:hover,
-.games:hover,
-.contact:hover {
-  transform: scale(125%);
-  font-weight: bold;
-}
-.nav-bar-option:hover {
-  top: 25px;
-}
-a {
-  color: black;
-  text-decoration: none;
-}
-.nav-bar-option {
-  position: relative;
-  top: 17.5px;
-}
-.logo {
-  position: relative;
-
-  top: 4px;
-  left: 0px;
-  font-weight: bold;
-}
-.logo-text {
-  position: relative;
-  top: -10px;
-}
-.fa-gamepad {
-  position: relative;
-  top: 2px;
-}
-.games-selection {
-  display: grid;
-}
-body {
-  background-color: rgb(245, 245, 245);
-  font-family: Aldrich, monospace;
-  margin: 0;
 }
 .top-bar {
   width: 100vw;
