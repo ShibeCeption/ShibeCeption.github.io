@@ -56,13 +56,13 @@ a {
 }
 .logo {
   position: relative;
-  top: 4px;
+  top: 10px;
   left: 0px;
   font-weight: bold;
 }
 .logo-text {
   position: relative;
-  top: -10px;
+  top: -20px;
 }
 .fa-gamepad {
   position: relative;
@@ -74,10 +74,13 @@ audio {
 }
 
 .game {
-  width: 60vw;
-  height: 60vh;
-  border: 4vw groove rgb(211, 211, 211);
-  background-color: hsla(0, 0%, 59%, 0.39);
+  width: 70vw;
+  height: 75vh;
+  border: 3vw solid rgb(163, 163, 163);
+  border-radius: 5%;
+  background-color: hsla(0, 0%, 75%, 0.39);
+  position: absolute;
+  top: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
