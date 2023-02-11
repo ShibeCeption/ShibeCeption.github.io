@@ -69,10 +69,6 @@ a {
   top: 2px;
 }
 
-audio {
-  visibility: hidden;
-}
-
 .game {
   width: 70vw;
   height: 75vh;
