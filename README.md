@@ -11,7 +11,7 @@ _____________
   
 [This will lead to a page about .md/markdown files][MD]  
   
-_____________  
+_____________
   
   
 [MD]: <https://www.lifewire.com/md-file-4143558> "This will lead to a page about .md/markdown files"
