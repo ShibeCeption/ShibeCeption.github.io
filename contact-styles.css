@@ -73,7 +73,9 @@ a {
   align-items: center;
 }
 .contact-info {
-  padding: 10px;
+  height: 10vh;
+  padding: 1.25vh;
+  font-size: 2.5vh;
   border: 6px double rgb(97, 97, 97);
 }
 .contact-info:hover {
@@ -93,10 +95,9 @@ a {
   background-color: hsl(212, 22%, 51%);
 }
 .virtual-text {
+  height: 10vh;
   width: 100vw;
   background-color: rgb(150, 150, 150);
-  padding-top: 1vh;
-  padding-bottom: 1vh;
   font-family: "Roboto", monospace;
   font-weight: 900;
   border: 2% groove rgb(34, 34, 34);
@@ -106,9 +107,10 @@ a {
 }
 
 .profile-pic {
-  height: 76px;
+  height: 10vh;
   border: 6px double rgb(97, 97, 97);
-  padding: 10px;
+  padding: 1.25vh;
+  object-fit: cover;
 }
 
 .profile-pic:hover {
@@ -123,4 +125,3 @@ a {
     transform: rotateY(180deg);
   }
 }
-
