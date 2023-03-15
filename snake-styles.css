@@ -71,7 +71,7 @@ a {
   height: 512px;
   border: 3vw solid rgb(143, 167, 113);
   border-radius: 5%;
-  background-image: url(/images/grassv2.png);
+  background-image: url(grassv2.png);
   position: absolute;
   top: 10%;
   display: flex;
