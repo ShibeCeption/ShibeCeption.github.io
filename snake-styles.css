@@ -67,11 +67,11 @@ a {
 }
 
 .game {
-  width: 70vw;
-  height: 75vh;
-  border: 3vw solid rgb(163, 163, 163);
+  width: 512px;
+  height: 512px;
+  border: 3vw solid rgb(143, 167, 113);
   border-radius: 5%;
-  background-color: hsla(0, 0%, 75%, 0.39);
+  background-image: url(/images/grassv2.png);
   position: absolute;
   top: 10%;
   display: flex;
