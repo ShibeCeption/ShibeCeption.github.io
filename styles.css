@@ -36,6 +36,7 @@ body {
 .nav-bar-option:hover,
 .games:hover,
 .contact:hover {
+  transition: all 1s ease-in-out;
   transform: scale(125%);
   font-weight: bold;
 }
@@ -78,7 +79,7 @@ a {
 .item {
   width: 25vh;
   height: 25vh;
-  background-color: #c7c7c7;
+  background-color: #c9c9c9;
   border: 4vh double rgb(230, 230, 230);
   border-radius: 10%;
   display: inherit;
@@ -102,4 +103,20 @@ a {
   60% {
     transform: rotateZ(-5deg);
   }
+}
+
+.nav-bar {
+  width: 10vw;
+  height: 7.5vh;
+  border-radius: 5%;
+  z-index: 10;
+  background-color: rgb(211, 211, 211);
+  position: fixed;
+  top: 5%;
+  left: 0%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1vw;
+  visibility: hidden;
 }
