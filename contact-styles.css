@@ -36,6 +36,7 @@ body {
 .nav-bar-option:hover,
 .games:hover,
 .contact:hover {
+  transition: all 1s ease-in-out;
   transform: scale(125%);
   font-weight: bold;
 }
@@ -75,7 +76,6 @@ a {
 .contact-info {
   height: 10vh;
   padding: 1.25vh;
-  font-size: 2.5vh;
   border: 6px double rgb(97, 97, 97);
 }
 .contact-info:hover {
@@ -124,4 +124,20 @@ a {
   33% {
     transform: rotateY(180deg);
   }
+}
+
+.nav-bar {
+  width: 10vw;
+  height: 7.5vh;
+  border-radius: 5%;
+  z-index: 10;
+  background-color: rgb(211, 211, 211);
+  position: fixed;
+  top: 5%;
+  left: 0%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1vw;
+  visibility: hidden;
 }
