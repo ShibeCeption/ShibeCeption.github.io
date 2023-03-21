@@ -1,7 +1,6 @@
 
 let menuBar = document.querySelector('.nav-bar')
-
-
+let menu = document.querySelector('#menu')
 
 menu.onclick = function menu() {
     if (menuBar.style.visibility == "hidden") {
