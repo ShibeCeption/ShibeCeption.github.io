@@ -127,8 +127,8 @@ a {
 }
 
 .nav-bar {
-  width: 10vw;
-  height: 7.5vh;
+  width: 12.5vw;
+  height: 10vh;
   border-radius: 5%;
   z-index: 10;
   background-color: rgb(211, 211, 211);
@@ -141,3 +141,4 @@ a {
   gap: 1vw;
   visibility: hidden;
 }
+
