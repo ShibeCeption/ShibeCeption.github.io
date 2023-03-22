@@ -54,7 +54,6 @@ function toggleTheme(e) {
         for (let x = 0; x < games.length; x++) {
             games[x].style.border = "";
         }
-        snakeGame.setAttribute("src", "/images/SnekCover-export.png")
         //
         document.cookie = "darkMode=off"
         e.stopPropagation()
