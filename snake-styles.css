@@ -110,3 +110,10 @@ a {
   gap: 1vw;
   display: none;
 }
+
+@media all and (max-width: 1367px) {
+  .nav-bar {
+    align-items: flex-end;
+  }
+}
+
