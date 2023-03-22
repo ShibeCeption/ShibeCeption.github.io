@@ -14,6 +14,7 @@ body {
   background-color: rgb(211, 211, 211);
   padding-left: 1.5vw;
   overflow: hidden;
+  z-index: 12;
 }
 @media (max-width: 1000px) {
   .top-bar {
