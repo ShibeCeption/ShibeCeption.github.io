@@ -4,12 +4,13 @@ let menuBar = document.querySelector('.nav-bar')
 
 
 menu.onclick = function menu() {
-    if (menuBar.style.visibility == "hidden") {
-        menuBar.style.visibility = 'visible';
+    if (menuBar.style.display !== 'flex') {
+        menuBar.style.display = 'flex';
+        return;
+    } if (menuBar.style.display == 'flex') {
+        menuBar.style.display = 'none';
         return;
     }
-    menuBar.style.visibility = 'hidden';
-    return;
 }
 
 
