@@ -116,8 +116,7 @@ a {
   left: 0%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   gap: 1vw;
-  visibility: hidden;
+  display: none;
 }
-
