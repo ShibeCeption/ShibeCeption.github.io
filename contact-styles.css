@@ -14,6 +14,7 @@ body {
   background-color: rgb(211, 211, 211);
   padding-left: 1.5vw;
   overflow: hidden;
+  z-index: 11;
 }
 @media (max-width: 1000px) {
   .top-bar {
@@ -137,8 +138,7 @@ a {
   left: 0%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   gap: 1vw;
-  visibility: hidden;
+  display: none;
 }
-
