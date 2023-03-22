@@ -70,7 +70,7 @@ a {
 
 .game {
   width: 512px;
-  height: 512px;
+  height: 70vh;
   border: 3vw solid rgb(117, 146, 83);
   border-radius: 5%;
   background-image: url(GrassV2.png);
