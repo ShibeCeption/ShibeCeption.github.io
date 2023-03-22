@@ -73,7 +73,7 @@ a {
   height: 70vh;
   border: 3vw solid rgb(117, 146, 83);
   border-radius: 5%;
-  background-image: url(GrassV2.png);
+  background-image: url(/images/grassv2.png);
   position: absolute;
   top: 10%;
   display: flex;
@@ -107,7 +107,11 @@ a {
   left: 0%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 1vw;
   visibility: hidden;
+}
+
+.nav-bar p {
+  z-index: 13;
 }
