@@ -75,6 +75,25 @@ function cookieCheck() {
 }
 cookieCheck()
 
+document.body.onkeydown = function goBack(e) {
+  if (e.keyCode == 8) {
+    let leaveCheck = confirm("Do you wish to leave the Game?")
+    leaveCheck == true
+      ? location.href = 'http://127.0.0.1:5500/arcade.html'
+      : console.log("Leave Denied");
+  }
+}
+
+function screenCheck() {
+  if (window.matchMedia("(max-width: 1370px)").matches) {
+    topBar.style.display = "none";
+    navBar.style.display = "none";
+  } else {
+    topBar.style.display = "flex";
+  }
+}
+screenCheck()
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let image = document.getElementById('snekHead')
