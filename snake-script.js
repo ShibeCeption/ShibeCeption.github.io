@@ -21,8 +21,6 @@ let themeToggle = document.querySelector('.fa-toggle-off')
 let themeToggle2 = document.querySelector('.toggle-text')
 
 function toggleTheme(e) {
-  let topBar = document.querySelector('.top-bar');
-  let navBar = document.querySelector('.nav-bar');
   // Snek Exclusive
   let snekBorder = document.querySelector('#snek')
   //
@@ -61,8 +59,6 @@ function cookieCheck() {
 
     return;
   } if (document.cookie == "darkMode=on") {
-    let topBar = document.querySelector('.top-bar');
-    let navBar = document.querySelector('.nav-bar');
     // Snek Exclusive
     let snekBorder = document.querySelector('#snek')
     //
