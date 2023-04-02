@@ -1,4 +1,3 @@
-
 body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
@@ -15,7 +14,7 @@ body {
   background-color: rgb(211, 211, 211);
   padding-left: 1.5vw;
   overflow: hidden;
-  z-index: 11;
+  z-index: 12;
 }
 @media (max-width: 1000px) {
   .top-bar {
@@ -70,14 +69,15 @@ a {
 
 .game {
   width: 512px;
-  height: 70vh;
-  border: 3vw solid rgb(117, 146, 83);
-  border-radius: 5%;
+  height: 512px;
+  border: 2vw solid rgb(117, 146, 83);
+  border-radius: 0%;
   background-image: url(GrassV2.png);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  z-index: 20;
 }
 
 .game p {
@@ -91,7 +91,6 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -1;
 }
 
 .nav-bar {
@@ -110,7 +109,7 @@ a {
   display: none;
 }
 
-@media all and (max-width: 1367px) {
+@media all and (max-width: 1370px) {
   .nav-bar {
     align-items: flex-end;
     height: 12vh;
@@ -157,4 +156,3 @@ a {
   filter: brightness(125%) saturate(150%);
   transform: scale(110%);
 }
-
