@@ -1,4 +1,3 @@
-
 let topBar = document.querySelector('.top-bar');
 let navBar = document.querySelector('.nav-bar');
 // Snek Exclusive
