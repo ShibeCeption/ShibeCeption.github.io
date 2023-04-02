@@ -73,8 +73,6 @@ a {
   border: 3vw solid rgb(117, 146, 83);
   border-radius: 5%;
   background-image: url(GrassV2.png);
-  position: absolute;
-  top: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
