@@ -46,15 +46,43 @@
           class="fa-solid fa-toggle-off toggleTheme"></i>
       </p>
     </nav>
-    <div class="container-game">
-      <div class="game">
-      <marquee id="snek">
-          <img src="SnekRight.png" alt="Snek" /><img
-            src="SnekLengthRight.png"
+    <div id="game" class="container-game">
+      <div class="ui2">
+        <p id="lapsS"></p>
+        <p id="lapsR"></p>
+        <p id="lapsB"></p>
+
+        <div id="snek">
+          <img id="snekHead" src="/snekRight.png" alt="Snek" /><img
+            id="snekLength"
+            src="/sneklengthright.png"
             alt="SnekLength" /><img
-            src="SnekEndRight.png"
-            alt="Snekend"
-        /></marquee></div>
+            src="/SnekEndRight.png"
+            alt="SnekEnd"
+            id="snekEnd" />
+          <img id="snekHeadR" src="/RacerSnekR.png" alt="Snek" /><img
+            id="snekLengthR"
+            src="/RacerSnekLL.png"
+            alt="SnekLength" /><img
+            id="snekLengthRS"
+            src="/RacerSnekLLS.png"
+            alt="SnekLength" /><img
+            src="/RacerEL.png"
+            alt="SnekEnd"
+            id="snekEndR" />
+          <img id="snekHeadB" src="/BoomSnekR.png" alt="Snek" /><img
+            id="snekLengthB"
+            src="/BoomSnekLL.png"
+            alt="SnekLengthB" /><img
+            src="/BoomSnekEL.png"
+            alt="SnekEndB"
+            id="snekEndB" />
+        </div>
+      </div>
+      <div class="game">
+        <canvas id="canvas" height="512px" width="512px"> </canvas>
+      </div>
+      <div class="ui"></div>
     </div>
     <script src="/snake-script.js"></script>
   </body>
