@@ -150,3 +150,4 @@ let image3 = document.getElementById('snekEnd')
       }
     }
   } window.requestAnimationFrame(drawIt);
+
