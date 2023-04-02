@@ -117,3 +117,44 @@ a {
     height: 12vh;
   }
 }
+
+.ui {
+  background-color: lightgreen;
+  width: 250px;
+  height: 512px;
+  border: 2vw solid rgb(117, 146, 83);
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 5%;
+  position: relative;
+  left: -5%;
+}
+
+.ui2 {
+  background-color: lightgreen;
+  width: 250px;
+  height: 512px;
+  border: 2vw solid rgb(117, 146, 83);
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+  position: relative;
+  right: -5%;
+}
+
+#snek {
+  position: relative;
+  visibility: hidden;
+}
+
+.ui2 p {
+  background-color: rgb(152, 194, 128);
+  margin-left: 5px;
+  border: 4px groove rgb(117, 146, 83);
+  border-radius: 10%;
+  width: 180px;
+  transition: all 1s ease-in-out;
+}
+
+.ui2 p:hover {
+  filter: brightness(125%) saturate(150%);
+  transform: scale(110%);
+}
