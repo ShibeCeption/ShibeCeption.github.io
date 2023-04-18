@@ -78,7 +78,7 @@ document.body.onkeydown = function goBack(e) {
   if (e.keyCode == 8) {
     let leaveCheck = confirm("Do you wish to leave the Game?")
     leaveCheck == true
-      ? location.href = 'http://127.0.0.1:5500/arcade.html'
+      ? location.href = 'shibeception.github.io/index.html'
       : console.log("Leave Denied");
   }
 }
