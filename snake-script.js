@@ -42,8 +42,6 @@
       return;
     }
   }
-  
-  themeToggle = document.querySelector('.fa-toggle-off')
 
   themeToggle.onclick = toggleTheme;
   themeToggle2.onclick = toggleTheme;
