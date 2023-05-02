@@ -14,7 +14,7 @@
     }
   }
 
-  // let themeToggle = document.querySelector('.fa-toggle-off')
+  let themeToggle = document.getElementById('toggleTheme')
   let themeToggle2 = document.querySelector('.toggle-text')
 
   function toggleTheme(e) {
