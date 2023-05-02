@@ -80,6 +80,16 @@
   }
   screenCheck()
 
+  function screenCheck() {
+    if (window.matchMedia("(max-width: 1370px)").matches) {
+      topBar.style.display = "none";
+      navBar.style.display = "none";
+    } else {
+      topBar.style.display = "flex";
+    }
+  }
+  screenCheck()
+
 
 
   /*
@@ -138,9 +148,9 @@
 
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  let image = document.querySelector('#SnekHead')
-  let image2 = document.querySelector('#SnekLength')
-  let image3 = document.querySelector('#SnekEnd')
+  let image = document.getElementById('SnekHead')
+  let image2 = document.getElementById('SnekLength')
+  let image3 = document.getElementById('SnekEnd')
 
   let snekCoords = {
     snekHead: {
@@ -189,8 +199,8 @@
   function snek() {
     moved = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    moveSnek();
     drawSnek();
+    moveSnek();
     drawFood();
     drawObjects();
   }
@@ -490,9 +500,7 @@
   // Make snek parts go to the part infront of old position
 
   image3.addEventListener("load", () => {
-    setInterval(snek, 1000 / 5);
+    setInterval(snek, 1000 / 4);
   })
 
 }
-
-// setInterval(snek, 1000 / 5);
