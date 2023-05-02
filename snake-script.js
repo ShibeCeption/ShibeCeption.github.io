@@ -188,8 +188,8 @@
 
   function snek() {
     moved = false;
-    moveSnek();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    moveSnek();
     drawSnek();
     drawFood();
     drawObjects();
