@@ -70,9 +70,9 @@ a {
 .game {
   width: 512px;
   height: 512px;
-  border: 2vw solid rgb(117, 146, 83);
+  border: 30px solid rgb(117, 146, 83);
   border-radius: 0%;
-  background-image: url(GrassV2.png);
+  background-image: url(/images/GrassV2.png);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,6 +91,14 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -1;
+  font-family: Pixel;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: "Pixel"; /*a name to be used later*/
+  src: url("/04B_30__.TTF"); /*URL to font*/
 }
 
 .nav-bar {
@@ -120,22 +128,23 @@ a {
   background-color: lightgreen;
   width: 250px;
   height: 512px;
-  border: 2vw solid rgb(117, 146, 83);
+  border: 30px solid rgb(117, 146, 83);
   border-top-right-radius: 5%;
   border-bottom-right-radius: 5%;
   position: relative;
-  left: -5%;
+  left: -1.5%;
+  z-index: 20;
 }
 
 .ui2 {
   background-color: lightgreen;
   width: 250px;
   height: 512px;
-  border: 2vw solid rgb(117, 146, 83);
+  border: 30px solid rgb(117, 146, 83);
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
   position: relative;
-  right: -5%;
+  right: -1.5%;
 }
 
 #snek {
@@ -148,11 +157,13 @@ a {
   margin-left: 5px;
   border: 4px groove rgb(117, 146, 83);
   border-radius: 10%;
-  width: 180px;
+  width: 220px;
   transition: all 1s ease-in-out;
+  text-align: center;
+  transform: scale(102%);
 }
 
 .ui2 p:hover {
   filter: brightness(125%) saturate(150%);
-  transform: scale(110%);
+  transform: scale(115%);
 }
