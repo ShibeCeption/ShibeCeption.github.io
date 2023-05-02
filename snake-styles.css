@@ -72,7 +72,7 @@ a {
   height: 512px;
   border: 30px solid rgb(117, 146, 83);
   border-radius: 0%;
-  background-image: url(/images/GrassV2.png);
+  background-image: url(/GrassV2.png);
   display: flex;
   justify-content: center;
   align-items: center;
