@@ -138,9 +138,9 @@
 
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  let image = document.getElementById('SnekHead')
-  let image2 = document.getElementById('SnekLength')
-  let image3 = document.getElementById('SnekEnd')
+  let image = document.querySelector('#SnekHead')
+  let image2 = document.querySelector('#SnekLength')
+  let image3 = document.querySelector('#SnekEnd')
 
   let snekCoords = {
     snekHead: {
@@ -495,4 +495,4 @@
 
 }
 
-setInterval(snek, 1000 / 5);
+// setInterval(snek, 1000 / 5);
