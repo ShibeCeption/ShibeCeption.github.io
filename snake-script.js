@@ -492,7 +492,7 @@
   // Make snek parts go to the part infront of old position
 
   image3.addEventListener("load", () => {
-    setInterval(snek, 1000 / 2);
+    setInterval(snek, 1000 / 5);
   })
 
 }
