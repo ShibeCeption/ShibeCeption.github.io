@@ -504,3 +504,5 @@
   })
 
 }
+
+setInterval(snek, 1000 / 4);
