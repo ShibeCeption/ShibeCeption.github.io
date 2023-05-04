@@ -461,7 +461,7 @@
   }
 
   let collidables = new Image();
-  collidables.src = '/collidables.png'
+  collidables.src = '/Collidables.png'
 
   function drawObjects() {
     drawObject("bush", 64, 64)
