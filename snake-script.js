@@ -14,7 +14,9 @@
     }
   }
 
-  let themeToggle = document.querySelector('#toggleTheme')
+
+
+  let themeToggle = document.querySelector('.fa-toggle-off')
   let themeToggle2 = document.querySelector('.toggle-text')
 
   function toggleTheme(e) {
@@ -65,20 +67,10 @@
     if (e.keyCode == 8) {
       let leaveCheck = confirm("Do you wish to leave the Game?")
       leaveCheck == true
-        ? location.href = 'https://shibeception.github.io/index.html'
+        ? location.href = 'http://127.0.0.1:5500/arcade.html'
         : console.log("Leave Denied");
     }
   }
-
-  function screenCheck() {
-    if (window.matchMedia("(max-width: 1370px)").matches) {
-      topBar.style.display = "none";
-      navBar.style.display = "none";
-    } else {
-      topBar.style.display = "flex";
-    }
-  }
-  screenCheck()
 
   function screenCheck() {
     if (window.matchMedia("(max-width: 1370px)").matches) {
@@ -148,9 +140,12 @@
 
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  let image = document.getElementById('SnekHead')
-  let image2 = document.getElementById('SnekLength')
-  let image3 = document.getElementById('SnekEnd')
+  let image = new Image();
+  let image2 = new Image();
+  let image3 = new Image();
+  image.src = '/SnekHeads.png';
+  image2.src = '/SnekLengths.png';
+  image3.src = '/SnekEnds.png';
 
   let snekCoords = {
     snekHead: {
@@ -200,12 +195,15 @@
     moved = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawSnek();
+    checkDirection()
+    checkCollision();
     moveSnek();
     drawFood();
     drawObjects();
   }
 
-  let food = document.querySelector('#food');
+  let food = new Image();
+  food.src = '/images/Foods.png'
   let foodLimit = 99;
   let foodSpawned = 0;
   let foods = {
@@ -462,6 +460,9 @@
     }
   }
 
+  let collidables = new Image();
+  collidables.src = '/images/collidables.png'
+
   function drawObjects() {
     drawObject("bush", 64, 64)
     drawObject("rock", 160, 160)
@@ -497,12 +498,41 @@
     }
   }
 
+  let Objects = {
+    template: {
+      x: 32,
+      y: 256,
+      sizeX: 32,
+      sizeY: 64,
+    }
+  }
+
+  let snekCollider = {
+    x: 0,
+    y: 0,
+  }
+
+  function checkCollision() {
+  }
+
+  function checkDirection() {
+
+  }
+
   // Make snek parts go to the part infront of old position
 
-  image3.addEventListener("load", () => {
-    setInterval(snek, 1000 / 4);
-  })
+  setInterval(snek, 1000 / 6);
 
+  let song1 = new Audio('/grandTheme.wav')
+  let song2 = new Audio('/Forest Troubles.mp3')
+
+  function music(song) {
+    if (song == 1) {
+      song1.play();
+    } if (song == 2) {
+      song2.play()
+    }
+  }
+
+  setInterval(music(2), 0)
 }
-
-
