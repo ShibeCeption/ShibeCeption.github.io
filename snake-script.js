@@ -203,7 +203,7 @@
   }
 
   let food = new Image();
-  food.src = '/images/Foods.png'
+  food.src = '/Foods.png'
   let foodLimit = 99;
   let foodSpawned = 0;
   let foods = {
