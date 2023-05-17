@@ -67,7 +67,7 @@
     if (e.keyCode == 8) {
       let leaveCheck = confirm("Do you wish to leave the Game?")
       leaveCheck == true
-        ? location.href = 'https://shibeception.github.io/arcade.html'
+        ? location.href = 'https://shibeception.github.io/index.html'
         : console.log("Leave Denied");
     }
   }
