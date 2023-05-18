@@ -67,7 +67,7 @@
     if (e.keyCode == 8) {
       let leaveCheck = confirm("Do you wish to leave the Game?")
       leaveCheck == true
-        ? location.href = 'https://shibeception.github.io/index.html'
+        ? location.href = 'http://127.0.0.1:5500/arcade.html'
         : console.log("Leave Denied");
     }
   }
@@ -195,9 +195,9 @@
     moved = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawSnek();
-    checkDirection()
-    checkCollision();
+    updateSnekCollider()
     moveSnek();
+    console.log(isColliding);
     drawFood();
     drawObjects();
   }
@@ -254,37 +254,57 @@
     // Code needs rework for longer lengths -->
 
     if (snekDirection == "left") {
-      snekCoords.snekHead.x -= 32;
-      snekCoords.snekLength.x = snekCoords.snekHead.old.x;
-      snekCoords.snekLength.y = snekCoords.snekHead.old.y;
-      snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
-      snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
-      oldDirection = "left"
-      return;
+      checkCollision();
+      if (isColliding == false) {
+        snekCoords.snekHead.x -= 32;
+        snekCoords.snekLength.x = snekCoords.snekHead.old.x;
+        snekCoords.snekLength.y = snekCoords.snekHead.old.y;
+        snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
+        snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
+        oldDirection = "left"
+        return;
+      } else {
+        return;
+      }
     } if (snekDirection == "right") {
-      snekCoords.snekHead.x += 32;
-      snekCoords.snekLength.x = snekCoords.snekHead.old.x;
-      snekCoords.snekLength.y = snekCoords.snekHead.old.y;
-      snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
-      snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
-      oldDirection = "right"
-      return;
+      checkCollision();
+      if (isColliding == false) {
+        snekCoords.snekHead.x += 32;
+        snekCoords.snekLength.x = snekCoords.snekHead.old.x;
+        snekCoords.snekLength.y = snekCoords.snekHead.old.y;
+        snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
+        snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
+        oldDirection = "right"
+        return;
+      } else {
+        return;
+      }
     } if (snekDirection == "down") {
-      snekCoords.snekHead.y += 32;
-      snekCoords.snekLength.x = snekCoords.snekHead.old.x;
-      snekCoords.snekLength.y = snekCoords.snekHead.old.y;
-      snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
-      snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
-      oldDirection = "down"
-      return;
+      checkCollision();
+      if (isColliding == false) {
+        snekCoords.snekHead.y += 32;
+        snekCoords.snekLength.x = snekCoords.snekHead.old.x;
+        snekCoords.snekLength.y = snekCoords.snekHead.old.y;
+        snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
+        snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
+        oldDirection = "down"
+        return;
+      } else {
+        return;
+      }
     } if (snekDirection == "up") {
-      snekCoords.snekHead.y -= 32;
-      snekCoords.snekLength.x = snekCoords.snekHead.old.x;
-      snekCoords.snekLength.y = snekCoords.snekHead.old.y;
-      snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
-      snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
-      oldDirection = "up"
-      return;
+      checkCollision();
+      if (isColliding == false) {
+        snekCoords.snekHead.y -= 32;
+        snekCoords.snekLength.x = snekCoords.snekHead.old.x;
+        snekCoords.snekLength.y = snekCoords.snekHead.old.y;
+        snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
+        snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
+        oldDirection = "up"
+        return;
+      } else {
+        return;
+      }
     }
   }
 
@@ -464,8 +484,10 @@
   collidables.src = '/Collidables.png'
 
   function drawObjects() {
+    Objects = {};
+    objCount = 0;
     drawObject("bush", 64, 64)
-    drawObject("rock", 160, 160)
+    drawObject("rock", 128, 160)
     drawObject("pTree", 256, 0)
     drawObject("oTree", 384, 128)
     drawObject("moai", 384, 384)
@@ -476,35 +498,77 @@
   let moaiType = Math.floor(Math.random() * 2)
   let size = 64;
 
+  let objCount = 0;
+
   function drawObject(type, xCoords, yCoords) {
     if (type == "bush") {
       ctx.drawImage(collidables, 0, 0, 64, 64, xCoords, yCoords, size, size,);
+       objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "1x2";
+      return;
     } if (type == "rock") {
       ctx.drawImage(collidables, rockType, 0, 64, 64, xCoords, yCoords, size, size);
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "1x2";
+      return;
     } if (type == "pTree") {
       ctx.drawImage(collidables, 256, 0, 64, 64, xCoords, yCoords, size, size);
-      ctx.drawImage(collidables, 320, 0, 64, 64, xCoords, yCoords + size, size, size)
+      ctx.drawImage(collidables, 320, 0, 64, 64, xCoords, yCoords + size, size, size);
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 32;
+      Objects[objCount].type = "1x2";
+      return;
     } if (type == "oTree") {
       ctx.drawImage(collidables, 384, 0, 64, 64, xCoords, yCoords, size, size);
-      ctx.drawImage(collidables, 448, 0, 64, 64, xCoords, yCoords + size, size, size)
+      ctx.drawImage(collidables, 448, 0, 64, 64, xCoords, yCoords + size, size, size);
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 32;
+      Objects[objCount].type = "1x2";
     } if (type == "moai") {
       if (moaiType == 1) {
         ctx.drawImage(collidables, 704, 0, 64, 64, xCoords, yCoords, size, size);
-        ctx.drawImage(collidables, 640, 0, 64, 64, xCoords, yCoords + size, size, size)
+        ctx.drawImage(collidables, 640, 0, 64, 64, xCoords, yCoords + size, size, size);
+        objCount++;
+        Objects[objCount] = {};
+        Objects[objCount].x = xCoords;
+        Objects[objCount].y = yCoords + 96;
+        Objects[objCount].width = 64;
+        Objects[objCount].height = 32;
+        Objects[objCount].type = "1x2";
         return;
       }
       ctx.drawImage(collidables, 576, 0, 64, 64, xCoords, yCoords, size, size);
-      ctx.drawImage(collidables, 512, 0, 64, 64, xCoords, yCoords + size, size, size)
+      ctx.drawImage(collidables, 512, 0, 64, 64, xCoords, yCoords + size, size, size);
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 32;
+      Objects[objCount].type = "1x2";
+      return;
     }
   }
 
   let Objects = {
-    template: {
-      x: 32,
-      y: 256,
-      sizeX: 32,
-      sizeY: 64,
-    }
   }
 
   let snekCollider = {
@@ -512,27 +576,74 @@
     y: 0,
   }
 
+  let objLength = 0;
+  let isColliding = 0;
+
   function checkCollision() {
+    objLength = 0;
+    isColliding = false;
+    let arrX = [];
+    let arrY = [];
+    let arrType = [];
+    for (let values in Objects) {
+      objLength++;
+    } for (let x = 1; x <= objLength; x++) {
+      arrX.push(Objects[x].x);
+      arrY.push(Objects[x].y);
+      arrType.push(Objects[x].type);
+    } for (let x = 0; x < 5; x++) {
+      if (arrType[x] == "1x2") {
+        if (snekCollider.x == arrX[x] || snekCollider.x == arrX[x] + 32) {
+          if (snekCollider.y == arrY[x]) {
+            isColliding = true;
+          }
+        }
+      } if (arrType[x] == "2x2") {
+        if (snekCollider.x == arrX[x] || snekCollider.x == arrX[x] + 32) {
+          if (snekCollider.y == arrY[x] || snekCollider.y == arrY[x] + 32) {
+            isColliding = true;
+          }
+        }
+      }
+    }
   }
 
-  function checkDirection() {
-
+  function updateSnekCollider() {
+    if (snekDirection == "left") {
+      snekCollider.x = snekCoords.snekHead.x - 32;
+      snekCollider.y = snekCoords.snekHead.y;
+    } if (snekDirection == "down") {
+      snekCollider.x = snekCoords.snekHead.x;
+      snekCollider.y = snekCoords.snekHead.y + 32;
+    } if (snekDirection == "right") {
+      snekCollider.x = snekCoords.snekHead.x + 32;
+      snekCollider.y = snekCoords.snekHead.y;
+    } if (snekDirection == "up") {
+      snekCollider.x = snekCoords.snekHead.x;
+      snekCollider.y = snekCoords.snekHead.y - 32;
+    }
+    // console.log(snekCollider);
   }
 
   // Make snek parts go to the part infront of old position
 
+
   setInterval(snek, 1000 / 6);
 
-  let song1 = new Audio('/grandTheme.wav')
+  let song1 = new Audio('/grandTheme.mp3')
   let song2 = new Audio('/Forest Troubles.mp3')
+  let song3 = new Audio('/guitarSong.mp3')
 
   function music(song) {
     if (song == 1) {
       song1.play();
     } if (song == 2) {
       song2.play()
+    } if (song == 3) {
+      song3.play()
     }
   }
 
-  setInterval(music(2), 0)
+  // setInterval(music, 0, 2)
+
 }
