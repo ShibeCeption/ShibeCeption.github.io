@@ -14,7 +14,7 @@ body {
   background-color: rgb(211, 211, 211);
   padding-left: 1.5vw;
   overflow: hidden;
-  z-index: 11;
+  z-index: 12;
 }
 @media (max-width: 1000px) {
   .top-bar {
@@ -37,7 +37,6 @@ body {
 .nav-bar-option:hover,
 .games:hover,
 .contact:hover {
-  transition: all 1s ease-in-out;
   transform: scale(125%);
   font-weight: bold;
 }
@@ -54,7 +53,6 @@ a {
 }
 .logo {
   position: relative;
-
   top: 10px;
   left: 0px;
   font-weight: bold;
@@ -66,6 +64,14 @@ a {
 .fa-gamepad {
   position: relative;
   top: 2px;
+}
+.home,
+.logo-text,
+.logo,
+.nav-bar-option,
+.games,
+.contact {
+  transition: all 1s ease-out;
 }
 .contact-area {
   width: 100vw;
