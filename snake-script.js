@@ -630,9 +630,9 @@
 
   setInterval(snek, 1000 / 6);
 
-  let song1 = new Audio('/grandTheme.wav')
+  let song1 = new Audio('/grandTheme.mp3')
   let song2 = new Audio('/Forest Troubles.mp3')
-  let song3 = new Audio('/guitarSong.wav')
+  let song3 = new Audio('/guitarSong.mp3')
 
   function music(song) {
     if (song == 1) {
