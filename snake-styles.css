@@ -37,7 +37,6 @@ body {
 .nav-bar-option:hover,
 .games:hover,
 .contact:hover {
-  transition: all 1s ease-in-out;
   transform: scale(125%);
   font-weight: bold;
 }
@@ -65,6 +64,14 @@ a {
 .fa-gamepad {
   position: relative;
   top: 2px;
+}
+.home,
+.logo-text,
+.logo,
+.nav-bar-option,
+.games,
+.contact {
+  transition: all 1s ease-out;
 }
 
 .game {
