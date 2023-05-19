@@ -644,6 +644,6 @@
     }
   }
 
-  // setInterval(music, 0, 2)
+  setInterval(music, 0, 2)
 
 }
