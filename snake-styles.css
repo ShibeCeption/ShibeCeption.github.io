@@ -104,8 +104,8 @@ a {
 }
 
 @font-face {
-  font-family: "Pixel"; /*a name to be used later*/
-  src: url("/04B_30__.TTF"); /*URL to font*/
+  font-family: "Pixel";
+  src: url("/04B_30__.TTF");
 }
 
 .nav-bar {
@@ -165,13 +165,22 @@ a {
   border: 4px groove rgb(117, 146, 83);
   border-radius: 10%;
   width: 220px;
+  height: 45px;
   transition: all 1s ease-in-out;
   text-align: center;
   transform: scale(102%);
+  position: relative;
+  left: 2.5%;
+}
+
+.ui2 :nth-child(2) {
+  width: 150px;
+  height: 20px;
+  position: relative;
+  left: 15%;
 }
 
 .ui2 p:hover {
   filter: brightness(125%) saturate(150%);
   transform: scale(115%);
 }
-
