@@ -1,5 +1,4 @@
 {
-
   let topBar = document.querySelector('.top-bar');
   let navBar = document.querySelector('.nav-bar');
   let menuBar = document.querySelector('.nav-bar')
