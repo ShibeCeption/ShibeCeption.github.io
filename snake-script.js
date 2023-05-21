@@ -197,14 +197,14 @@
     drawSnek();
     updateSnekCollider()
     moveSnek();
-    console.log(isColliding);
     drawFood();
     drawObjects();
+    updateScore();
   }
 
   let food = new Image();
   food.src = '/Foods.png'
-  let foodLimit = 99;
+  let foodLimit = 4;
   let foodSpawned = 0;
   let foods = {
     food1: {
@@ -226,21 +226,29 @@
     }
   }
 
-  let currentFood = 0;
   let mouseType = Math.floor(Math.random() * 2);
 
   function drawFood() {
     for (let x = 1; x < 5; x++) {
-      if (foods[`food${x}`].foodType <= 10) {
-        mouseType == 0 ? ctx.drawImage(food, 64, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32)
-          : ctx.drawImage(food, 96, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32)
-      } if (foods[`food${x}`].foodType > 10 && foods[`food${x}`].foodType < 70) {
+      foodCollisions();
+      if (foods[`food${x}`].foodType > 10 && foods[`food${x}`].foodType < 70) {
         ctx.drawImage(food, 0, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
       } if (foods[`food${x}`].foodType >= 70) {
         ctx.drawImage(food, 32, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
+      } if (foods[`food${x}`].foodType <= 10) {
+        mouseType == 0 ? ctx.drawImage(food, 64, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32)
+          : ctx.drawImage(food, 96, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32)
       }
     }
     // ctx.drawImage(food, foods.food1.foodType, 0, 32, 32, foods.food1.spawnLocationX, foods.food1.spawnLocationY, 32, 32);
+  }
+
+  let boundaryType = "pacman";
+  function boundaries(type) {
+    boundaryType = confirm("Do you want the pacman-effect or not");
+    boundaryType == true
+      ? boundaryType = "pacman"
+      : boundaryType = "walls"
   }
 
   function moveSnek() {
@@ -255,6 +263,7 @@
 
     if (snekDirection == "left") {
       checkCollision();
+      mapBoundaries(boundaryType);
       if (isColliding == false) {
         snekCoords.snekHead.x -= 32;
         snekCoords.snekLength.x = snekCoords.snekHead.old.x;
@@ -264,10 +273,12 @@
         oldDirection = "left"
         return;
       } else {
+        killSnake()
         return;
       }
     } if (snekDirection == "right") {
       checkCollision();
+      mapBoundaries(boundaryType);
       if (isColliding == false) {
         snekCoords.snekHead.x += 32;
         snekCoords.snekLength.x = snekCoords.snekHead.old.x;
@@ -277,10 +288,12 @@
         oldDirection = "right"
         return;
       } else {
+        killSnake()
         return;
       }
     } if (snekDirection == "down") {
       checkCollision();
+      mapBoundaries(boundaryType);
       if (isColliding == false) {
         snekCoords.snekHead.y += 32;
         snekCoords.snekLength.x = snekCoords.snekHead.old.x;
@@ -290,10 +303,12 @@
         oldDirection = "down"
         return;
       } else {
+        killSnake()
         return;
       }
     } if (snekDirection == "up") {
       checkCollision();
+      mapBoundaries(boundaryType);
       if (isColliding == false) {
         snekCoords.snekHead.y -= 32;
         snekCoords.snekLength.x = snekCoords.snekHead.old.x;
@@ -303,6 +318,7 @@
         oldDirection = "up"
         return;
       } else {
+        killSnake()
         return;
       }
     }
@@ -503,7 +519,7 @@
   function drawObject(type, xCoords, yCoords) {
     if (type == "bush") {
       ctx.drawImage(collidables, 0, 0, 64, 64, xCoords, yCoords, size, size,);
-       objCount++;
+      objCount++;
       Objects[objCount] = {};
       Objects[objCount].x = xCoords;
       Objects[objCount].y = yCoords + 32;
@@ -578,13 +594,13 @@
 
   let objLength = 0;
   let isColliding = 0;
+  let arrX = [];
+  let arrY = [];
+  let arrType = [];
 
   function checkCollision() {
     objLength = 0;
     isColliding = false;
-    let arrX = [];
-    let arrY = [];
-    let arrType = [];
     for (let values in Objects) {
       objLength++;
     } for (let x = 1; x <= objLength; x++) {
@@ -625,14 +641,79 @@
     // console.log(snekCollider);
   }
 
-  // Make snek parts go to the part infront of old position
+  let deaths = 0;
 
+  function killSnake() {
+    deaths++;
+    snekCoords.snekHead.x = 224;
+    snekCoords.snekHead.y = 224;
+    snekCoords.snekLength.x = 256;
+    snekCoords.snekLength.y = 224;
+    snekCoords.snekEnd.x = 288;
+    snekCoords.snekEnd.y = 224;
+    snekDirection = "left";
+    oldDirection = "left";
+    drawStage = 0;
+    drawStage2 = 0;
+    drawStage3 = 0;
+    mapScore = 0;
+    // setTimeout(() => { alert("You Died! Try Again"); }, 50);
+  }
+
+  function mapBoundaries(type) {
+    if (type == "walls") {
+      if (snekCollider.x == -32 || snekCollider.x == 544) {
+        isColliding = true;
+      } if (snekCollider.y == 544 || snekCollider.y == -32) {
+        isColliding = true;
+      }
+    } if (type == "pacman") {
+      if (snekCollider.x == -32) {
+        snekCoords.snekHead.x = 512;
+      } if (snekCollider.x == 512) {
+        snekCoords.snekHead.x = -32;
+      } if (snekCollider.y == -32) {
+        snekCoords.snekHead.y = 512;
+      } if (snekCollider.y == 512) {
+        snekCoords.snekHead.y = -32;
+      }
+    }
+  }
+
+  let mapScore = 0;
+  let scoreText = document.getElementById('scoreText');
+
+  function updateScore() {
+    scoreText.textContent = `Score: ${mapScore}`;
+  }
+
+  function foodCollisions() {
+    for (let x = 0; x < 5; x++) {
+      if (arrType[x] == "1x2") {
+        for (let y = 1; y <= 4; y++) {
+          if (foods[`food${y}`].spawnLocationX == arrX[x] || foods[`food${y}`].spawnLocationX == arrX[x] + 32) {
+            if (foods[`food${y}`].spawnLocationY == arrY[x] || foods[`food${y}`.spawnLocationY == arrY[x] + 32]) {
+              foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
+              foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+            }
+          }
+        }
+      }
+    }
+
+    // Make Food not spawn ontop of Snake and Make Food not spawn on other food
+
+    for (let x = 1; x <= 4; x++) {
+
+    }
+  }
 
   setInterval(snek, 1000 / 6);
 
   let song1 = new Audio('/grandTheme.mp3')
   let song2 = new Audio('/Forest Troubles.mp3')
   let song3 = new Audio('/guitarSong.mp3')
+  let song4 = new Audio(/*'/audio/Second.mp3'*/)
 
   function music(song) {
     if (song == 1) {
@@ -641,9 +722,11 @@
       song2.play()
     } if (song == 3) {
       song3.play()
+    } if (song == 4) {
+      song4.play()
     }
   }
 
-  setInterval(music, 0, 2)
+  // setInterval(music, 0, 4)
 
 }
