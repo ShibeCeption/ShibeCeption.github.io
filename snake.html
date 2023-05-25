@@ -7,8 +7,8 @@
     <meta name="keywords" content="HTML, CSS" />
     <meta name="description" content="A Arcade with fun games to play!" />
     <title>The Arcade</title>
-    <link rel="icon" type="image/x-icon" href="/ArcadeLogo2Trim.gif" />
-    <link rel="stylesheet" href="snake-styles.css" />
+    <link rel="icon" type="image/x-icon" href="/ArcadeLogo6.png" />
+    <link rel="stylesheet" href="/snake-styles.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
@@ -17,13 +17,13 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap"
       rel="stylesheet" />
-    <script src="/snake-script.js" defer="5000ms"></script>
+    <script src="/snake-scripts.js" defer="5000ms"></script>
   </head>
   <body>
     <div id="top" class="top-bar">
       <i id="menu" class="fa-solid fa-bars nav-bar-option"></i>
       <p class="logo-text top-bar-item">
-        <a class="top-bar-item" href="/index.html#top">
+        <a class="top-bar-item" href="/index.html">
           The Arcade
           <img
             class="logo top-bar-item"
@@ -32,9 +32,7 @@
         </a>
       </p>
       <p class="games">
-        <a href="/index.html#games-selection"
-          >Games <i class="fa-solid fa-gamepad"></i
-        ></a>
+        <a href="#games-selection">Games <i class="fa-solid fa-gamepad"></i></a>
       </p>
       <p class="contact">
         <a href="/contact.html">Contact <i class="fa-solid fa-phone"></i></a>
@@ -42,7 +40,7 @@
     </div>
     <nav class="nav-bar">
       <p class="toggle-text">
-        &nbsp;Toggle Theme&nbsp;<i id="toggleTheme"
+        &nbsp;Toggle Theme&nbsp;<i
           class="fa-solid fa-toggle-off toggleTheme"></i>
       </p>
     </nav>
@@ -57,13 +55,13 @@
           Snek Pre-Alpha
         </p>
         <p id="scoreText">Score: 0</p>
-        <div id="snek">
-        </div>
+        <div id="snek"></div>
       </div>
       <div class="game">
         <canvas id="canvas" height="512px" width="512px"> </canvas>
       </div>
       <div class="ui"></div>
     </div>
+    <!-- <ul id="uljs"></ul> -->
   </body>
 </html>
