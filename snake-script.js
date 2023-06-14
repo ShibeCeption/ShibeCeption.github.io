@@ -821,7 +821,10 @@
 
   function foodTimer(x) {
      if (foods[`food${x}`].foodType <= 10 && foods[`food${x}`].eaten == false) {
-      setTimeout((() => { foods[`food${x}`].spawnLocationX = -512;
+      setTimeout((() => { if (foods[`food${x}`].eaten == true) {
+        return;
+      }
+      foods[`food${x}`].spawnLocationX = -512;
        setTimeout(respawnFood, 3500, x) }), 7500)
     }
   }
