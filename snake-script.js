@@ -1,4 +1,4 @@
-{
+// {
 
   let topBar = document.querySelector('.top-bar');
   let navBar = document.querySelector('.nav-bar');
@@ -81,7 +81,7 @@
       topBar.style.display = "visible";
     } if (window.matchMedia("(max-width: 1200px)").matches) {
       alert("Your screen is too small for this game");
-      location.href = "https://shibeception.github.io/";
+      location.href = "http://127.0.0.1:5500/arcade.html";
     } else {
       topBar.style.display = "flex";
     }
@@ -105,35 +105,6 @@
   let moveDir = "left";
   let movementY = 0;
   let movementX = 0;
-
-  document.onkeydown = function wasdControls(e) {
-    if (e.keyCode == 87) {
-      moveDir = "up";
-    } if (e.keyCode == 83) {
-      moveDir = "down"
-    } if (e.keyCode == 65) {
-      moveDir = "left"
-    } if (e.keyCode == 68) {
-      moveDir = "right"
-    }
-  }
-
-  function movement() {
-    let speed = 32
-    if (moveDir == "down") {
-      movementY += speed
-      snek.style.top = movementY + 'px'
-    } if (moveDir == "up") {
-      movementY -= speed
-      snek.style.top = movementY + 'px'
-    } if (moveDir == "left") {
-      movementX -= speed;
-      snek.style.left = movementX + 'px';
-    } if (moveDir == "right") {
-      movementX += speed;
-      snek.style.left = movementX + 'px';
-    }
-  }
 
   /*
   setInterval(movement, 350)
@@ -180,6 +151,7 @@
   let snekDirection = "left";
   let oldDirection = "left"
   let moved = false;
+  let movementQueue = [];
 
   document.onkeydown = function controls(e) {
     if (e.key == 'a' && snekDirection !== "right" && moved == false) {
@@ -194,6 +166,8 @@
     } if (e.key == 'w' && snekDirection !== "down" && moved == false) {
       snekDirection = "up";
       moved = true;
+    } if (moved == true) {
+      movementQueue.push(e.key);
     }
   }
 
@@ -201,6 +175,7 @@
     moved = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     foodOnSnek();
+    foodCollisions();
     drawSnek();
     updateSnekCollider()
     moveSnek();
@@ -217,36 +192,40 @@
       spawnLocationY: Math.floor(Math.random() * 15) * 32,
       foodType: Math.floor(Math.random() * 10) * 10,
       score: 0,
+      eaten: false,
     }, food2: {
       spawnLocationX: Math.floor(Math.random() * 15) * 32,
       spawnLocationY: Math.floor(Math.random() * 15) * 32,
       foodType: Math.floor(Math.random() * 10) * 10,
       score: 0,
+      eaten: false,
     }, food3: {
       spawnLocationX: Math.floor(Math.random() * 15 + 1) * 32,
       spawnLocationY: Math.floor(Math.random() * 15 + 1) * 32,
       foodType: Math.floor(Math.random() * 10) * 10,
       score: 0,
+      eaten: false,
     }, food4: {
       spawnLocationX: Math.floor(Math.random() * 15 + 1) * 32,
       spawnLocationY: Math.floor(Math.random() * 15 + 1) * 32,
       foodType: Math.floor(Math.random() * 10) * 10,
-      
+      score: 0,
+      eaten: false,
     }
   }
 
   function drawFood() {
     for (let x = 1; x < 5; x++) {
       foodCollisions();
-      if (foods[`food${x}`].foodType > 10 && foods[`food${x}`].foodType < 70) {
-        ctx.drawImage(food, 0, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
-        foods[`food${x}`].score = 1;
-      } if (foods[`food${x}`].foodType >= 70) {
+       if (foods[`food${x}`].foodType >= 70) {
         ctx.drawImage(food, 32, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
         foods[`food${x}`].score = 2;
       } if (foods[`food${x}`].foodType <= 10) {
         ctx.drawImage(food, 64, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
         foods[`food${x}`].score = 5;
+      } if (foods[`food${x}`].foodType > 10 && foods[`food${x}`].foodType < 70) {
+        ctx.drawImage(food, 0, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
+        foods[`food${x}`].score = 1;
       }
     }
     // ctx.drawImage(food, foods.food1.foodType, 0, 32, 32, foods.food1.spawnLocationX, foods.food1.spawnLocationY, 32, 32);
@@ -259,6 +238,7 @@
       ? boundaryType = "pacman"
       : boundaryType = "walls"
   }
+
 
   function moveSnek() {
     snekCoords.snekHead.old.x = snekCoords.snekHead.x;
@@ -274,13 +254,9 @@
       for (let x = 1; x <= 4; x++) {
         if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
           if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
-            foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].foodType = Math.floor(Math.random() * 10) * 10;
             mapScore = mapScore + foods[`food${x}`].score;
             foods[`food${x}`].spawnLocationX = -512;
-            setTimeout((() => { foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32; }), 3500); foodOnSnek();
+            setTimeout(respawnFood, 3500, x);
           }
         }
       }
@@ -302,13 +278,9 @@
       for (let x = 1; x <= 4; x++) {
         if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
           if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
-            foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].foodType = Math.floor(Math.random() * 10) * 10;
             mapScore = mapScore + foods[`food${x}`].score;
             foods[`food${x}`].spawnLocationX = -512;
-            setTimeout((() => { foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32; }), 3500); foodOnSnek();
+            setTimeout(respawnFood, 3500, x);
           }
         }
       }
@@ -330,13 +302,9 @@
       for (let x = 1; x <= 4; x++) {
         if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
           if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
-            foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].foodType = Math.floor(Math.random() * 10) * 10;
             mapScore = mapScore + foods[`food${x}`].score;
             foods[`food${x}`].spawnLocationX = -512;
-            setTimeout((() => { foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32; }), 3500); foodOnSnek();
+            setTimeout(respawnFood, 3500, x);
           }
         }
       }
@@ -358,13 +326,9 @@
       for (let x = 1; x <= 4; x++) {
         if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
           if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
-            foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
-            foods[`food${x}`].foodType = Math.floor(Math.random() * 10) * 10;
             mapScore = mapScore + foods[`food${x}`].score;
             foods[`food${x}`].spawnLocationX = -512;
-            setTimeout((() => { foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32; }), 3500); foodOnSnek();
+            setTimeout(respawnFood, 3500, x);
           }
         }
       }
@@ -748,7 +712,7 @@
         snekCoords.snekHead.y = 512;
       } if (snekCollider.y == 512) {
         snekCoords.snekHead.y = -32;
-      } console.log(snekCollider.y);
+      } // console.log(snekCollider.y);
     }
   }
 
@@ -773,48 +737,59 @@
         }
       }
     }
+  }
 
-    if (foods.food1.spawnLocationX == foods.food2.spawnLocationX || 
-      foods.food1.spawnLocationX == foods.food3.spawnLocationX ||
-      foods.food1.spawnLocationX == foods.food4.spawnLocationX) {
-        if (foods.food1.spawnLocationY == foods.food2.spawnLocationY ||
-          foods.food1.spawnLocationY == foods.food3.spawnLocationY ||
-          foods.food1.spawnLocationY == foods.food4.spawnLocationY) {
-            foods.food1.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
-            foods.food1.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
-            foodOnSnek();
+  function foodOnFood(food) {
+    if (food == 1) {
+      if (foods.food1.spawnLocationX == foods.food2.spawnLocationX || 
+        foods.food1.spawnLocationX == foods.food3.spawnLocationX ||
+        foods.food1.spawnLocationX == foods.food4.spawnLocationX) {
+          if (foods.food1.spawnLocationY == foods.food2.spawnLocationY ||
+            foods.food1.spawnLocationY == foods.food3.spawnLocationY ||
+            foods.food1.spawnLocationY == foods.food4.spawnLocationY) {
+              foods.food1.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+              foods.food1.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+              foodOnSnek();
+        }
       }
-    } if (foods.food2.spawnLocationX == foods.food1.spawnLocationX || 
-      foods.food2.spawnLocationX == foods.food3.spawnLocationX ||
-      foods.food2.spawnLocationX == foods.food4.spawnLocationX) {
-        if (foods.food2.spawnLocationY == foods.food1.spawnLocationY ||
-          foods.food2.spawnLocationY == foods.food3.spawnLocationY ||
-          foods.food2.spawnLocationY == foods.food4.spawnLocationY) {
-            foods.food2.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
-            foods.food2.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
-            foodOnSnek();
+    } if (food == 2) {
+      if (foods.food2.spawnLocationX == foods.food1.spawnLocationX || 
+        foods.food2.spawnLocationX == foods.food3.spawnLocationX ||
+        foods.food2.spawnLocationX == foods.food4.spawnLocationX) {
+          if (foods.food2.spawnLocationY == foods.food1.spawnLocationY ||
+            foods.food2.spawnLocationY == foods.food3.spawnLocationY ||
+            foods.food2.spawnLocationY == foods.food4.spawnLocationY) {
+              foods.food2.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+              foods.food2.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+              foodOnSnek();
+        }
       }
-    } if (foods.food3.spawnLocationX == foods.food2.spawnLocationX || 
-      foods.food3.spawnLocationX == foods.food1.spawnLocationX ||
-      foods.food3.spawnLocationX == foods.food4.spawnLocationX) {
-        if (foods.food3.spawnLocationY == foods.food2.spawnLocationY ||
-          foods.food3.spawnLocationY == foods.food1.spawnLocationY ||
-          foods.food3.spawnLocationY == foods.food4.spawnLocationY) {
-            foods.food3.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
-            foods.food3.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
-            foodOnSnek();
+    } if (food == 3) {
+      if (foods.food3.spawnLocationX == foods.food2.spawnLocationX || 
+        foods.food3.spawnLocationX == foods.food1.spawnLocationX ||
+        foods.food3.spawnLocationX == foods.food4.spawnLocationX) {
+          if (foods.food3.spawnLocationY == foods.food2.spawnLocationY ||
+            foods.food3.spawnLocationY == foods.food1.spawnLocationY ||
+            foods.food3.spawnLocationY == foods.food4.spawnLocationY) {
+              foods.food3.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+              foods.food3.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+              foodOnSnek();
+        }
       }
-    } if (foods.food4.spawnLocationX == foods.food2.spawnLocationX || 
-      foods.food4.spawnLocationX == foods.food3.spawnLocationX ||
-      foods.food4.spawnLocationX == foods.food1.spawnLocationX) {
-        if (foods.food4.spawnLocationY == foods.food2.spawnLocationY ||
-          foods.food4.spawnLocationY == foods.food3.spawnLocationY ||
-          foods.food4.spawnLocationY == foods.food1.spawnLocationY) {
-            foods.food4.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
-            foods.food4.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
-            foodOnSnek();
+    } if (food == 4) {
+      if (foods.food4.spawnLocationX == foods.food2.spawnLocationX || 
+        foods.food4.spawnLocationX == foods.food3.spawnLocationX ||
+        foods.food4.spawnLocationX == foods.food1.spawnLocationX) {
+          if (foods.food4.spawnLocationY == foods.food2.spawnLocationY ||
+            foods.food4.spawnLocationY == foods.food3.spawnLocationY ||
+            foods.food4.spawnLocationY == foods.food1.spawnLocationY) {
+              foods.food4.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+              foods.food4.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+              foodOnSnek();
+        }
       }
     }
+    
   }
 
   function foodOnSnek() {
@@ -824,18 +799,48 @@
         foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
         foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
         foodOnSnek();
+        foodCollisions();
+        foodOnFood(x);
        } if (foods[`food${x}`].spawnLocationX == snekCoords.snekLength.x &&
        foods[`food${x}`].spawnLocationY == snekCoords.snekLength.y) {
         foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
         foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
         foodOnSnek();
+        foodCollisions();
+        foodOnFood(x);
        } if (foods[`food${x}`].spawnLocationX == snekCoords.snekEnd.x &&
        foods[`food${x}`].spawnLocationY == snekCoords.snekEnd.y) {
         foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
         foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
         foodOnSnek();
+        foodCollisions();
+        foodOnFood(x);
        }
     }
+  }
+
+  function foodTimer(x) {
+     if (foods[`food${x}`].foodType <= 10 && foods[`food${x}`].eaten == false) {
+      setTimeout((() => { foods[`food${x}`].spawnLocationX = -512;
+       setTimeout(respawnFood, 3500, x) }), 7500)
+    }
+  }
+
+  function respawnFood(foodNum) {
+    foods[`food${foodNum}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
+          foods[`food${foodNum}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+          foods[`food${foodNum}`].foodType = Math.floor(Math.random() * 10) * 10;
+          foods[`food${foodNum}`].eaten = false;
+          foodOnSnek();
+          foodOnFood(foodNum);
+          foodTimer(foodNum);
+  }
+
+  foodCollisions();
+  foodOnSnek();
+  for (let x = 1; x <= 4; x++) {
+    foodOnFood(x);
+    foodTimer(x);
   }
 
   setInterval(snek, 1000 / 6);
@@ -844,7 +849,7 @@
   let song1 = new Audio('/grandTheme.mp3')
   let song2 = new Audio('/Forest Troubles.mp3')
   let song3 = new Audio('/guitarSong.mp3')
-  let song4 = new Audio(/*'/audio/Second.mp3'*/)
+  let selectedSong = 2;
 
   function music(song) {
     if (song == 1) {
@@ -853,11 +858,9 @@
       song2.play()
     } if (song == 3) {
       song3.play()
-    } if (song == 4) {
-      song4.play()
     }
   }
 
-  // setInterval(music, 0, 4)
+  setInterval(music, 0, selectedSong)
 
-}
+// }
