@@ -2,6 +2,7 @@ body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
   margin: 0;
+  transition: all 1s ease-in-out;
 }
 .top-bar {
   width: 100vw;
@@ -15,7 +16,9 @@ body {
   padding-left: 1.5vw;
   overflow: hidden;
   z-index: 12;
+ transition: all, 1s ease-out;
 }
+
 @media (max-width: 1000px) {
   .top-bar {
     height: 10vh;
@@ -46,25 +49,30 @@ body {
 a {
   color: black;
   text-decoration: none;
+  transition: all 1s ease-out;
 }
 .nav-bar-option {
   position: relative;
   top: 17.5px;
 }
+
 .logo {
   position: relative;
   top: 10px;
   left: 0px;
   font-weight: bold;
 }
+
 .logo-text {
   position: relative;
   top: -20px;
 }
+
 .fa-gamepad {
   position: relative;
   top: 2px;
 }
+
 .home,
 .logo-text,
 .logo,
@@ -73,6 +81,7 @@ a {
 .contact {
   transition: all 1s ease-out;
 }
+
 .games-selection {
   display: flex;
   padding-top: 20vh;
@@ -93,6 +102,7 @@ a {
   justify-content: center;
   align-items: center;
   object-fit: cover;
+  transition: all 1s ease-in-out;
 }
 
 .item:hover {
@@ -101,6 +111,7 @@ a {
 .item img {
   width: 100%;
   height: 100%;
+  transition: all 1s ease-in-out;
 }
 
 @keyframes wiggle {
@@ -126,6 +137,7 @@ a {
   align-items: center;
   gap: 1vw;
   display: none;
+  transition: all, 1s ease-out;
 }
 
 @media all and (max-width: 1367px) {
