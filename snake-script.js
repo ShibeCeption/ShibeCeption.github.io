@@ -1,14 +1,28 @@
 // {
 
+  let topBar = document.querySelector('.top-bar');
+  let navBar = document.querySelector('.nav-bar');
+  let menuBar = document.querySelector('.nav-bar')
+
+  menu.onclick = function menu() {
+    if (menuBar.style.display !== 'flex') {
+      menuBar.style.display = 'flex';
+      return;
+    } if (menuBar.style.display == 'flex') {
+      menuBar.style.display = 'none';
+      return;
+    }
+  }
+
   let themeToggle = document.querySelector('.fa-toggle-off');
   let themeToggle2 = document.querySelector('.toggle-text');
   let topBarText = document.querySelector('a');
   let games = document.querySelector('#gamesLink');
   let contact = document.querySelector('#contactLink');
-  let topBar = document.querySelector('.top-bar');
-  let navBar = document.querySelector('.nav-bar');
 
   function toggleTheme(e) {
+    let topBar = document.querySelector('.top-bar');
+    let navBar = document.querySelector('.nav-bar');
     if (themeToggle.classList.contains('fa-toggle-off')) {
       themeToggle.classList.remove('fa-toggle-off');
       themeToggle.classList.add('fa-toggle-on');
@@ -58,13 +72,14 @@
       contact.style.color = 'rgb(198, 230, 204)';
       return;
     }
-  } cookieCheck()
+  }
+  cookieCheck()
 
   document.body.onkeydown = function goBack(e) {
     if (e.keyCode == 8) {
       let leaveCheck = confirm("Do you wish to leave the Game?")
       leaveCheck == true
-        ? location.href = 'https://shibeception.github.io/'
+        ? location.href = 'https://shibeception.github.io/index.html'
         : console.log("Leave Denied");
     }
   }
@@ -78,7 +93,7 @@
       topBar.style.display = "visible";
     } if (window.matchMedia("(max-width: 1200px)").matches) {
       alert("Your screen is too small for this game");
-      location.href = "https://shibeception.github.io/";
+      location.href = 'https://shibeception.github.io/index.html';
     } else {
       topBar.style.display = "flex";
     }
