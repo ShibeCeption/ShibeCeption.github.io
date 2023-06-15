@@ -2,6 +2,7 @@ body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
   margin: 0;
+  transition: all 1s ease-in-out;
 }
 .top-bar {
   width: 100vw;
@@ -15,6 +16,7 @@ body {
   padding-left: 1.5vw;
   overflow: hidden;
   z-index: 24;
+  transition: all 1s ease-out;
 }
 @media (max-width: 1000px) {
   .top-bar {
@@ -46,6 +48,7 @@ body {
 a {
   color: black;
   text-decoration: none;
+  transition: all 1s ease-in-out;
 }
 .nav-bar-option {
   position: relative;
@@ -65,6 +68,7 @@ a {
   position: relative;
   top: 2px;
 }
+
 .home,
 .logo-text,
 .logo,
@@ -123,6 +127,7 @@ a {
   align-items: center;
   gap: 1vw;
   display: none;
+  transition: all 1s ease-out;
 }
 
 @media all and (max-width: 1370px) {
