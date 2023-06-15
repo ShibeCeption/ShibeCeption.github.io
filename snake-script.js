@@ -1,23 +1,10 @@
 // {
 
-  let topBar = document.querySelector('.top-bar');
-  let navBar = document.querySelector('.nav-bar');
-  let menuBar = document.querySelector('.nav-bar')
-
-  menu.onclick = function menu() {
-    if (menuBar.style.display !== 'flex') {
-      menuBar.style.display = 'flex';
-      return;
-    } if (menuBar.style.display == 'flex') {
-      menuBar.style.display = 'none';
-      return;
-    }
-  }
-
-
-
-  let themeToggle = document.querySelector('.fa-toggle-off')
-  let themeToggle2 = document.querySelector('.toggle-text')
+  let themeToggle = document.querySelector('.fa-toggle-off');
+  let themeToggle2 = document.querySelector('.toggle-text');
+  let topBarText = document.querySelector('a');
+  let games = document.querySelector('#gamesLink');
+  let contact = document.querySelector('#contactLink');
 
   function toggleTheme(e) {
     let topBar = document.querySelector('.top-bar');
@@ -25,9 +12,14 @@
     if (themeToggle.classList.contains('fa-toggle-off')) {
       themeToggle.classList.remove('fa-toggle-off');
       themeToggle.classList.add('fa-toggle-on');
-      document.body.style.backgroundColor = 'rgb(170, 170, 170)';
-      topBar.style.backgroundColor = 'rgb(136, 136, 136)';
-      navBar.style.backgroundColor = 'rgb(136, 136, 136)';
+      document.body.style.backgroundColor = 'rgb(35, 50, 35)';
+      topBar.style.backgroundColor = 'rgb(55, 70, 55)';
+      navBar.style.backgroundColor = 'rgb(55, 70, 55)';
+      navBar.style.color = 'rgb(198, 230, 204)';
+      topBarText.style.color = 'rgb(198, 230, 204)';
+      menu.style.color = 'rgb(198, 230, 204)';
+      games.style.color = 'rgb(198, 230, 204)';
+      contact.style.color = 'rgb(198, 230, 204)';
       document.cookie = "darkMode=on"
       e.stopPropagation()
       return;
@@ -37,6 +29,12 @@
       document.body.style.backgroundColor = "";
       topBar.style.backgroundColor = "";
       navBar.style.backgroundColor = "";
+      topBar.style.color = "";
+      navBar.style.color = "";
+      topBarText.style.color = '';
+      menu.style.color = '';
+      games.style.color = '';
+      contact.style.color = '';
       document.cookie = "darkMode=off"
       e.stopPropagation()
       return;
@@ -47,17 +45,17 @@
   themeToggle2.onclick = toggleTheme;
 
   function cookieCheck() {
-    if (document.cookie == "darkMode=off") {
-
-      return;
-    } if (document.cookie == "darkMode=on") {
-      let topBar = document.querySelector('.top-bar');
-      let navBar = document.querySelector('.nav-bar');
+    if (document.cookie == "darkMode=on") {
       themeToggle.classList.remove('fa-toggle-off');
       themeToggle.classList.add('fa-toggle-on');
-      document.body.style.backgroundColor = 'rgb(170, 170, 170)';
-      topBar.style.backgroundColor = 'rgb(136, 136, 136)';
-      navBar.style.backgroundColor = 'rgb(136, 136, 136)';
+      document.body.style.backgroundColor = 'rgb(35, 50, 35)';
+      topBar.style.backgroundColor = 'rgb(55, 70, 55)';
+      navBar.style.backgroundColor = 'rgb(55, 70, 55)';
+      navBar.style.color = 'rgb(198, 230, 204)';
+      topBarText.style.color = 'rgb(198, 230, 204)';
+      menu.style.color = 'rgb(198, 230, 204)';
+      games.style.color = 'rgb(198, 230, 204)';
+      contact.style.color = 'rgb(198, 230, 204)';
       return;
     }
   }
