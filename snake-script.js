@@ -5,10 +5,10 @@
   let topBarText = document.querySelector('a');
   let games = document.querySelector('#gamesLink');
   let contact = document.querySelector('#contactLink');
+  let topBar = document.querySelector('.top-bar');
+  let navBar = document.querySelector('.nav-bar');
 
   function toggleTheme(e) {
-    let topBar = document.querySelector('.top-bar');
-    let navBar = document.querySelector('.nav-bar');
     if (themeToggle.classList.contains('fa-toggle-off')) {
       themeToggle.classList.remove('fa-toggle-off');
       themeToggle.classList.add('fa-toggle-on');
