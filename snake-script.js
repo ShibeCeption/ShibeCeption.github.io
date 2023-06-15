@@ -58,8 +58,7 @@
       contact.style.color = 'rgb(198, 230, 204)';
       return;
     }
-  }
-  cookieCheck()
+  } cookieCheck()
 
   document.body.onkeydown = function goBack(e) {
     if (e.keyCode == 8) {
@@ -787,7 +786,7 @@
         }
       }
     }
-    console.log(`foodOnFood(${food})`);
+    // console.log(`foodOnFood(${food})`);
   }
 
   function foodOnSnek() {
