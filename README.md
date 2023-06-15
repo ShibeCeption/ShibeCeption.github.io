@@ -2,10 +2,7 @@
   
 This website will have **games** in the *near future* but yeah that's about it  
 Well goodluck with whatever you're doing.  
-Here's a list of things i'll be adding to my website  
-- Animations 
-- Games
-- And more!  
+There is one game currently in development: Snek like snake but with enemies, abilities and more
 
 _____________  
   
