@@ -1,7 +1,7 @@
 
-let menuBar = document.querySelector('.nav-bar')
-
-
+let menuBar = document.querySelector('.nav-bar');
+let topBar = document.querySelector('.top-bar');
+let navBar = document.querySelector('.nav-bar');
 
 menu.onclick = function menu() {
     if (menuBar.style.display !== 'flex') {
@@ -15,8 +15,12 @@ menu.onclick = function menu() {
 
 
 
-let themeToggle = document.querySelector('.fa-toggle-off')
-let themeToggle2 = document.querySelector('.toggle-text')
+let themeToggle = document.querySelector('.fa-toggle-off');
+let themeToggle2 = document.querySelector('.toggle-text');
+let topBarText = document.querySelector('a');
+let gamesLink = document.querySelector('#gamesLink');
+let contact = document.querySelector('#contactLink');
+let items = document.querySelectorAll('.cm img');
 
 function toggleTheme(e) {
     let topBar = document.querySelector('.top-bar');
@@ -27,15 +31,21 @@ function toggleTheme(e) {
     if (themeToggle.classList.contains('fa-toggle-off')) {
         themeToggle.classList.remove('fa-toggle-off');
         themeToggle.classList.add('fa-toggle-on');
-        document.body.style.backgroundColor = 'rgb(170, 170, 170)';
-        topBar.style.backgroundColor = 'rgb(136, 136, 136)';
-        navBar.style.backgroundColor = 'rgb(136, 136, 136)';
+        document.body.style.backgroundColor = 'rgb(35, 50, 35)';
+        topBar.style.backgroundColor = 'rgb(55, 70, 55)';
+        navBar.style.backgroundColor = 'rgb(55, 70, 55)';
+        navBar.style.color = 'rgb(198, 230, 204)';
+        topBarText.style.color = 'rgb(198, 230, 204)';
+        menu.style.color = 'rgb(198, 230, 204)';
+        gamesLink.style.color = 'rgb(198, 230, 204)';
+        contact.style.color = 'rgb(198, 230, 204)';
         // Arcade Exclusive
         for (let x = 0; x < games.length; x++) {
-            games[x].style.backgroundColor = 'rgb(126, 126, 126)';
-        }
-        for (let x = 0; x < games.length; x++) {
-            games[x].style.border = '4vh double rgb(140, 140, 140)';
+            games[x].style.backgroundColor = 'hsl(124, 12%, 25%)';
+        } for (let x = 0; x < games.length; x++) {
+            games[x].style.borderColor = 'hsl(104, 12%, 32%)';
+        } for (let x = 0; x < 3; x++) {
+            items[x].style.filter = 'invert(100%)';
         }
         //
         document.cookie = "darkMode=on"
@@ -47,12 +57,19 @@ function toggleTheme(e) {
         document.body.style.backgroundColor = "";
         topBar.style.backgroundColor = "";
         navBar.style.backgroundColor = "";
+        navBar.style.color = '';
+        topBarText.style.color = '';
+        menu.style.color = '';
+        gamesLink.style.color = '';
+        contact.style.color = '';
         // Arcade Exclusive
         for (let x = 0; x < games.length; x++) {
             games[x].style.backgroundColor = "";
         }
         for (let x = 0; x < games.length; x++) {
             games[x].style.border = "";
+        } for (let x = 0; x < 3; x++) {
+            items[x].style.filter = '';
         }
         //
         document.cookie = "darkMode=off"
@@ -78,15 +95,22 @@ function cookieCheck() {
         //
         themeToggle.classList.remove('fa-toggle-off');
         themeToggle.classList.add('fa-toggle-on');
-        document.body.style.backgroundColor = 'rgb(170, 170, 170)';
-        topBar.style.backgroundColor = 'rgb(136, 136, 136)';
-        navBar.style.backgroundColor = 'rgb(136, 136, 136)';
+        document.body.style.backgroundColor = 'rgb(35, 50, 35)';
+        topBar.style.backgroundColor = 'rgb(55, 70, 55)';
+        navBar.style.backgroundColor = 'rgb(55, 70, 55)';
+        navBar.style.color = 'rgb(198, 230, 204)';
+        topBarText.style.color = 'rgb(198, 230, 204)';
+        menu.style.color = 'rgb(198, 230, 204)';
+        gamesLink.style.color = 'rgb(198, 230, 204)';
+        contact.style.color = 'rgb(198, 230, 204)';
         // Arcade Exclusive
         for (let x = 0; x < games.length; x++) {
-            games[x].style.backgroundColor = 'rgb(126, 126, 126)';
+            games[x].style.backgroundColor = 'hsl(124, 12%, 25%)';
         }
         for (let x = 0; x < games.length; x++) {
-            games[x].style.border = '4vh double rgb(140, 140, 140)';
+            games[x].style.borderColor = 'hsl(104, 12%, 32%)';
+        } for (let x = 0; x < 3; x++) {
+            items[x].style.filter = 'invert(100%)';
         }
         //
         return;
