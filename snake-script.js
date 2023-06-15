@@ -81,7 +81,7 @@
       topBar.style.display = "visible";
     } if (window.matchMedia("(max-width: 1200px)").matches) {
       alert("Your screen is too small for this game");
-      location.href = "http://127.0.0.1:5500/arcade.html";
+      location.href = "https://shibeception.github.io/";
     } else {
       topBar.style.display = "flex";
     }
@@ -520,7 +520,7 @@
   }
 
   let collidables = new Image();
-  collidables.src = '/Collidables.png'
+  collidables.src = '/collidables.png'
 
   function drawObjects() {
     Objects = {};
@@ -789,7 +789,7 @@
         }
       }
     }
-    
+    console.log(`foodOnFood(${food})`);
   }
 
   function foodOnSnek() {
@@ -801,6 +801,7 @@
         foodOnSnek();
         foodCollisions();
         foodOnFood(x);
+        foodTimer(x);
        } if (foods[`food${x}`].spawnLocationX == snekCoords.snekLength.x &&
        foods[`food${x}`].spawnLocationY == snekCoords.snekLength.y) {
         foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
@@ -808,6 +809,7 @@
         foodOnSnek();
         foodCollisions();
         foodOnFood(x);
+        foodTimer(x);
        } if (foods[`food${x}`].spawnLocationX == snekCoords.snekEnd.x &&
        foods[`food${x}`].spawnLocationY == snekCoords.snekEnd.y) {
         foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
@@ -815,6 +817,7 @@
         foodOnSnek();
         foodCollisions();
         foodOnFood(x);
+        foodTimer(x);
        }
     }
   }
@@ -864,6 +867,6 @@
     }
   }
 
-  setInterval(music, 0, selectedSong)
+  // setInterval(music, 0, selectedSong)
 
 // }
