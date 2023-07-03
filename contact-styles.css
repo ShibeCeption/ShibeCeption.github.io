@@ -2,7 +2,6 @@ body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
   margin: 0;
-  transition: all 1s ease-out;
 }
 .top-bar {
   width: 100vw;
@@ -16,7 +15,6 @@ body {
   padding-left: 1.5vw;
   overflow: hidden;
   z-index: 12;
-  transition: all 1s ease-out;
 }
 @media (max-width: 1000px) {
   .top-bar {
@@ -46,14 +44,9 @@ body {
   top: 25px;
 }
 
-.nav-bar {
-  transition: all 1s ease-out;
-}
-
 a {
   color: black;
   text-decoration: none;
-  transition: all 1s ease-out;
 }
 .nav-bar-option {
   position: relative;
@@ -74,10 +67,10 @@ a {
   top: 2px;
 }
 
+
 .home,
 .logo-text,
 .logo,
-.nav-bar-option,
 .games,
 .contact {
   transition: all 1s ease-out;
@@ -111,9 +104,6 @@ a {
   }
 }
 
-* ::selection {
-  background-color: hsl(212, 22%, 51%);
-}
 .virtual-text {
   height: 20vh;
   width: 100vw;
@@ -167,3 +157,12 @@ a {
     height: 12vh;
   }
 }
+
+/*
+.profile-pic:hover,
+ .contact-info:hover {
+  box-shadow: 10px 0px 25px rgb(119, 140, 140), -10px 0px 25px rgb(108, 125, 125),
+   0px 10px 25px rgb(155, 255, 255), 0px -10px 25px rgb(155, 255, 255);
+   background-color: rgb(133, 203, 203);
+   border-color: rgb(82, 129, 129);
+} */
