@@ -1,4 +1,4 @@
-// {
+{
 
   let topBar = document.querySelector('.top-bar');
   let navBar = document.querySelector('.nav-bar');
@@ -881,4 +881,4 @@
 
   // setInterval(music, 0, selectedSong)
 
-// }
+}
