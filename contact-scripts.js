@@ -20,7 +20,8 @@ let topBar = document.querySelector('.top-bar');
   let contact = document.querySelector('#contactLink');
   // Contact Exclusive
   let contactIcon = document.querySelector('.profile-pic');
-  let contactInfo = document.querySelector('.contact-info')
+  let contactInfo = document.querySelector('.contact-info');
+  let contactHover = document.querySelectorAll('.profile-pic:hover, .contact-info:hover')
 
   function toggleTheme(e) {
     let topBar = document.querySelector('.top-bar');
@@ -59,6 +60,9 @@ let topBar = document.querySelector('.top-bar');
       contactIcon.style.borderColor = '';
       contactInfo.style.borderColor = '';
       contactInfo.style.color = '';
+      // Code for glowing contact info
+      
+
       document.cookie = "darkMode=off"
       e.stopPropagation()
       return;
@@ -84,7 +88,25 @@ let topBar = document.querySelector('.top-bar');
       contactIcon.style.borderColor = 'rgb(157, 183, 159)';
       contactInfo.style.borderColor = 'rgb(157, 183, 159)';
       contactInfo.style.color = 'rgb(198, 230, 204)';
+      // Code for glowing contact info
+      for (let x = 0; x < contactHover.length; x++) {
+        
+      }
       return;
     }
   }
-  cookieCheck()
+  cookieCheck();
+
+  // Theme Toggle Code
+  function transitions() {
+    document.body.style.transition = 'all 1s ease-in-out';
+    contactInfo.style.transition = 'all 1s ease-in-out';
+    contactIcon.style.transition = 'all 1s ease-in-out';
+    topBar.style.transition = 'all 1s ease-in-out';
+    navBar.style.transition = 'all 1s ease-in-out';
+      menu.style.transition = 'all 1s ease-in-out';
+      games.style.transition = 'all 1s ease-in-out';
+      contact.style.transition = 'all 1s ease-in-out';
+      topBarText.style.transition = 'all 1s ease-in-out';
+  }
+  setTimeout(transitions, 0);
