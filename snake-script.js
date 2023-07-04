@@ -1,4 +1,4 @@
-// {
+{
 
 
 let topBar = document.querySelector('.top-bar');
