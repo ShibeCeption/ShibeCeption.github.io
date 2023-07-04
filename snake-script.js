@@ -121,9 +121,9 @@ let topBar = document.querySelector('.top-bar');
   }
   screenCheck()
 
- let snekGame = document.querySelector('.game');
+  let snekGame = document.querySelector('.game');
 
-  snekGame.style.backgroundImage = 'url(/images/GrassV2.png)';
+  setTimeout((() => {snekGame.style.backgroundImage = 'url(/images/GrassV2.png)'; }), 3000);
 
   // Movement Code
 
@@ -923,8 +923,7 @@ let topBar = document.querySelector('.top-bar');
     foodCollisions(x);
   }
 
-  setInterval(snek, 1000 / 4.5);
-
+   setTimeout((() => { setInterval(snek, 1000 / 4.5); }), 2900);
 
   let song1 = new Audio('/grandTheme.mp3');
   let song2 = new Audio('/Forest Troubles.mp3');
