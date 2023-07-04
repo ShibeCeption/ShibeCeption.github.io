@@ -121,7 +121,9 @@ let topBar = document.querySelector('.top-bar');
   }
   screenCheck()
 
+ let snekGame = document.querySelector('.game');
 
+  snekGame.style.backgroundImage = 'url(/images/GrassV2.png)';
 
   // Movement Code
 
