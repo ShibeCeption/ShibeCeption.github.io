@@ -123,7 +123,7 @@ let topBar = document.querySelector('.top-bar');
 
   let snekGame = document.querySelector('.game');
 
-  setTimeout((() => {snekGame.style.backgroundImage = 'url(/images/GrassV2.png)'; }), 3000);
+  setTimeout((() => {snekGame.style.backgroundImage = 'url(/GrassV2.png)'; }), 3000);
 
   // Movement Code
 
