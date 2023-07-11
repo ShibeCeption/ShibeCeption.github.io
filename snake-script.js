@@ -581,7 +581,7 @@ let topBar = document.querySelector('.top-bar');
   }
 
   let collidables = new Image();
-  collidables.src = '/collidables.png';
+  collidables.src = '/Collidables.png';
   let foxIdle = new Image();
   foxIdle.src = '/foxIdle-export.png';
   let foxWalking = new Image();
