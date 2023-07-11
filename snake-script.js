@@ -282,7 +282,7 @@ let topBar = document.querySelector('.top-bar');
         for (let x = 1; x <= 4; x++) {
           respawnFood(x);
         } if (map == "forest") {
-        setTimeout((() => { requiredScore = 30;
+        setTimeout((() => { requiredScore = 15; // 30 normally /images
            snekGame.style.backgroundImage = 'url(/GrassV2.png)'; mapWon = false; }), 9000);
            for (let x = 1; x <= 4; x++) {
             foodOnFood(x);
@@ -290,7 +290,7 @@ let topBar = document.querySelector('.top-bar');
             foodCollisions(x);
            }
     } if (map == "autumnForest") {
-      setTimeout((() => { requiredScore = 40;
+      setTimeout((() => { requiredScore = 20 // 40 normally;
          snekGame.style.backgroundImage = 'url(/GrassV2AF.png)'; mapWon = false; }), 9000);
          for (let x = 1; x <= 4; x++) {
           foodOnFood(x);
@@ -1316,7 +1316,7 @@ let topBar = document.querySelector('.top-bar');
 
   let mapScore = 0;
   let scoreText = document.getElementById('scoreText');
-  let requiredScore = 50;
+  let requiredScore = 15; // 50
 
   function updateScore() {
     scoreText.textContent = 'Score:\n' + mapScore + '/' + requiredScore;
