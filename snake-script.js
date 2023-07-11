@@ -1500,7 +1500,7 @@ let topBar = document.querySelector('.top-bar');
   }
 
 
-  setTimeout((() => { setInterval(snek, 1000 / 4.5); }), 2900);
+  setTimeout((() => { setInterval(snek, 1000 / 5); }), 2900);
 
 
   let song1 = new Audio('/grandTheme.mp3');
