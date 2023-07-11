@@ -1,4 +1,5 @@
-{
+// {
+
 
 
 let topBar = document.querySelector('.top-bar');
@@ -114,12 +115,12 @@ let topBar = document.querySelector('.top-bar');
       topBar.style.display = "visible";
     } if (window.matchMedia("(max-width: 1200px)").matches) {
       alert("Your screen is too small for this game");
-      location.href = "https://shibeception.github.io/index.html";
+      location.href = "https://shibeception.github.io/";
     } else {
       topBar.style.display = "flex";
     }
   }
-  screenCheck()
+  screenCheck();
 
   let snekGame = document.querySelector('.game');
 
@@ -234,7 +235,15 @@ let topBar = document.querySelector('.top-bar');
     }
   }
 
+  mapWon = false;
+
+  let map = "meadows";
+
   function snek() {
+    checkWin();
+    if (mapWon == true) {
+      return;
+    }
     moved = false;
     movementQueues();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -244,6 +253,52 @@ let topBar = document.querySelector('.top-bar');
     moveSnek();
     drawObjects();
     updateScore();
+  }
+
+  let maps = ["meadows", "forest", "autumnForest", "cliffside", "mountains"];
+
+  let mapCount = 0;
+
+  function checkWin() {
+    if (mapScore >= requiredScore) {
+      mapScore = 0;
+      snekDirection = "left";
+      mapCount++;
+      map = maps[mapCount];
+      setTimeout((() => { ctx.clearRect(0, 0, canvas.width, canvas.height,);
+        snekGame.style.backgroundImage = 'url(/snekLoading2-export.gif)';
+        mapWon = true; }), 50);
+        snekCoords.snekHead.x = 192;
+        snekCoords.snekHead.y = 224;
+        snekCoords.snekLength.x = 224;
+        snekCoords.snekLength.y = 224;
+        snekCoords.snekEnd.x = 256;
+        snekCoords.snekEnd.y = 224;
+        Objects = {};
+        arrX = [];
+        arrY = [];
+        arrType = [];
+        objCount = 0;
+        for (let x = 1; x <= 4; x++) {
+          respawnFood(x);
+        } if (map == "forest") {
+        setTimeout((() => { requiredScore = 30;
+           snekGame.style.backgroundImage = 'url(/GrassV2.png)'; mapWon = false; }), 9000);
+           for (let x = 1; x <= 4; x++) {
+            foodOnFood(x);
+            foodOnSnek(x);
+            foodCollisions(x);
+           }
+    } if (map == "autumnForest") {
+      setTimeout((() => { requiredScore = 40;
+         snekGame.style.backgroundImage = 'url(/GrassV2AF.png)'; mapWon = false; }), 9000);
+         for (let x = 1; x <= 4; x++) {
+          foodOnFood(x);
+          foodOnSnek(x);
+          foodCollisions(x);
+         }
+  } 
+  }
   }
 
   let food = new Image();
@@ -331,6 +386,9 @@ let topBar = document.querySelector('.top-bar');
         snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
         snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
         oldDirection = "left"
+        if (map == "forest" || map == "autumnForest") {
+          foxStates();
+        }
         return;
       } else {
         killSnake()
@@ -358,8 +416,11 @@ let topBar = document.querySelector('.top-bar');
         snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
         snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
         oldDirection = "right"
+        if (map == "forest" || map == "autumnForest") {
+          foxStates(); 
+        }
         return;
-      } else {
+       } else {
         killSnake()
         return;
       }
@@ -385,6 +446,9 @@ let topBar = document.querySelector('.top-bar');
         snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
         snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
         oldDirection = "down"
+        if (map == "forest" || map == "autumnForest") {
+          foxStates();
+        }
         return;
       } else {
         killSnake()
@@ -412,6 +476,9 @@ let topBar = document.querySelector('.top-bar');
         snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
         snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
         oldDirection = "up"
+        if (map == "forest" || map == "autumnForest") {
+          foxStates();
+        }
         return;
       } else {
         killSnake()
@@ -514,9 +581,137 @@ let topBar = document.querySelector('.top-bar');
   }
 
   let collidables = new Image();
-  collidables.src = '/Collidables.png';
+  collidables.src = '/collidables.png';
+  let foxIdle = new Image();
+  foxIdle.src = '/foxIdle-export.png';
+  let foxWalking = new Image();
+  foxWalking.src = '/foxWalking.png';
+  let foxAttacking = new Image();
+  foxAttacking.src = '/foxAttacking.png'
+  let foxReturning = new Image();
+  foxReturning.src = '/foxReturning.png'
+  let foxState = "idle";
+  foxFrame = 0;
+  let walkDistance = 0;
+
+  function foxStates() {
+    if (map == "forest") {
+      if (foxState == "returning") {
+        if (Objects[1].x <= 0) {
+          foxFrame = 0;
+          foxState = "idle";
+          if (Objects[1].x >= 192) {
+            return;
+          }
+        } if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
+          || snekCollider.x == 128 || snekCollider.x == 288) {
+            if (snekCollider.y == 160 || snekCollider.y == 192) {
+              foxState = "walking";
+              foxFrame = 0;
+            }
+          }
+      }
+    if (foxState == "idle") {
+    if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
+      || snekCollider.x == 128 || snekCollider.x == 288) {
+        if (snekCollider.y == 160 || snekCollider.y == 192) {
+          foxState = "walking";
+          foxFrame = 0;
+        }
+      }
+      }
+    } if (foxState == "walking") {
+      if (snekCollider.x == Objects[1].x + 128) {
+        if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+        }
+      } if (snekCoords.snekHead.x == Objects[1].x + 128) {
+        if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+        }
+      } if (snekCoords.snekLength.x == Objects[1].x + 128) {
+        if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+        }
+      } if (snekCoords.snekEnd.x == Objects[1].x + 128) {
+        if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+        }
+      }
+    } if (foxState == "walking") {
+        if (Objects[1].x >= 192) {
+          foxFrame = 0;
+          foxState = "idle";
+          setTimeout((() => {
+          foxFrame = 1024;
+          foxState = "returning";
+        }), 1000);
+        }
+      } if (map == "autumnForest") {
+        if (foxState == "returning") {
+          if (Objects[1].x <= 0) {
+            foxFrame = 0;
+            foxState = "idle";
+            if (Objects[1].x >= 384) {
+              return;
+            }
+          } if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
+            || snekCollider.x == 128 || snekCollider.x == 288) {
+              if (snekCollider.y == 128 || snekCollider.y == 160) {
+                foxState = "walking";
+                foxFrame = 0;
+              }
+            }
+        }
+      if (foxState == "idle") {
+      if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
+        || snekCollider.x == 128 || snekCollider.x == 288) {
+          if (snekCollider.y == 128 || snekCollider.y == 160) {
+            foxState = "walking";
+            foxFrame = 0;
+          }
+        }
+        }
+      } if (foxState == "walking") {
+        if (snekCollider.x == Objects[1].x + 128) {
+          if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+          foxFrame = 0;
+          foxState = "attacking";
+          }
+        } if (snekCoords.snekHead.x == Objects[1].x + 128) {
+          if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+          foxFrame = 0;
+          foxState = "attacking";
+          }
+        } if (snekCoords.snekLength.x == Objects[1].x + 128) {
+          if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+          foxFrame = 0;
+          foxState = "attacking";
+          }
+        } if (snekCoords.snekEnd.x == Objects[1].x + 128) {
+          if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+          foxFrame = 0;
+          foxState = "attacking";
+          }
+        }
+      } if (foxState == "walking") {
+          if (Objects[1].x >= 384) {
+            foxFrame = 0;
+            foxState = "idle";
+            setTimeout((() => {
+            foxFrame = 1024;
+            foxState = "returning";
+          }), 1000);
+          }
+        } 
+    }
 
   function drawObjects() {
+    if (map == "meadows") {
     Objects = {};
     objCount = 0;
     drawObject("bush", 96, 32);
@@ -528,6 +723,50 @@ let topBar = document.querySelector('.top-bar');
     drawObject("bush", 64, 320);
     drawObject("oTree", 352, 256);
     drawObject("bush", 224, 448);
+    } if (map == "forest") {
+    Objects = {};
+    objCount = 0;
+    drawObject("fox", 0, 128);
+    drawObject("rock", 0, 0);
+    drawObject("oTree", 32, 32);
+    drawObject("bush", 96, 96);
+    drawObject("rock", 224, 32);
+    drawObject("pTree", 320, 32);
+    drawObject("pTree", 448, 0);
+    drawObject("oTree", 384, 64);
+    drawObject("bush", 320, 160);
+    drawObject("pTree", 416, 192);
+    drawObject("rock", 448, 352);
+    drawObject("pTree", 320, 288);
+    drawObject("oTree", 416, 384);
+    drawObject("pTree", 96, 192);
+    drawObject("oTree", 128, 256);
+    drawObject("oTree", 0, 224);
+    drawObject("pTree", 32, 352);
+    drawObject("bush", 128, 448);
+    drawObject("barrier", 320, 128);
+    } if (map == "autumnForest") {
+      Objects = {};
+      objCount = 0;
+      drawObject("fox", 0, 96);
+      drawObject("reTree", 0, 0);
+      drawObject("pTree", 128, 0,);
+      drawObject("rock", 288, 32);
+      drawObject("orTree", 384, 0,);
+      drawObject("pTree", 32, 160);
+      drawObject("orTree", 160, 192);
+      drawObject("aBush", 96, 320);
+      drawObject("yeTree", 320, 96);
+      drawObject("reTree", 448, 128);
+      drawObject("pTree", 384, 224);
+      drawObject("yeTree", 352, 320);
+      drawObject("aBush", 288, 448);
+      drawObject("yeTree", 0, 320);
+      drawObject("rock", 0, 448);
+      drawObject("orTree", 416, 384);
+      drawObject("orTree", 96, 384);
+      drawObject("reTree", 192, 320);
+    }
   }
 
   let rockType = Math.floor(Math.random() * 3) * 64;
@@ -535,8 +774,8 @@ let topBar = document.querySelector('.top-bar');
   let moaiType = Math.floor(Math.random() * 2)
   let rockValue = Math.floor(Math.random() * 500);
   let size = 64;
-
   let objCount = 0;
+  let foxSpeed = 32;
 
   function drawObject(type, xCoords, yCoords) {
     if (type == "bush") {
@@ -627,7 +866,155 @@ let topBar = document.querySelector('.top-bar');
       Objects[objCount].height = 32;
       Objects[objCount].type = "1x2";
       return;
-    }
+    } if (type == "barrier") {
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "1x2";
+      Objects[objCount].barrier = true;
+      return;
+    } if (type == "fox") {
+      if (foxState == "idle") {
+      ctx.drawImage(foxIdle, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
+      foxFrame += 128;
+      if (foxFrame == 512) {
+        foxFrame = 0;
+      }
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords + walkDistance;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 128;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "4x2 Disabled";
+      enemyCollisions();
+    } if (foxState == "walking") {
+      ctx.drawImage(foxWalking, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
+      foxFrame += 128;
+      for (let x = 1; x <= 4; x++) {
+        foodCollisions(x);
+      }
+      if (foxFrame == 1024) {
+        foxFrame = 0;
+      }
+      walkDistance += foxSpeed;
+      objCount++;
+      if (walkDistance % foxSpeed == 0) {
+        Objects[objCount] = {};
+        Objects[objCount].x = xCoords + walkDistance;
+        Objects[objCount].y = yCoords + 32;
+        Objects[objCount].width = 128;
+        Objects[objCount].height = 64;
+        Objects[objCount].type = "4x2 Disabled";
+        enemyCollisions();
+      } /* if (walkDistance % foxSpeed > 0) {
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords + walkDistance + 8;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 128;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "4x2";
+      } */
+    } if (foxState == "attacking") {
+      ctx.drawImage(foxAttacking, foxFrame, 0, 192, 128, xCoords + walkDistance, yCoords, 192, 128);
+      foxFrame += 768;
+      for (let x = 1; x <= 4; x++) {
+        foodCollisions(x);
+      } if (foxFrame >= 5088) {
+        foxState = "idle";
+        foxFrame = 0;
+        if (xCoords + walkDistance !== 0) {
+          setTimeout((() => {
+          foxState = "returning";
+          foxFrame = 1024;
+        }), 1000)
+        }
+      }
+      objCount++;
+      if (walkDistance % foxSpeed == 0) {
+        Objects[objCount] = {};
+        Objects[objCount].x = xCoords + walkDistance;
+        Objects[objCount].y = yCoords + 32;
+        Objects[objCount].width = 128;
+        Objects[objCount].height = 64;
+        Objects[objCount].type = "4x2 Disabled";
+        enemyCollisions();
+      }
+    } if (foxState == "returning") {
+      ctx.drawImage(foxReturning, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
+      foxFrame -= 128;
+      for (let x = 1; x <= 4; x++) {
+        foodCollisions(x);
+      }
+      if (foxFrame == 0) {
+        foxFrame = 1024;
+      }
+      walkDistance -= foxSpeed;
+      objCount++;
+      if (walkDistance % foxSpeed == 0) {
+        Objects[objCount] = {};
+        Objects[objCount].x = xCoords + walkDistance;
+        Objects[objCount].y = yCoords + 32;
+        Objects[objCount].width = 128;
+        Objects[objCount].height = 64;
+        Objects[objCount].type = "4x2 Disabled";
+        enemyCollisions();
+      } /* if (walkDistance % foxSpeed > 0) {
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords + walkDistance - 8;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 128;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "4x2";
+      } */
+  }
+} if (type == "aBush") {
+  ctx.drawImage(collidables, 768, 0, 64, 64, xCoords, yCoords, size, size);
+  objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 32;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "1x2";
+      return;
+} if (type == "orTree") {
+  ctx.drawImage(collidables, 1088, 0, 64, 64, xCoords, yCoords, size, size);
+  ctx.drawImage(collidables, 1152, 0, 64, 64, xCoords, yCoords + size, size, size);
+  objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "1x2";
+      return;
+} if (type == "reTree") {
+  ctx.drawImage(collidables, 960, 0, 64, 64, xCoords, yCoords, size, size);
+  ctx.drawImage(collidables, 1024, 0, 64, 64, xCoords, yCoords + size, size, size);
+  objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 64;
+      Objects[objCount].type = "1x2";
+      return;
+} if (type == "yeTree") {
+  ctx.drawImage(collidables, 832, 0, 64, 64, xCoords, yCoords, size, size);
+  ctx.drawImage(collidables, 896, 0, 64, 64, xCoords, yCoords + size, size, size);
+  objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 128;
+      Objects[objCount].type = "1x2";
+      return;
+}
   }
 
   let Objects = {
@@ -643,6 +1030,136 @@ let topBar = document.querySelector('.top-bar');
   let arrX = [];
   let arrY = [];
   let arrType = [];
+
+  function enemyCollisions () {
+    if (map == "autumnForest") {
+      if (snekCollider.x == Objects[1].x || snekCollider.x == Objects[1].x + 32 ||
+        snekCollider.x == Objects[1].x + 64 || snekCollider.x == Objects[1].x + 96) {
+          if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+            killSnake();
+          }
+        } if (snekCoords.snekHead.x == Objects[1].x || snekCoords.snekHead.x == Objects[1].x + 32 ||
+          snekCoords.snekHead.x == Objects[1].x + 64 || snekCoords.snekHead.x == Objects[1].x + 96) {
+            if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+              killSnake();
+            }
+          } if (snekCoords.snekLength.x == Objects[1].x || snekCoords.snekLength.x == Objects[1].x + 32 ||
+            snekCoords.snekLength.x == Objects[1].x + 64 || snekCoords.snekLength.x == Objects[1].x + 96) {
+              if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+                killSnake();
+              }
+            } if (snekCoords.snekEnd.x == Objects[1].x || snekCoords.snekEnd.x == Objects[1].x + 32 ||
+              snekCoords.snekEnd.x == Objects[1].x + 64 || snekCoords.snekEnd.x == Objects[1].x + 96) {
+                if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+                  killSnake();
+                }
+              }
+              if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCollider.x == Objects[1].x + 128 || snekCollider.x == Objects[1].x + 160) {
+                  if (snekCollider.y == 128 || snekCollider.y == 160 ||
+                    snekCollider.y == 96 || snekCollider.y == 192) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              } if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCoords.snekHead.x == Objects[1].x + 128 || snekCoords.snekHead.x == Objects[1].x + 160) {
+                  if (snekCoords.snekHead.y == 128 || snekCoords.snekHead.y == 160 ||
+                    snekCoords.snekHead.y == 96 || snekCoords.snekHead.y == 192) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              } if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCoords.snekLength.x == Objects[1].x + 128 || snekCoords.snekLength.x == Objects[1].x + 160) {
+                  if (snekCoords.snekLength.y == 128 || snekCoords.snekLength.y == 160 ||
+                    snekCoords.snekLength.y == 96 || snekCoords.snekLength.y == 192) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              } if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCoords.snekEnd.x == Objects[1].x + 128 || snekCoords.snekEnd.x == Objects[1].x + 160) {
+                  if (snekCoords.snekEnd.y == 128 || snekCoords.snekEnd.y == 160 ||
+                    snekCoords.snekEnd.y == 96 || snekCoords.snekEnd.y == 192) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              }
+    } if (map == "forest") {
+      if (snekCollider.x == Objects[1].x || snekCollider.x == Objects[1].x + 32 ||
+        snekCollider.x == Objects[1].x + 64 || snekCollider.x == Objects[1].x + 96) {
+          if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+            killSnake();
+          }
+        } if (snekCoords.snekHead.x == Objects[1].x || snekCoords.snekHead.x == Objects[1].x + 32 ||
+          snekCoords.snekHead.x == Objects[1].x + 64 || snekCoords.snekHead.x == Objects[1].x + 96) {
+            if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+              killSnake();
+            }
+          } if (snekCoords.snekLength.x == Objects[1].x || snekCoords.snekLength.x == Objects[1].x + 32 ||
+            snekCoords.snekLength.x == Objects[1].x + 64 || snekCoords.snekLength.x == Objects[1].x + 96) {
+              if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+                killSnake();
+              }
+            } if (snekCoords.snekEnd.x == Objects[1].x || snekCoords.snekEnd.x == Objects[1].x + 32 ||
+              snekCoords.snekEnd.x == Objects[1].x + 64 || snekCoords.snekEnd.x == Objects[1].x + 96) {
+                if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+                  killSnake();
+                }
+              }
+              if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCollider.x == Objects[1].x + 128 || snekCollider.x == Objects[1].x + 160) {
+                  if (snekCollider.y == 160 || snekCollider.y == 192 ||
+                    snekCollider.y == 224 || snekCollider.y == 96) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              } if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCoords.snekHead.x == Objects[1].x + 128 || snekCoords.snekHead.x == Objects[1].x + 160) {
+                  if (snekCoords.snekHead.y == 160 || snekCoords.snekHead.y == 192 ||
+                    snekCoords.snekHead.y == 224 || snekCoords.snekHead.y == 96) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              } if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCoords.snekLength.x == Objects[1].x + 128 || snekCoords.snekLength.x == Objects[1].x + 160) {
+                  if (snekCoords.snekLength.y == 160 || snekCoords.snekLength.y == 192 ||
+                    snekCoords.snekLength.y == 224 || snekCoords.snekLength.y == 96) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              } if (foxState == "attacking") {
+                setTimeout((() => {
+                if (snekCoords.snekEnd.x == Objects[1].x + 128 || snekCoords.snekEnd.x == Objects[1].x + 160) {
+                  if (snekCoords.snekEnd.y == 160 || snekCoords.snekEnd.y == 192 ||
+                    snekCoords.snekEnd.y == 224 || snekCoords.snekEnd.y == 96) {
+                    killSnake();
+                  }
+                }
+                }), 250);
+                return;
+              }
+    }
+  }
 
   function checkCollision() {
     objLength = 0;
@@ -666,8 +1183,37 @@ let topBar = document.querySelector('.top-bar');
             isColliding = true;
           }
         }
+      } if (arrType[x] == "4x2") {
+        if (snekCollider.x == arrX[x] || snekCollider.x == arrX[x] + 32 ||
+          snekCollider.x == arrX[x] + 64 || snekCollider.x == arrX[x] + 96) {
+            if (snekCollider.y == arrY[x] || snekCollider.y == arrY[x] + 32) {
+              isColliding = true;
+            }
+          }
+      } if (arrType[x] == "4x2") {
+        if (snekCoords.snekEnd.x == arrX[x] || snekCoords.snekEnd.x == arrX[x] + 32 ||
+          snekCoords.snekEnd.x == arrX[x] + 64 || snekCoords.snekEnd.x == arrX[x] + 96) {
+            if (snekCoords.snekEnd.y == arrY[x] || snekCoords.snekEnd.y == arrY[x] + 32) {
+              isColliding = true;
+            }
+          }
+      } if (arrType[x] == "4x2") {
+        if (snekCoords.snekHead.x == arrX[x] || snekCoords.snekHead.x == arrX[x] + 32 ||
+          snekCoords.snekHead.x == arrX[x] + 64 || snekCoords.snekHead.x == arrX[x] + 96) {
+            if (snekCoords.snekHead.y == arrY[x] || snekCoords.snekHead.y == arrY[x] + 32) {
+              isColliding = true;
+            }
+          }
+      } if (arrType[x] == "4x2") {
+        if (snekCoords.snekLength.x == arrX[x] || snekCoords.snekLength.x == arrX[x] + 32 ||
+          snekCoords.snekLength.x == arrX[x] + 64 || snekCoords.snekLength.x == arrX[x] + 96) {
+            if (snekCoords.snekLength.y == arrY[x] || snekCoords.snekLength.y == arrY[x] + 32) {
+              isColliding = true;
+            }
+          }
       }
     }
+    
   }
 
   function updateSnekCollider() {
@@ -778,9 +1324,39 @@ let topBar = document.querySelector('.top-bar');
 
   function foodCollisions(y) {
     for (let x = 1; x <= objLength; x++) {
+      if (map == "forest") {
+        if (foods[`food${y}`].spawnLocationX == 0 || foods[`food${y}`].spawnLocationX == 32 ||
+        foods[`food${y}`].spawnLocationX == 64 || foods[`food${y}`].spawnLocationX == 96 ||
+        foods[`food${y}`].spawnLocationX == 128 || foods[`food${y}`].spawnLocationX == 160 
+        || foods[`food${y}`].spawnLocationX == 192 || foods[`food${y}`].spawnLocationX == 224
+        || foods[`food${y}`].spawnLocationX == 256
+        ) {
+          if (foods[`food${y}`].spawnLocationY == 160 || foods[`food${y}`].spawnLocationY == 192) {
+            foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
+              foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+          }
+        }
+      } if (map == "autumnForest") {
+        if (foods[`food${y}`].spawnLocationX >= 0) {
+          if (foods[`food${y}`].spawnLocationY == 128 || foods[`food${y}`].spawnLocationY == 160) {
+            foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
+              foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+          }
+        }
+      }
       if (arrType[x] == "1x2") {
           if (foods[`food${y}`].spawnLocationX == arrX[x] || foods[`food${y}`].spawnLocationX == arrX[x] + 32) {
             if (foods[`food${y}`].spawnLocationY == arrY[x] || foods[`food${y}`.spawnLocationY == arrY[x] + 32]) {
+              foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
+              foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+              // console.log("foodCollisions run!")
+              foodOnSnek(y);
+            }
+          }
+        } if (arrType[x] == "4x2") {
+          if (foods[`food${y}`].spawnLocationX == arrX[x] || foods[`food${y}`].spawnLocationX == arrX[x] + 32 ||
+          foods[`food${y}`].spawnLocationX == arrX[x] + 64 || foods[`food${y}`].spawnLocationX == arrX[x] + 96) {
+            if (foods[`food${y}`].spawnLocationY == arrY[x] || foods[`food${y}`].spawnLocationY == arrY[x] + 32) {
               foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
               foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
               // console.log("foodCollisions run!")
@@ -923,7 +1499,9 @@ let topBar = document.querySelector('.top-bar');
     foodCollisions(x);
   }
 
-   setTimeout((() => { setInterval(snek, 1000 / 4.5); }), 2900);
+
+  setTimeout((() => { setInterval(snek, 1000 / 4.5); }), 2900);
+
 
   let song1 = new Audio('/grandTheme.mp3');
   let song2 = new Audio('/Forest Troubles.mp3');
@@ -938,4 +1516,12 @@ let topBar = document.querySelector('.top-bar');
 
   setInterval(music, 0)
 
-}
+// }
+
+/*
+let encoder = new TextEncoder();
+let binary = encoder.encode(prompt("Put in something you'd like to Encode"))
+let decoder = new TextDecoder()
+alert(`Binary: ${binary}`)
+alert(` Decoded: ${decoder.decode(binary)}`);
+*/
