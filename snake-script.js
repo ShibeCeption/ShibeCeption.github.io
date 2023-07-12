@@ -1500,7 +1500,25 @@ let topBar = document.querySelector('.top-bar');
   }
 
 
-  setTimeout((() => { setInterval(snek, 1000 / 5); }), 2900);
+ setTimeout((() => { /* setInterval(snek, 1000 / 5); */ snek(); }), 2900);
+
+  setTimeout((() => {
+  let updateSpeed = prompt("Chose your speed: Recomended: 3.5, 4.5, and 5.5");
+  parseInt(updateSpeed, 10);
+  if (updateSpeed <= 10 && updateSpeed > 0) {
+    setInterval(snek, 1000 / updateSpeed);
+  } else {
+    while (updateSpeed !== 1 || updateSpeed == 2 || updateSpeed == 3 || updateSpeed == 5 ||
+      updateSpeed == 6 || updateSpeed == 7 || updateSpeed == 8 || updateSpeed == 9 || updateSpeed == 10) {
+        let updateSpeed = prompt("Chose your speed: Recomended: 3.5, 4.5 and 5.5");
+        parseInt(updateSpeed, 10);
+        if (updateSpeed > 0 && updateSpeed <= 10) {
+          setInterval(snek, 1000 / updateSpeed);
+          break;
+        }
+      }
+  }
+  }), 3400);
 
 
   let song1 = new Audio('/grandTheme.mp3');
