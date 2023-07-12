@@ -1518,7 +1518,7 @@ let topBar = document.querySelector('.top-bar');
         }
       }
   }
-  }), 3400);
+  }), 4200);
 
 
   let song1 = new Audio('/grandTheme.mp3');
