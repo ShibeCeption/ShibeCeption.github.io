@@ -115,7 +115,7 @@ let topBar = document.querySelector('.top-bar');
       topBar.style.display = "visible";
     } if (window.matchMedia("(max-width: 1200px)").matches) {
       alert("Your screen is too small for this game");
-      location.href = "https://shibeception.github.io/";
+      location.href = "https://shibeception.github.io";
     } else {
       topBar.style.display = "flex";
     }
@@ -181,44 +181,48 @@ let topBar = document.querySelector('.top-bar');
 
   document.onkeydown = function controls(e) {
     if (e.key == 'a' && snekDirection !== "right" && moved == false
-    || e.key == 'ArrowLeft' && snekDirection !== "right" && moved == false) {
+    || e.key == 'ArrowLeft' && snekDirection !== "right" && moved == false ||
+    e.key == 'A' && snekDirection !== "right" && moved == false) {
       snekDirection = "left";
       moved = true;
       return;
     } if (e.key == 'd' && snekDirection !== "left" && moved == false
-    || e.key == 'ArrowRight' && snekDirection !== "left" && moved == false) {
+    || e.key == 'ArrowRight' && snekDirection !== "left" && moved == false ||
+    e.key == "D" && snekDirection !== "left" && moved == false) {
       snekDirection = "right";
       moved = true;
       return;
     } if (e.key == 's' && snekDirection !== "up" && moved == false
-    || e.key == 'ArrowDown' && snekDirection !== "up" && moved == false) {
+    || e.key == 'ArrowDown' && snekDirection !== "up" && moved == false ||
+    e.key == 'S' && snekDirection !== "up" && moved == false) {
       snekDirection = "down";
       moved = true;
       return;
     } if (e.key == 'w' && snekDirection !== "down" && moved == false
-    || e.key == 'ArrowUp' && snekDirection !== "down" && moved == false) {
+    || e.key == 'ArrowUp' && snekDirection !== "down" && moved == false ||
+    e.key == 'W' && snekDirection !== "up" && moved == false) {
       snekDirection = "up";
       moved = true;
       return;
     } if (moved = true) { 
-      if (e.key == 'w' || e.key == 'ArrowUp') {
-        movementQueue.push("up");
-        if (movementQueue.length == 3) {
+      if (e.key == 'w' || e.key == 'ArrowUp' || e.key == 'W') {
+        movementQueue.unshift("up");
+        if (movementQueue.length == 2) {
           movementQueue.shift();
         }
-      } if (e.key == 'a' || e.key == 'ArrowLeft') {
-        movementQueue.push("left");
-        if (movementQueue.length == 3) {
+      } if (e.key == 'a' || e.key == 'ArrowLeft' || e.key == 'A') {
+        movementQueue.unshift("left");
+        if (movementQueue.length == 2) {
           movementQueue.shift();
         }
-      } if (e.key == 'd' || e.key == 'ArrowRight') {
-        movementQueue.push("right");
-        if (movementQueue.length == 3) {
+      } if (e.key == 'd' || e.key == 'ArrowRight' || e.key == 'D') {
+        movementQueue.unshift("right");
+        if (movementQueue.length == 2) {
           movementQueue.shift();
         }
-      } if (e.key == 's' || e.key == 'ArrowDown') {
-        movementQueue.push("down");
-        if (movementQueue.length == 3) {
+      } if (e.key == 's' || e.key == 'ArrowDown' || e.key == 'S') {
+        movementQueue.unshift("down");
+        if (movementQueue.length == 2) {
           movementQueue.shift();
         }
       }
@@ -227,8 +231,8 @@ let topBar = document.querySelector('.top-bar');
 
   function movementQueues() {
     if (movementQueue.length > 0) {
-      snekDirection == movementQueue[0];
-      movementQueue.shift();
+      snekDirection == movementQueue[movementQueue.length];
+      movementQueue.pop();
       // console.log("movementQueueRun!")
       checkCollision();
       mapBoundaries(boundaryType)
@@ -243,9 +247,8 @@ let topBar = document.querySelector('.top-bar');
     checkWin();
     if (mapWon == true) {
       return;
-    }
+    } movementQueues();
     moved = false;
-    movementQueues();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawFood();
     drawSnek();
@@ -282,7 +285,7 @@ let topBar = document.querySelector('.top-bar');
         for (let x = 1; x <= 4; x++) {
           respawnFood(x);
         } if (map == "forest") {
-        setTimeout((() => { requiredScore = 30; // 30 normally /images
+        setTimeout((() => { requiredScore = 30;
            snekGame.style.backgroundImage = 'url(/GrassV2.png)'; mapWon = false; }), 9000);
            for (let x = 1; x <= 4; x++) {
             foodOnFood(x);
@@ -290,7 +293,7 @@ let topBar = document.querySelector('.top-bar');
             foodCollisions(x);
            }
     } if (map == "autumnForest") {
-      setTimeout((() => { requiredScore = 40 // 40 normally;
+      setTimeout((() => { requiredScore = 40;
          snekGame.style.backgroundImage = 'url(/GrassV2AF.png)'; mapWon = false; }), 9000);
          for (let x = 1; x <= 4; x++) {
           foodOnFood(x);
@@ -583,13 +586,13 @@ let topBar = document.querySelector('.top-bar');
   let collidables = new Image();
   collidables.src = '/Collidables.png';
   let foxIdle = new Image();
-  foxIdle.src = '/FoxIdle-export.png';
+  foxIdle.src = '/foxIdle-export.png';
   let foxWalking = new Image();
   foxWalking.src = '/foxWalking.png';
   let foxAttacking = new Image();
   foxAttacking.src = '/foxAttacking.png'
   let foxReturning = new Image();
-  foxReturning.src = '/Foxreturning.png'
+  foxReturning.src = '/foxreturning.png'
   let foxState = "idle";
   foxFrame = 0;
   let walkDistance = 0;
@@ -1316,7 +1319,7 @@ let topBar = document.querySelector('.top-bar');
 
   let mapScore = 0;
   let scoreText = document.getElementById('scoreText');
-  let requiredScore = 50; // 50
+  let requiredScore = 50;
 
   function updateScore() {
     scoreText.textContent = 'Score:\n' + mapScore + '/' + requiredScore;
@@ -1467,6 +1470,8 @@ let topBar = document.querySelector('.top-bar');
        }
     }
 
+    let eggTimer = 7500;
+
   function foodTimer(x) {
      if (foods[`food${x}`].foodType <= 10 && foods[`food${x}`].eaten == false) {
       setTimeout((() => { if (foods[`food${x}`].eaten == true) {
@@ -1477,7 +1482,7 @@ let topBar = document.querySelector('.top-bar');
         return;
       }
       foods[`food${x}`].spawnLocationX = -512;
-       setTimeout(respawnFood, 3500, x) }), 7500)
+       setTimeout(respawnFood, 3500, x) }), eggTimer)
        console.log("foodTimer run!");
     }
   }
@@ -1499,14 +1504,19 @@ let topBar = document.querySelector('.top-bar');
     foodCollisions(x);
   }
 
-
- setTimeout((() => { /* setInterval(snek, 1000 / 5); */ snek(); }), 2900);
+  setTimeout((() => { /* setInterval(snek, 1000 / 5); */ snek(); }), 2900);
+  let updateSpeed2 = "";
 
   setTimeout((() => {
   let updateSpeed = prompt("Choose your speed: Easy: 3.5, Normal: 4.5 and Hard: 5.5 or customize it");
   parseInt(updateSpeed, 10);
   if (updateSpeed <= 10 && updateSpeed > 0) {
     setInterval(snek, 1000 / updateSpeed);
+    updateSpeed2 = updateSpeed
+    setTimeout((() => {
+      if (updateSpeed2 <= 3.5) {
+        eggTimer = 15000;
+      } }), 0);
   } else {
     while (updateSpeed !== 1 || updateSpeed == 2 || updateSpeed == 3 || updateSpeed == 5 ||
       updateSpeed == 6 || updateSpeed == 7 || updateSpeed == 8 || updateSpeed == 9 || updateSpeed == 10) {
@@ -1514,11 +1524,17 @@ let topBar = document.querySelector('.top-bar');
         parseInt(updateSpeed, 10);
         if (updateSpeed > 0 && updateSpeed <= 10) {
           setInterval(snek, 1000 / updateSpeed);
+          updateSpeed2 = updateSpeed;
+          setTimeout((() => {
+            if (updateSpeed2 <= 3.5) {
+              eggTimer = 15000; 
+            } }), 0);
           break;
         }
       }
   }
-  }), 4200);
+  }), 3400);
+
 
 
   let song1 = new Audio('/grandTheme.mp3');
