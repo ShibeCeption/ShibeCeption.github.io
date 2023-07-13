@@ -1505,14 +1505,14 @@ let topBar = document.querySelector('.top-bar');
   }
 
   setTimeout((() => { /* setInterval(snek, 1000 / 5); */ snek(); }), 2900);
-  let updateSpeed2 = "";
+  let updateSpeed2 = 0.1;
 
   setTimeout((() => {
   let updateSpeed = prompt("Choose your speed: Easy: 3.5, Normal: 4.5 and Hard: 5.5 or customize it");
   parseInt(updateSpeed, 10);
   if (updateSpeed <= 10 && updateSpeed > 0) {
-    setInterval(snek, 1000 / updateSpeed);
-    updateSpeed2 = updateSpeed
+    updateSpeed2 = updateSpeed;
+    setInterval(snek, 1000 / updateSpeed2);
     setTimeout((() => {
       if (updateSpeed2 <= 3.5) {
         eggTimer = 15000;
@@ -1523,8 +1523,8 @@ let topBar = document.querySelector('.top-bar');
         let updateSpeed = prompt("Choose your speed: Easy: 3.5, Normal: 4.5 and Hard: 5.5 or customize it");
         parseInt(updateSpeed, 10);
         if (updateSpeed > 0 && updateSpeed <= 10) {
-          setInterval(snek, 1000 / updateSpeed);
           updateSpeed2 = updateSpeed;
+          setInterval(snek, 1000 / updateSpeed2);
           setTimeout((() => {
             if (updateSpeed2 <= 3.5) {
               eggTimer = 15000; 
@@ -1535,14 +1535,14 @@ let topBar = document.querySelector('.top-bar');
   }
   }), 3150);
 
+  
 
-
-  let song1 = new Audio('/grandTheme.mp3');
-  let song2 = new Audio('/Forest Troubles.mp3');
-  let song3 = new Audio('/guitarSong.mp3');
-  let track = new Audio('/Snek OST.mp3')
-  let sfx1 = new Audio('/Death.mp3');
-  let sfx2 = new Audio('/Eat.mp3');
+  let song1 = new Audio('/audio/grandTheme.mp3');
+  let song2 = new Audio('/audio/Forest Troubles.mp3');
+  let song3 = new Audio('/audio/guitarSong.mp3');
+  let track = new Audio('/audio/Snek OST.mp3')
+  let sfx1 = new Audio('/audio/Death.mp3');
+  let sfx2 = new Audio('/audio/Eat.mp3');
 
   function music(song) {
     track.play();
