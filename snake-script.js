@@ -1533,7 +1533,7 @@ let topBar = document.querySelector('.top-bar');
         }
       }
   }
-  }), 3400);
+  }), 3150);
 
 
 
