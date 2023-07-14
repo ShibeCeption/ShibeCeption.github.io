@@ -1470,12 +1470,8 @@ let topBar = document.querySelector('.top-bar');
        }
     }
 
- let song1 = new Audio('/audio/grandTheme.mp3');
-  let song2 = new Audio('/audio/Forest Troubles.mp3');
-  let song3 = new Audio('/audio/guitarSong.mp3');
-  let track = new Audio('/audio/Snek OST.mp3')
-  let sfx1 = new Audio('/audio/Death.mp3');
-  let sfx2 = new Audio('/audio/Eat.mp3');
+
+  let track = new Audio('/Snek OST.mp3')
 
   function music(song) {
     track.play();
