@@ -412,7 +412,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/audio/Eat.mp3');
+          let sfx2 = new Audio('/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -442,7 +442,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/audio/Eat.mp3');
+          let sfx2 = new Audio('/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -472,7 +472,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/audio/Eat.mp3');
+          let sfx2 = new Audio('/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -502,7 +502,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/audio/Eat.mp3');
+          let sfx2 = new Audio('/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -622,7 +622,7 @@ function drawSnek() {
 }
 
 let collidables = new Image();
-collidables.src = '/collidables.png';
+collidables.src = '/Collidables.png';
 let foxIdle = new Image();
 foxIdle.src = '/foxIdle-export.png';
 let foxWalking = new Image();
@@ -1559,7 +1559,7 @@ function killSnake() {
   drawStage2 = 0;
   drawStage3 = 0;
   mapScore = 0;
-  let sfx1 = new Audio('/audio/Death.mp3');
+  let sfx1 = new Audio('/Death.mp3');
   sfx1.play();
   // setTimeout(() => { alert("You Died! Try Again"); }, 50);
 }
@@ -1773,12 +1773,12 @@ function foodOnSnek(x) {
   }
 }
 
-let song1 = new Audio('/audio/grandTheme.mp3');
-let song2 = new Audio('/audio/Forest Troubles.mp3');
-let song3 = new Audio('/audio/guitarSong.mp3');
-let track = new Audio('/audio/Snek OST.mp3')
-let sfx1 = new Audio('/audio/Death.mp3');
-let sfx2 = new Audio('/audio/Eat.mp3');
+let song1 = new Audio('/grandTheme.mp3');
+let song2 = new Audio('/Forest Troubles.mp3');
+let song3 = new Audio('/guitarSong.mp3');
+let track = new Audio('/Snek OST.mp3')
+let sfx1 = new Audio('/Death.mp3');
+let sfx2 = new Audio('/Eat.mp3');
 
 function music(song) {
   track.play();
