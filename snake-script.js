@@ -412,7 +412,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio('/audio/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -442,7 +442,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio('/audio/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -472,7 +472,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio('/audio/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -502,7 +502,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio('/audio/Eat.mp3');
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -630,7 +630,7 @@ foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
 foxAttacking.src = '/foxAttacking.png'
 let foxReturning = new Image();
-foxReturning.src = '/Foxreturning.png'
+foxReturning.src = '/foxreturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
