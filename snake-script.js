@@ -624,13 +624,13 @@ function drawSnek() {
 let collidables = new Image();
 collidables.src = '/Collidables.png';
 let foxIdle = new Image();
-foxIdle.src = '/foxIdle-export.png';
+foxIdle.src = '/FoxIdle-export.png';
 let foxWalking = new Image();
 foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
 foxAttacking.src = '/foxAttacking.png'
 let foxReturning = new Image();
-foxReturning.src = '/foxReturning.png'
+foxReturning.src = '/FoxReturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
