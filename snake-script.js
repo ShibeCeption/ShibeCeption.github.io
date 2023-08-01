@@ -290,6 +290,14 @@ function checkWin() {
     arrY = [];
     arrType = [];
     objCount = 0;
+     foxFrame = 0;
+      foxState = "idle";
+      owlFrame = 0;
+      owlDirection = "normal";
+      owlX = -64;
+      owlState = "idle";
+      walkDistance = 0;
+      flightDistance = 0;
     for (let x = 1; x <= 4; x++) {
       respawnFood(x);
     } if (map == "forest") {
