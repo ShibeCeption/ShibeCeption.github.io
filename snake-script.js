@@ -124,7 +124,8 @@ screenCheck();
 
 let snekGame = document.querySelector('.game');
 
-setTimeout((() => { snekGame.style.backgroundImage = 'url(/GrassV2.png)'; }), 3000);
+setTimeout((() => { snekGame.style.backgroundImage = 'url(/GrassV2.png)';
+inGame = true; }), 3000);
 
 // Movement Code
 
@@ -176,8 +177,43 @@ let snekDirection = "left";
 let oldDirection = "left"
 let moved = false;
 let movementQueue = [];
+let flashActive = false;
+let flashNum = 0;
+let flashReady = true;
+let flashCount = 0;
+let inGame = false;
+
+
+function flash() {
+  if (flashReady == true) {
+    if (inGame) {
+      if (flashCount == 0) {
+        return;
+      } if (flashNum !== 0) {
+        return;
+      }
+      console.log(`FlashCount ${flashCount}`);
+     flashReady = false;
+    flashActive = true;
+      } else {
+        flashCount = 1;
+        return;
+      }
+    } else {
+      flashCount = 1;
+      return;
+    }
+  }
 
 document.onkeydown = function controls(e) {
+  if (e.key == 'q' && flashReady || e.key == "Q" && flashReady) {
+    flashCount++;
+    if (flashCount == 1) {
+    setTimeout((() => { flash(); }), 100);
+    } else {
+      console.log("Failed Here Flash Count: " + flashCount)
+    }
+  }
   if (e.key == 'a' && snekDirection !== "right" && moved == false
     || e.key == 'ArrowLeft' && snekDirection !== "right" && moved == false ||
     e.key == 'A' && snekDirection !== "right" && moved == false) {
@@ -240,12 +276,48 @@ function movementQueues() {
 mapWon = false;
 
 let map = "meadows";
+let flashCooldown = document.querySelector('#flashCooldown');
+let flashCoolNum = 30;
+
+function flashTimer() {
+    let interval = setInterval((() => {
+    flashCooldown.textContent = 'Q: Flash Cooldown: ' + flashCoolNum + 's';
+    if (flashCoolNum == 0) {
+      flashCooldown.textContent = 'Q: Flash Cooldown: Ready';
+      clearInterval(interval);
+      return;
+    } flashCoolNum--;
+  }), 1000);
+}
+
+let flashSound = new Audio("/Flash.wav");
 
 function snek() {
   checkWin();
   if (mapWon == true) {
     return;
   } movementQueues();
+  if (flashActive) {
+    if (flashNum == 0) {
+      setTimeout((() => {
+      flashActive = false;
+      flashNum = 0;
+      flashReady = true;
+      flashCount = 0;
+      }), 30000)
+      flashSound.play();
+      setTimeout((() => {
+        flashCoolNum = 30;
+      flashTimer();
+    }), 2500);
+    }
+  setTimeout((() => {
+    flashNum = 0;
+    flashActive = false;
+    flashReady = false;
+  }), 2500);
+  flashNum++;
+  }
   moved = false;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (map == "cliffsides") {
@@ -270,6 +342,7 @@ let mapCount = 0;
 
 function checkWin() {
   if (mapScore >= requiredScore) {
+    inGame = false;
     mapScore = 0;
     snekDirection = "left";
     mapCount++;
@@ -290,20 +363,26 @@ function checkWin() {
     arrY = [];
     arrType = [];
     objCount = 0;
-     foxFrame = 0;
-      foxState = "idle";
-      owlFrame = 0;
-      owlDirection = "normal";
-      owlX = -64;
-      owlState = "idle";
-      walkDistance = 0;
-      flightDistance = 0;
+    foxFrame = 0;
+    foxState = "returning";
+    owlFrame = 0;
+    owlDirection = "normal";
+    owlX = -64;
+    owlState = "idle";
+    walkDistance = 0;
+    flightDistance = 0;
+    flashActive = false;
+    flashNum = 0;
+    flashReady = true;
+    flashCount = 0;
+    flashCoolNum = 0;
     for (let x = 1; x <= 4; x++) {
       respawnFood(x);
     } if (map == "forest") {
       setTimeout((() => {
         requiredScore = 25;
         snekGame.style.backgroundImage = 'url(/GrassV2.png)'; mapWon = false;
+        setTimeout((() => { inGame = true; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
@@ -316,6 +395,7 @@ function checkWin() {
         requiredScore = 30;
         snekGame.style.backgroundImage = 'url(/GrassV2AF.png)'; mapWon = false;
         owlTimer();
+        setTimeout((() => { inGame = true; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
@@ -327,20 +407,26 @@ function checkWin() {
       owlDirection = "normal";
       owlX = -64;
       owlState = "idle";
+      walkDistance = 0;
+      flightDistance = 0;
     } if (map == "cliffsides") {
       setTimeout((() => {
         requiredScore = 35;
         snekGame.style.backgroundImage = 'url(/cliffgrass.png)'; mapWon = false;
-        owlTimer();
+        owlTimer(); setTimeout((() => { inGame = true; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
         foodOnSnek(x);
         foodCollisions(x);
-      } owlFrame = 0;
+      }  foxFrame = 0;
+      foxState = "idle";
+      owlFrame = 0;
       owlDirection = "normal";
       owlX = -64;
       owlState = "idle";
+      walkDistance = 0;
+      flightDistance = 0;
     }
   }
 }
@@ -539,92 +625,111 @@ let drawStage2 = 0;
 let drawStage3 = 0;
 let snekDrawSize = 32;
 let snekCutAmount = 32 - snekDrawSize;
+let selectedImage = image;
+let selectedImage2 = image2;
+let selectedImage3 = image3;
+let imageF = new Image();
+let imageF2 = new Image();
+let imageF3 = new Image();
+imageF.src = '/SnekHeadsF.png';
+imageF2.src = '/SnekLengthsF.png';
+imageF3.src = '/SnekEndsF.png';
+
 
 function drawSnek() {
+  if (flashNum % 2 == 1) {
+    selectedImage = imageF;
+    selectedImage2 = imageF2;
+    selectedImage3 = imageF3;
+  } if (flashActive == false || flashNum % 2 == 0) {
+    selectedImage = image;
+    selectedImage2 = image2;
+    selectedImage3 = image3;
+  }
   let tailCheck = false;
   let tailCheck2 = false;
   let tailCheck3 = false;
   // Snek Head
   if (oldDirection == "left") {
-    ctx.drawImage(image, 32, 0, 32, 32, snekCoords.snekHead.x + snekCutAmount * 2, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage, 32, 0, 32, 32, snekCoords.snekHead.x + snekCutAmount * 2, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
   } if (oldDirection == "down") {
-    ctx.drawImage(image, 128, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage, 128, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
   } if (oldDirection == "right") {
-    ctx.drawImage(image, 96, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage, 96, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
   } if (oldDirection == "up") {
-    ctx.drawImage(image, 0, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage, 0, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
   }
   // Snek Length
   if (snekCoords.snekHead.x == snekCoords.snekLength.x - 32) {
     if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
       snekCoords.snekEnd.x == -32) {
-      ctx.drawImage(image2, 0, 0, 32, 32, snekCoords.snekLength.x + snekCutAmount, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 0, 0, 32, 32, snekCoords.snekLength.x + snekCutAmount, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
       snekCoords.snekEnd.y == -32) {
-      ctx.drawImage(image2, 256, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 256, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
       snekCoords.snekEnd.y == 512) {
-      ctx.drawImage(image2, 448, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 448, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     }
   } if (snekCoords.snekHead.x == snekCoords.snekLength.x + 32) {
     if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
       snekCoords.snekEnd.x == 512) {
-      ctx.drawImage(image2, 128, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 128, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
       snekCoords.snekEnd.y == -32) {
-      ctx.drawImage(image2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
       tailCheck3 = true;
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
       snekCoords.snekEnd.y == 512) {
-      ctx.drawImage(image2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
       tailCheck2 = true;
     }
   } if (snekCoords.snekHead.y == snekCoords.snekLength.y - 32) {
     if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
       snekCoords.snekEnd.y == -32) {
-      ctx.drawImage(image2, 32, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 32, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
       snekCoords.snekEnd.y == -32 && snekDirection !== "up") {
-      ctx.drawImage(image2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
       snekCoords.snekEnd.y == 512 && snekDirection !== "up") {
-      ctx.drawImage(image2, 320, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 320, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
       tailCheck = true;
     }
   } if (snekCoords.snekHead.y == snekCoords.snekLength.y + 32) {
     if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
       snekCoords.snekEnd.y == 512) {
-      ctx.drawImage(image2, 64, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 64, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
       snekCoords.snekEnd.x == -32) {
-      ctx.drawImage(image2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
       snekCoords.snekEnd.x == 512) {
-      ctx.drawImage(image2, 384, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      ctx.drawImage(selectedImage2, 384, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
       tailCheck = true;
     }
   }
   // Snek End
   if (tailCheck) {
-    ctx.drawImage(image3, 192, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 192, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   } if (tailCheck2) {
-    ctx.drawImage(image3, 160, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 160, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   } if (tailCheck3) {
-    ctx.drawImage(image3, 128, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 128, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32) {
-    ctx.drawImage(image3, 32, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 32, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32) {
-    ctx.drawImage(image3, 0, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 0, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32) {
-    ctx.drawImage(image3, 96, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 96, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32) {
-    ctx.drawImage(image3, 64, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    ctx.drawImage(selectedImage3, 64, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   }
 }
@@ -638,7 +743,7 @@ foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
 foxAttacking.src = '/foxAttacking.png'
 let foxReturning = new Image();
-foxReturning.src = '/Foxreturning.png';
+foxReturning.src = '/foxreturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
@@ -1039,6 +1144,9 @@ function drawObject(type, xCoords, yCoords) {
     return;
   } if (type == "fox") {
     if (foxState == "idle") {
+      if (walkDistance == 32 || walkDistance == -32) {
+        walkDistance = 0;
+      }
       ctx.drawImage(foxIdle, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
       foxFrame += 128;
       if (foxFrame == 512) {
@@ -1295,18 +1403,30 @@ function enemyCollisions() {
       setTimeout((() => {
         if (snekCollider.x == owlX || snekCollider.x == owlX + 32) {
           if (snekCollider.y == lockedY) {
+            if (flashActive) {
+              return;
+            }
             killSnake();
           }
         } if (snekCoords.snekHead.x == owlX || snekCoords.snekHead.x == owlX + 32) {
           if (snekCoords.snekHead.y == lockedY) {
+            if (flashActive) {
+              return;
+            }
             killSnake();
           }
         } if (snekCoords.snekLength.x == owlX || snekCoords.snekLength.x == owlX + 32) {
           if (snekCoords.snekLength.y == lockedY) {
+            if (flashActive) {
+              return;
+            }
             killSnake();
           }
         } if (snekCoords.snekEnd.x == owlX || snekCoords.snekEnd.x == owlX + 32) {
           if (snekCoords.snekEnd.y == lockedY) {
+            if (flashActive) {
+              return;
+            }
             killSnake();
           }
         }
@@ -1338,6 +1458,9 @@ function enemyCollisions() {
         if (snekCollider.x == Objects[1].x + 128 || snekCollider.x == Objects[1].x + 160) {
           if (snekCollider.y == 128 || snekCollider.y == 160 ||
             snekCollider.y == 96 || snekCollider.y == 192) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1348,6 +1471,9 @@ function enemyCollisions() {
         if (snekCoords.snekHead.x == Objects[1].x + 128 || snekCoords.snekHead.x == Objects[1].x + 160) {
           if (snekCoords.snekHead.y == 128 || snekCoords.snekHead.y == 160 ||
             snekCoords.snekHead.y == 96 || snekCoords.snekHead.y == 192) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1358,6 +1484,9 @@ function enemyCollisions() {
         if (snekCoords.snekLength.x == Objects[1].x + 128 || snekCoords.snekLength.x == Objects[1].x + 160) {
           if (snekCoords.snekLength.y == 128 || snekCoords.snekLength.y == 160 ||
             snekCoords.snekLength.y == 96 || snekCoords.snekLength.y == 192) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1368,6 +1497,9 @@ function enemyCollisions() {
         if (snekCoords.snekEnd.x == Objects[1].x + 128 || snekCoords.snekEnd.x == Objects[1].x + 160) {
           if (snekCoords.snekEnd.y == 128 || snekCoords.snekEnd.y == 160 ||
             snekCoords.snekEnd.y == 96 || snekCoords.snekEnd.y == 192) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1401,6 +1533,9 @@ function enemyCollisions() {
         if (snekCollider.x == Objects[1].x + 128 || snekCollider.x == Objects[1].x + 160) {
           if (snekCollider.y == 160 || snekCollider.y == 192 ||
             snekCollider.y == 224 || snekCollider.y == 96) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1411,6 +1546,9 @@ function enemyCollisions() {
         if (snekCoords.snekHead.x == Objects[1].x + 128 || snekCoords.snekHead.x == Objects[1].x + 160) {
           if (snekCoords.snekHead.y == 160 || snekCoords.snekHead.y == 192 ||
             snekCoords.snekHead.y == 224 || snekCoords.snekHead.y == 96) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1421,6 +1559,9 @@ function enemyCollisions() {
         if (snekCoords.snekLength.x == Objects[1].x + 128 || snekCoords.snekLength.x == Objects[1].x + 160) {
           if (snekCoords.snekLength.y == 160 || snekCoords.snekLength.y == 192 ||
             snekCoords.snekLength.y == 224 || snekCoords.snekLength.y == 96) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1431,6 +1572,9 @@ function enemyCollisions() {
         if (snekCoords.snekEnd.x == Objects[1].x + 128 || snekCoords.snekEnd.x == Objects[1].x + 160) {
           if (snekCoords.snekEnd.y == 160 || snekCoords.snekEnd.y == 192 ||
             snekCoords.snekEnd.y == 224 || snekCoords.snekEnd.y == 96) {
+              if (flashActive) {
+                return;
+              }
             killSnake();
           }
         }
@@ -1438,6 +1582,9 @@ function enemyCollisions() {
       return;
     }
   } if (map == "cliffsides") {
+    if (flashActive) {
+      return;
+    }
     if (owlState == "attacking") {
       setTimeout((() => {
         if (snekCollider.x == owlX || snekCollider.x == owlX + 32) {
@@ -1872,4 +2019,3 @@ let decoder = new TextDecoder()
 alert(`Binary: ${binary}`)
 alert(` Decoded: ${decoder.decode(binary)}`);
 */
-
