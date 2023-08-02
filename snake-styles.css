@@ -2,6 +2,7 @@ body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
   margin: 0;
+  overflow: hidden;
 }
 .top-bar {
   width: 100vw;
