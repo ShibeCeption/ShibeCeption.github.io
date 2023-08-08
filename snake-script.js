@@ -240,32 +240,58 @@ document.onkeydown = function controls(e) {
     return;
   } if (moved = true) {
     if (e.key == 'w' || e.key == 'ArrowUp' || e.key == 'W') {
-      movementQueue.unshift("up");
-      if (movementQueue.length == 2) {
-        movementQueue.shift();
+      if (movementQueues[1] == snekDirection) {
+        return;
       }
+        if (movementQueue[0] == movementQueue[1]) {
+          return;
+        }
+        movementQueue.unshift("up");
+        if (movementQueue.length == movementQueueLimit) {
+          movementQueue.shift();             
+        }
     } if (e.key == 'a' || e.key == 'ArrowLeft' || e.key == 'A') {
-      movementQueue.unshift("left");
-      if (movementQueue.length == 2) {
-        movementQueue.shift();
+      if (movementQueues[1] == snekDirection) {
+        return;
       }
+        if (movementQueue[0] == movementQueue[1]) {
+          return;
+        }
+        movementQueue.unshift("left");
+        if (movementQueue.length == movementQueueLimit) {
+          movementQueue.shift();             
+        }
     } if (e.key == 'd' || e.key == 'ArrowRight' || e.key == 'D') {
-      movementQueue.unshift("right");
-      if (movementQueue.length == 2) {
-        movementQueue.shift();
+      if (movementQueues[1] == snekDirection) {
+        return;
       }
+        if (movementQueue[0] == movementQueue[1]) {
+          return;
+        }
+        movementQueue.unshift("right");
+        if (movementQueue.length == movementQueueLimit) {
+          movementQueue.shift();             
+        }
     } if (e.key == 's' || e.key == 'ArrowDown' || e.key == 'S') {
-      movementQueue.unshift("down");
-      if (movementQueue.length == 2) {
-        movementQueue.shift();
+      if (movementQueues[1] == snekDirection) {
+        return;
       }
+        if (movementQueue[0] == movementQueue[1]) {
+          return;
+        }
+        movementQueue.unshift("down");
+        if (movementQueue.length == movementQueueLimit) {
+          movementQueue.shift();             
+        }
     }
   }
 }
 
+let movementQueueLimit = 1;
+
 function movementQueues() {
   if (movementQueue.length > 0) {
-    snekDirection == movementQueue[movementQueue.length];
+    snekDirection = movementQueue[movementQueue.length];
     movementQueue.pop();
     // console.log("movementQueueRun!")
     checkCollision();
@@ -290,13 +316,34 @@ function flashTimer() {
   }), 1000);
 }
 
-let flashSound = new Audio("/Flash.wav");
+let flashSound = new Audio("/flash.wav");
+
+function turnSound() {
+  /*
+  let turnSound1 = new Audio("/TurnLeft.mp3")
+  let turnSound2 = new Audio("/TurnDown.mp3")
+  let turnSound3 = new Audio("/TurnRight.mp3")
+  let turnSound4 = new Audio("/TurnUp.mp3")
+  */
+  if (snekDirection !== oldDirection) {
+    if (snekDirection == "left") {
+      turnSound1.play();
+    } if (snekDirection == "down") {
+      turnSound2.play();
+    } if (snekDirection == "right") {
+      turnSound3.play();
+    } if (snekDirection == "up") {
+      turnSound4.play();
+    }
+  }
+}
 
 function snek() {
   checkWin();
   if (mapWon == true) {
     return;
   } movementQueues();
+  // turnSound();
   if (flashActive) {
     if (flashNum == 0) {
       setTimeout((() => {
@@ -382,7 +429,7 @@ function checkWin() {
       setTimeout((() => {
         requiredScore = 25;
         snekGame.style.backgroundImage = 'url(/GrassV2.png)'; mapWon = false;
-        setTimeout((() => { inGame = true; }), 500);
+        setTimeout((() => { inGame = true; movementQueue = []; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
@@ -395,7 +442,7 @@ function checkWin() {
         requiredScore = 30;
         snekGame.style.backgroundImage = 'url(/GrassV2AF.png)'; mapWon = false;
         owlTimer();
-        setTimeout((() => { inGame = true; }), 500);
+        setTimeout((() => { inGame = true; movementQueue = []; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
@@ -413,7 +460,7 @@ function checkWin() {
       setTimeout((() => {
         requiredScore = 35;
         snekGame.style.backgroundImage = 'url(/cliffgrass.png)'; mapWon = false;
-        owlTimer(); setTimeout((() => { inGame = true; }), 500);
+        owlTimer(); setTimeout((() => { inGame = true; movementQueue = []; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
@@ -506,7 +553,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio("/Eat.mp3");
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -536,7 +583,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio("/Eat.mp3");
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -566,7 +613,7 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio("/Eat.mp3");
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -596,7 +643,21 @@ function moveSnek() {
           mapScore = mapScore + foods[`food${x}`].score;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten == true;
-          let sfx2 = new Audio('/Eat.mp3');
+          let sfx2 = new Audio("/Eat.mp3");
+          /*
+          let sfx2 = 0;
+          if (foodCombo == 1) {
+            sfx2 = new Audio("/audio/EatA.mp3");
+          } if (foodCombo == 2) {
+            sfx2 = new Audio("/audio/EatB.mp3");
+          } if (foodCombo == 3) {
+            sfx2 = new Audio("/audio/EatC.mp3");
+          } if (foodCombo == 4) {
+            sfx2 = new Audio("/audio/EatD.mp3");
+          } foodCombo++;
+          if (foodCombo > 4) {
+            foodCombo = 1;
+          } */
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
         }
@@ -619,6 +680,9 @@ function moveSnek() {
     }
   }
 }
+
+let foodCombo = 1;
+let respawnImmunity = false;
 
 let drawStage = 0;
 let drawStage2 = 0;
@@ -743,7 +807,7 @@ foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
 foxAttacking.src = '/foxAttacking.png'
 let foxReturning = new Image();
-foxReturning.src = '/Foxreturning.png'
+foxReturning.src = '/FoxReturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
@@ -1403,28 +1467,28 @@ function enemyCollisions() {
       setTimeout((() => {
         if (snekCollider.x == owlX || snekCollider.x == owlX + 32) {
           if (snekCollider.y == lockedY) {
-            if (flashActive) {
+            if (flashActive || respawnImmunity) {
               return;
             }
             killSnake();
           }
         } if (snekCoords.snekHead.x == owlX || snekCoords.snekHead.x == owlX + 32) {
           if (snekCoords.snekHead.y == lockedY) {
-            if (flashActive) {
+            if (flashActive || respawnImmunity) {
               return;
             }
             killSnake();
           }
         } if (snekCoords.snekLength.x == owlX || snekCoords.snekLength.x == owlX + 32) {
           if (snekCoords.snekLength.y == lockedY) {
-            if (flashActive) {
+            if (flashActive || respawnImmunity) {
               return;
             }
             killSnake();
           }
         } if (snekCoords.snekEnd.x == owlX || snekCoords.snekEnd.x == owlX + 32) {
           if (snekCoords.snekEnd.y == lockedY) {
-            if (flashActive) {
+            if (flashActive || respawnImmunity) {
               return;
             }
             killSnake();
@@ -1458,7 +1522,7 @@ function enemyCollisions() {
         if (snekCollider.x == Objects[1].x + 128 || snekCollider.x == Objects[1].x + 160) {
           if (snekCollider.y == 128 || snekCollider.y == 160 ||
             snekCollider.y == 96 || snekCollider.y == 192) {
-              if (flashActive) {
+              if (flashActive || respawnImmunity) {
                 return;
               }
             killSnake();
@@ -1471,7 +1535,7 @@ function enemyCollisions() {
         if (snekCoords.snekHead.x == Objects[1].x + 128 || snekCoords.snekHead.x == Objects[1].x + 160) {
           if (snekCoords.snekHead.y == 128 || snekCoords.snekHead.y == 160 ||
             snekCoords.snekHead.y == 96 || snekCoords.snekHead.y == 192) {
-              if (flashActive) {
+              if (flashActive || respawnImmunity) {
                 return;
               }
             killSnake();
@@ -1533,7 +1597,7 @@ function enemyCollisions() {
         if (snekCollider.x == Objects[1].x + 128 || snekCollider.x == Objects[1].x + 160) {
           if (snekCollider.y == 160 || snekCollider.y == 192 ||
             snekCollider.y == 224 || snekCollider.y == 96) {
-              if (flashActive) {
+              if (flashActive || respawnImmunity) {
                 return;
               }
             killSnake();
@@ -1546,7 +1610,7 @@ function enemyCollisions() {
         if (snekCoords.snekHead.x == Objects[1].x + 128 || snekCoords.snekHead.x == Objects[1].x + 160) {
           if (snekCoords.snekHead.y == 160 || snekCoords.snekHead.y == 192 ||
             snekCoords.snekHead.y == 224 || snekCoords.snekHead.y == 96) {
-              if (flashActive) {
+              if (flashActive || respawnImmunity) {
                 return;
               }
             killSnake();
@@ -1559,7 +1623,7 @@ function enemyCollisions() {
         if (snekCoords.snekLength.x == Objects[1].x + 128 || snekCoords.snekLength.x == Objects[1].x + 160) {
           if (snekCoords.snekLength.y == 160 || snekCoords.snekLength.y == 192 ||
             snekCoords.snekLength.y == 224 || snekCoords.snekLength.y == 96) {
-              if (flashActive) {
+              if (flashActive || respawnImmunity) {
                 return;
               }
             killSnake();
@@ -1572,7 +1636,7 @@ function enemyCollisions() {
         if (snekCoords.snekEnd.x == Objects[1].x + 128 || snekCoords.snekEnd.x == Objects[1].x + 160) {
           if (snekCoords.snekEnd.y == 160 || snekCoords.snekEnd.y == 192 ||
             snekCoords.snekEnd.y == 224 || snekCoords.snekEnd.y == 96) {
-              if (flashActive) {
+              if (flashActive || respawnImmunity) {
                 return;
               }
             killSnake();
@@ -1582,7 +1646,7 @@ function enemyCollisions() {
       return;
     }
   } if (map == "cliffsides") {
-    if (flashActive) {
+    if (flashActive || respawnImmunity) {
       return;
     }
     if (owlState == "attacking") {
@@ -1699,6 +1763,7 @@ function updateSnekCollider() {
 }
 
 let deaths = 0;
+let trackStop = false;
 
 function killSnake() {
   deaths++;
@@ -1714,9 +1779,12 @@ function killSnake() {
   drawStage2 = 0;
   drawStage3 = 0;
   mapScore = 0;
-  let sfx1 = new Audio('/Death.mp3');
+  let sfx1 = new Audio('/Death2.mp3');
+  trackStop = true;
   sfx1.play();
-  // setTimeout(() => { alert("You Died! Try Again"); }, 50);
+  respawnImmunity = true; 
+  setTimeout(() => { alert("You Died! Try Again"); sfx1.pause();
+  trackStop = false; setTimeout((() => { respawnImmunity = false; }), 1000) }, 50);
 }
 
 function mapBoundaries(type) {
@@ -1731,38 +1799,65 @@ function mapBoundaries(type) {
       snekDirection == "left") {
       snekCoords.snekHead.x = 512;
       snekDirection = "left";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.x == 512 && snekDirection == "right" || snekCoords.snekHead.x > 512 &&
       snekDirection == "right") {
       snekCoords.snekHead.x = -32;
       snekDirection = "right";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.y == -32 && snekDirection == "up" || snekCoords.snekHead.y < -32 &&
       snekDirection == "up") {
       snekCoords.snekHead.y = 512;
       snekDirection = "up";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.y == 512 && snekDirection == "down" || snekCoords.snekHead.y == 512 &&
       snekDirection == "down") {
       snekCoords.snekHead.y = -32;
       snekDirection = "down";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.x == -32 && snekDirection == "up" || snekCoords.snekHead.x == -32 &&
       snekDirection == "left") {
       snekCoords.snekHead.x = 512;
       snekDirection = "left";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.x == 512 && snekDirection == "up" || snekCoords.snekHead.x == 512 &&
       snekDirection == "down") {
       snekCoords.snekHead.x = -32;
       snekDirection = "right";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.y == -32 && snekDirection == "left" || snekCoords.snekHead.y == -32 &&
       snekDirection == "right") {
       snekCoords.snekHead.y = 512;
       snekDirection = "up";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.y == 512 && snekDirection == "left" || snekCoords.snekHead.y == 512 &&
       snekDirection == "right") {
       snekCoords.snekHead.y = -32;
       snekDirection = "down";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     } if (snekCoords.snekHead.x == -32 && snekDirection == "up" ||
       snekDirection == "down" && snekCoords.snekHead.x == -32) {
       snekCoords.snekHead.x = 512;
       snekDirection = "left";
+      if (snekDirection !== oldDirection) {
+        snekDirection = oldDirection;
+      }
     }
   }
 }
@@ -1933,13 +2028,19 @@ let song2 = new Audio('/Forest Troubles.mp3');
 let song3 = new Audio('/guitarSong.mp3');
 let track = new Audio('/Snek OST.mp3')
 let sfx1 = new Audio('/Death.mp3');
+let sfx3 = new Audio('/Death2.mp3');
 let sfx2 = new Audio('/Eat.mp3');
 
 function music(song) {
+  if (trackStop == true) {
+    track.pause();
+    return;
+    }
   track.play();
+  
 }
 
-setInterval(music, 0)
+  setInterval(music, 0)
 
 let eggTimer = 7500;
 
