@@ -1,4 +1,4 @@
-// {
+{
 
 
 
@@ -805,7 +805,7 @@ foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
 foxAttacking.src = '/foxAttacking.png'
 let foxReturning = new Image();
-foxReturning.src = '/FoxReturning.png'
+foxReturning.src = '/foxReturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
@@ -2109,7 +2109,7 @@ setTimeout((() => {
   }
 }), 3150);
 
-// }
+}
 
 /*
 let encoder = new TextEncoder();
