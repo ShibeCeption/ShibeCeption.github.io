@@ -316,7 +316,7 @@ function flashTimer() {
   }), 1000);
 }
 
-let flashSound = new Audio("/flash.wav");
+let flashSound = new Audio("/Flash.wav");
 
 function turnSound() {
   let turnSound1 = new Audio("/TurnLeft.mp3")
