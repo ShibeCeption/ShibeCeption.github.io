@@ -206,7 +206,7 @@ function flash() {
   }
 
 document.onkeydown = function controls(e) {
-  if (e.key == 'q' && flashReady || e.key == "Q" && flashReady) {
+  if (e.key == 'q' && flashReady || e.key == "Q" && flashReady || e.key == "PageUp" && flashReady) {
     flashCount++;
     if (flashCount == 1) {
     setTimeout((() => { flash(); }), 100);
@@ -319,12 +319,10 @@ function flashTimer() {
 let flashSound = new Audio("/flash.wav");
 
 function turnSound() {
-  /*
   let turnSound1 = new Audio("/TurnLeft.mp3")
   let turnSound2 = new Audio("/TurnDown.mp3")
   let turnSound3 = new Audio("/TurnRight.mp3")
   let turnSound4 = new Audio("/TurnUp.mp3")
-  */
   if (snekDirection !== oldDirection) {
     if (snekDirection == "left") {
       turnSound1.play();
