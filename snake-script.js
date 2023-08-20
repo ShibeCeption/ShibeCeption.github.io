@@ -1,6 +1,6 @@
 // Why are you here? Trying to steal the code, edit it? Maybe cheat well hopefully this stops you. If not too bad for me.
 
-// {
+{
 
 
 
@@ -2141,7 +2141,7 @@ setTimeout((() => {
   }
 }), 3150);
 
-// }
+}
 
 /*
 let encoder = new TextEncoder();
