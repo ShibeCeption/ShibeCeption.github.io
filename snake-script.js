@@ -326,7 +326,7 @@ function flashTimer() {
   }), 1000);
 }
 
-let flashSound = new Audio("/flash.wav");
+let flashSound = new Audio("/Flash.wav");
 
 function turnSound() {
   let turnSound1 = new Audio("/TurnLeft.mp3")
@@ -821,9 +821,9 @@ collidables.src = '/Collidables.png';
 let foxIdle = new Image();
 foxIdle.src = '/FoxIdle-export.png';
 let foxWalking = new Image();
-foxWalking.src = '/FoxWalking.png';
+foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
-foxAttacking.src = '/FoxAttacking.png'
+foxAttacking.src = '/foxAttacking.png'
 let foxReturning = new Image();
 foxReturning.src = '/Foxreturning.png'
 let foxState = "idle";
