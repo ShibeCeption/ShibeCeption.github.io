@@ -1,3 +1,4 @@
+/*
 body {
   background-color: rgb(245, 245, 245);
   font-family: Aldrich, monospace;
@@ -178,4 +179,289 @@ a {
 .ui2 p:hover {
   filter: brightness(125%) saturate(150%);
   transform: scale(115%);
+}
+*/
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Pixel;
+  font-size: 100%;
+  background-color: rgb(50, 50, 50);
+}
+
+
+
+@font-face {
+  font-family: "Pixel"; /*a name to be used later*/
+  src: url("/04B_30__.TTF"); /*URL to font*/
+}
+
+.arcade-top {
+  width: 93.25%;
+  padding-left: 3%;
+  padding-right: 4%;
+  height: 15%;
+  display: flex;
+  padding-bottom: 1vh;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  border-bottom: 2.5vh solid rgb(35, 35, 35);
+  gap: 1vw;
+  transform: scale(100%);
+  background-color: rgb(50, 50, 50);
+  z-index: 2;
+}
+
+.arcade-text {
+  visibility: visible;
+  color: yellowgreen;
+  font-size: 175%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  position: relative;
+  left: 0%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.arcade-text a {
+  color: yellowgreen;
+  text-shadow: 0px 0px 3px yellowgreen;
+  text-decoration: none;
+  transition: all 0.25s ease-in-out;
+}
+
+.contact, .games {
+  color: yellowgreen;
+  font-size: 175%;
+  text-shadow: 0px 0px 3px yellowgreen;
+}
+
+.contact {
+  position: relative;
+  left: -35.25%;
+}
+
+.games {
+  position: relative;
+  left: -15.5%;
+}
+
+.arcade-text, .games {
+  padding-right: 1.5vw;
+  border-right: 0.5vh solid rgb(30, 30, 30);
+}
+
+.turn-angle {
+  transform: rotateZ(0deg);
+  color: yellowgreen;
+  font-size: 175%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  position: relative;
+  left: -20%;
+  transition: all 0.33s ease-in-out;
+}
+
+.games-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14%;
+  height: 45%;
+  position: relative;
+  top: 45%;
+  background-color: rgb(35, 35, 35);
+  box-shadow: 0px 0px 10px 5px black;
+  left: 0.5%;
+  transition: all 0.33s ease-in-out;
+  filter: opacity(0%);
+  transform: scaleY(0%);
+}
+
+.games-dropdown a {
+  width: 100%;
+  color: yellowgreen;
+  font-size: 185%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  text-decoration: none;
+  transition: all 0.33s ease-in-out;
+  filter: opacity(0%);
+  transform: scaleY(0%);
+  padding-top: 5vh;
+  position: relative;
+  top: -35%;
+  left: 20%;
+}
+
+a:hover {
+  --green: rgb(202, 253, 101);
+  color: var(--green);
+  text-shadow: 0px 0px 3px var(--green);
+}
+
+.contact-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17%;
+  height: 95%;
+  position: relative;
+  top: 70%;
+  background-color: rgb(35, 35, 35);
+  box-shadow: 0px 0px 10px 5px black;
+  left: -18%;
+  transition: all 0.33s ease-in-out;
+  filter: opacity(0%);
+  transform: scaleY(0%);
+}
+
+.contact-dropdown a {
+  color: yellowgreen;
+  font-size: 185%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  text-decoration: none;
+  transition: all 0.33s ease-in-out;
+  filter: opacity(0%);
+  transform: scaleY(0%);
+  padding-top: 5vh;
+  position: relative;
+  top: -40%;
+  left: 42%;
+}
+
+.email {
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
+.contact-dropdown a:last-child {
+  top: 15%;
+  left: -52.5%;
+  padding-top: 0vh;
+  filter: opacity(0%);
+  transform: scaleY(0%);
+}
+
+.contact-dropdown a:hover {
+  --green: rgb(202, 253, 101);
+  color: var(--green);
+  text-shadow: 0px 0px 3px var(--green);
+}
+
+.turn-angle-2 {
+  transform: rotateZ(0deg);
+  color: yellowgreen;
+  font-size: 175%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  position: relative;
+  left: -36.5%;
+  transition: all 0.33s ease-in-out;
+}
+
+.game {
+  width: 896px;
+  height: 512px;
+  border: 30px solid rgb(117, 146, 83);
+  border-radius: 5%;
+  background-image: url(/images/snekLoading2-export.gif);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 30;
+}
+
+.game p {
+  border: none;
+  font-size: 100%;
+}
+
+.container-game {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  font-family: Pixel;
+  overflow: hidden;
+  transform: scale(0%);
+  position: absolute;
+  top: 0%;
+  transition: all 1s ease-in-out;
+}
+
+@font-face {
+  font-family: "Pixel"; /*a name to be used later*/
+  src: url("/04B_30__.TTF"); /*URL to font*/
+}
+
+.game, canvas, #canvas2, #canvas3 {
+  filter: brightness(100%);
+}
+
+canvas {
+  position: absolute;
+  top: -1%;
+}
+
+
+#canvas {
+  z-index: 13;
+} #canvas2 {
+  z-index: 12;
+} #canvas3 {
+  z-index: 11;
+} #canvas4 {
+  z-index: 14;
+}
+
+.play {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -2;
+  gap: 2.5vh;
+  background-image: url("/images/cover.png");
+  transition: all 0.33s ease-in-out;
+}
+
+.play p {
+  color: yellowgreen;
+  font-size: 185%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  position: relative;
+  left: 5%;
+  transition: all 0.33s ease-in-out;
+}
+
+.triangle {
+  color: yellowgreen;
+  font-size: 600%;
+  text-shadow: 0px 0px 3px yellowgreen;
+  position: relative;
+  top: 7.5%;
+  left: 25%;
+  filter: blur(100%);
+}
+
+.playbox:hover {
+  filter: brightness(125%);
+  transform: scale(110%);
+}
+
+.playbox {
+  transition: all 1s ease-in-out;
+  position: relative;
+  cursor: pointer;
+  background-color: rgb(50, 50, 50);
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  border-radius: 50%;
+  top: 7.5%;
 }
