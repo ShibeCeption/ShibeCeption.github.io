@@ -180,7 +180,7 @@ a:hover {
   height: 512px;
   border: 30px solid rgb(117, 146, 83);
   border-radius: 5%;
-  background-image: url(/images/snekLoading2-export.gif);
+  background-image: url(/snekLoading2-export.gif);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,7 +242,7 @@ canvas {
   align-items: center;
   z-index: -2;
   gap: 2.5vh;
-  background-image: url("/images/cover.png");
+  background-image: url("/cover.png");
   transition: all 0.33s ease-in-out;
 }
 
