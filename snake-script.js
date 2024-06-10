@@ -330,7 +330,7 @@ function flashTimer() {
   }), 1000);
 }
 
-let flashSound = new Audio("/flash.wav");
+let flashSound = new Audio("/Flash.wav");
 
 function turnSound() {
   let turnSound1 = new Audio("/TurnLeft.mp3")
@@ -1159,7 +1159,7 @@ function drawSnek() {
 let collidables = new Image();
 collidables.src = '/collidables.png';
 let foxIdle = new Image();
-foxIdle.src = '/foxIdle-export.png';
+foxIdle.src = '/FoxIdle-export.png';
 /*
 let foxIdleAlt = new Image();
 foxIdle2.src = "/foxIdleAlternate-export.png";
@@ -1173,7 +1173,7 @@ let foxAttackingAlt = new Image();
 foxAttacking.src = "/foxAttackingAlternate.png"
 */
 let foxReturning = new Image();
-foxReturning.src = '/foxReturning.png'
+foxReturning.src = '/FoxReturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
