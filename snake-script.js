@@ -1174,6 +1174,7 @@ foxAttacking.src = "/foxAttackingAlternate.png"
 */
 let foxReturning = new Image();
 foxReturning.src = '/Foxreturning.png';
+
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
