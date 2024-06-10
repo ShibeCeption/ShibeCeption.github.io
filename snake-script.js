@@ -1,132 +1,100 @@
-// Why are you here? Trying to steal the code, edit it? Maybe cheat well hopefully this stops you. If not too bad for me.
-
-{
-
-
-
-let topBar = document.querySelector('.top-bar');
-let navBar = document.querySelector('.nav-bar');
-let menuBar = document.querySelector('.nav-bar')
-
-menu.onclick = function menu() {
-  if (menuBar.style.display !== 'flex') {
-    menuBar.style.display = 'flex';
-    return;
-  } if (menuBar.style.display == 'flex') {
-    menuBar.style.display = 'none';
-    return;
-  }
+let games = document.querySelector('.games');
+let dropdown = document.querySelector('.games-dropdown');
+let dropdownA = document.querySelector('.games-dropdown a');
+let angle = document.querySelector('.turn-angle');
+angle.style.transform = "rotateZ(0deg)";
+let playbox = document.querySelector('.playbox');
+let gameSnek = document.querySelector('.container-game');
+playbox.style.transform = "scale(100%)";
+playbox.onclick = function play() {
+  playbox.style.transform = "scale(0%)";
+  gameStop = false;
+  runSnek();
+  setTimeout((() => {
+  gameSnek.style.transform = "scale(143.5%)";
+  gameSnek.style.zIndex = "22";
+  trackStop = false;
+}), 550);
 }
 
-let themeToggle = document.querySelector('.fa-toggle-off');
-let themeToggle2 = document.querySelector('.toggle-text');
-let topBarText = document.querySelectorAll('a, .contact, .games, .logo-text');
-let games = document.querySelector('#gamesLink');
-let contact = document.querySelector('#contactLink');
+// Scaling Code here
 
-function toggleTheme(e) {
-  let topBar = document.querySelector('.top-bar');
-  let navBar = document.querySelector('.nav-bar');
-  if (themeToggle.classList.contains('fa-toggle-off')) {
-    themeToggle.classList.remove('fa-toggle-off');
-    themeToggle.classList.add('fa-toggle-on');
-    document.body.style.backgroundColor = 'rgb(35, 50, 35)';
-    topBar.style.backgroundColor = 'rgb(55, 70, 55)';
-    navBar.style.backgroundColor = 'rgb(55, 70, 55)';
-    navBar.style.color = 'rgb(198, 230, 204)';
-    for (let x = 0; x < topBarText.length; x++) {
-      topBarText[x].style.color = 'rgb(198, 230, 204)';
-    }
-    menu.style.color = 'rgb(198, 230, 204)';
-    games.style.color = 'rgb(198, 230, 204)';
-    contact.style.color = 'rgb(198, 230, 204)';
-    document.cookie = "darkMode=on"
-    e.stopPropagation()
-    return;
-  } if (themeToggle.classList.contains('fa-toggle-on')) {
-    themeToggle.classList.remove('fa-toggle-on');
-    themeToggle.classList.add('fa-toggle-off');
-    document.body.style.backgroundColor = "";
-    topBar.style.backgroundColor = "";
-    navBar.style.backgroundColor = "";
-    topBar.style.color = "";
-    navBar.style.color = "";
-    for (let x = 0; x < topBarText.length; x++) {
-      topBarText[x].style.color = '';
-    }
-    menu.style.color = '';
-    games.style.color = '';
-    contact.style.color = '';
-    document.cookie = "darkMode=off"
-    e.stopPropagation()
-    return;
-  }
+
+
+function gamesEnter() {
+    angle.style.transform = "rotateZ(90deg)";
+    dropdown.style.filter = "opacity(100%)";
+    dropdown.style.transform = "scaleY(100%)"
+    dropdownA.style.filter = "opacity(100%)";
+    dropdownA.style.transform = "scaleY(100%)";
 }
 
-themeToggle.onclick = toggleTheme;
-themeToggle2.onclick = toggleTheme;
-
-function cookieCheck() {
-  if (document.cookie == "darkMode=on") {
-    themeToggle.classList.remove('fa-toggle-off');
-    themeToggle.classList.add('fa-toggle-on');
-    document.body.style.backgroundColor = 'rgb(35, 50, 35)';
-    topBar.style.backgroundColor = 'rgb(55, 70, 55)';
-    navBar.style.backgroundColor = 'rgb(55, 70, 55)';
-    navBar.style.color = 'rgb(198, 230, 204)';
-    for (let x = 0; x < topBarText.length; x++) {
-      topBarText[x].style.color = 'rgb(198, 230, 204)';
-    }
-    menu.style.color = 'rgb(198, 230, 204)';
-    games.style.color = 'rgb(198, 230, 204)';
-    contact.style.color = 'rgb(198, 230, 204)';
-    return;
-  }
+function gamesLeave() {
+    angle.style.transform = "rotateZ(0deg)";
+    dropdown.style.filter = "opacity(0%)";
+    dropdown.style.transform = "scaleY(0%)"
+    dropdownA.style.filter = "opacity(0%)";
+    dropdownA.style.transform = "scaleY(0%)"
 }
-cookieCheck();
 
-// Theme Toggle Code
-function transitions() {
-  document.body.style.transition = 'all 1s ease-in-out';
-  topBar.style.transition = 'all 1s ease-in-out';
-  navBar.style.transition = 'all 1s ease-in-out';
-  menu.style.transition = 'all 1s ease-in-out';
-  games.style.transition = 'all 1s ease-in-out';
-  contact.style.transition = 'all 1s ease-in-out';
-  for (let x = 0; x < topBarText.length; x++) {
-    topBarText[x].style.transition = 'all 1s ease-in-out';
-  }
+
+dropdown.onmouseenter = gamesEnter;
+games.onmouseenter = gamesEnter;
+angle.onmouseenter = gamesEnter;
+let gamesCopy = document.querySelector('.games');
+let dropdownCopy = document.querySelector('.games-dropdown');
+let angleCopy = document.querySelector('.turn-angle');
+dropdownCopy.onmouseleave = gamesLeave;
+gamesCopy.onmouseleave = gamesLeave;
+angleCopy.onmouseleave = gamesLeave;
+
+
+
+let contact = document.querySelector('.contact');
+let dropdownC = document.querySelector('.contact-dropdown');
+let dropdownCA = document.querySelector('.contact-dropdown a');
+let angle2 = document.querySelector('.turn-angle-2');
+let dropdownCA2 = document.querySelector('.contact-dropdown a:last-child');
+angle2.style.transform = "rotateZ(0deg)";
+
+function contactEnter() {
+    angle2.style.transform = "rotateZ(90deg)";
+    dropdownC.style.filter = "opacity(100%)";
+    dropdownC.style.transform = "scaleY(100%)"
+    dropdownCA.style.filter = "opacity(100%)";
+    dropdownCA.style.transform = "scaleY(100%)";
+    dropdownCA2.style.filter = "opacity(100%)";
+    dropdownCA2.style.transform = "scaleY(100%)";
 }
-setTimeout(transitions, 0);
 
-/* document.body.onkeydown = function goBack(e) {
-  if (e.keyCode == 8) {
-    let leaveCheck = confirm("Do you wish to leave the Game?")
-    leaveCheck == true
-      ? location.href = 'http://127.0.0.1:5500/arcade.html'
-      : console.log("Leave Denied");
-  }
-} */
-
-function screenCheck() {
-  if (window.matchMedia("(max-width: 1370px)").matches) {
-    topBar.style.display = "none";
-    navBar.style.display = "none";
-  } if (window.matchMedia("(min-width: 1400px)").matches) {
-    topBar.style.display = "visible";
-    topBar.style.display = "visible";
-  } if (window.matchMedia("(max-width: 1200px)").matches) {
-    alert("Your screen is too small for this game");
-    location.href = "http://127.0.0.1:5500/arcade.html";
-  } else {
-    topBar.style.display = "flex";
-  }
+function contactLeave() {
+    angle2.style.transform = "rotateZ(0deg)";
+    dropdownC.style.filter = "opacity(0%)";
+    dropdownC.style.transform = "scaleY(0%)"
+    dropdownCA.style.filter = "opacity(0%)";
+    dropdownCA.style.transform = "scaleY(0%)";
+    dropdownCA2.style.filter = "opacity(0%)";
+    dropdownCA2.style.transform = "scaleY(0%)";
 }
-screenCheck();
+
+
+dropdownC.onmouseenter = contactEnter;
+contact.onmouseenter = contactEnter;
+angle2.onmouseenter = contactEnter;
+let contactCopy = document.querySelector('.contact');
+let dropdownCopy2 = document.querySelector('.contact-dropdown');
+let angleCopy2 = document.querySelector('.turn-angle-2');
+dropdownCopy2.onmouseleave = contactLeave;
+contactCopy.onmouseleave = contactLeave;
+angleCopy2.onmouseleave = contactLeave;
+
+
+
+// {
 
 let snekGame = document.querySelector('.game');
 
-setTimeout((() => { snekGame.style.backgroundImage = 'url(/GrassV2.png)';
+setTimeout((() => { snekGame.style.backgroundImage = 'url(/meadowGrass.png)';
 inGame = true; }), 3000);
 
 // Movement Code
@@ -144,6 +112,12 @@ audio.play(); */
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const canvas2 = document.getElementById("canvas2");
+const ctx2 = canvas2.getContext("2d");
+const canvas3 = document.getElementById("canvas3");
+const ctx3 = canvas3.getContext("2d");
+const canvas4 = document.getElementById("canvas4");
+const ctx4 = canvas4.getContext("2d");
 let image = new Image();
 let image2 = new Image();
 let image3 = new Image();
@@ -153,24 +127,24 @@ image3.src = '/SnekEnds.png';
 
 let snekCoords = {
   snekHead: {
-    x: 224,
+    x: 416,
     y: 224,
     old: {
-      x: 224,
+      x: 416,
       y: 224,
     },
   }, snekLength: {
-    x: 256,
+    x: 448,
     y: 224,
     old: {
-      x: 256,
+      x: 448,
       y: 224,
     },
   }, snekEnd: {
-    x: 288,
+    x: 480,
     y: 224,
     old: {
-      x: 288,
+      x: 480,
       y: 224,
     }
   },
@@ -178,7 +152,7 @@ let snekCoords = {
 let snekDirection = "left";
 let oldDirection = "left"
 let moved = false;
-let movementQueue = [];
+let movementQueue = "";
 let flashActive = false;
 let flashNum = 0;
 let flashReady = true;
@@ -215,36 +189,43 @@ document.onkeydown = function controls(e) {
     } else {
       console.log("Failed Here Flash Count: " + flashCount)
     }
-  }
-  if (e.key == 'a' && snekDirection !== "right" && moved == false
+  } if (e.key == 'a' && snekDirection !== "right" && moved == false
     || e.key == 'ArrowLeft' && snekDirection !== "right" && moved == false ||
     e.key == 'A' && snekDirection !== "right" && moved == false) {
-    snekDirection = "left";
-    moved = true;
+    // snekDirection = "left";
+        movementQueue = "";
+    movementQueue = "left";
+       moved = true;
     mapBoundaries(boundaryType);
     return;
   } if (e.key == 'd' && snekDirection !== "left" && moved == false
     || e.key == 'ArrowRight' && snekDirection !== "left" && moved == false ||
     e.key == "D" && snekDirection !== "left" && moved == false) {
-    snekDirection = "right";
-    moved = true;
-    mapBoundaries(boundaryType);
-    return;
+        // snekDirection = "right";
+        movementQueue = "";      
+        movementQueue = "right"
+        moved = true;
+        mapBoundaries(boundaryType);
+        return;
   } if (e.key == 's' && snekDirection !== "up" && moved == false
     || e.key == 'ArrowDown' && snekDirection !== "up" && moved == false ||
     e.key == 'S' && snekDirection !== "up" && moved == false) {
-    snekDirection = "down";
-    moved = true;
-    mapBoundaries(boundaryType);
-    return;
+        // snekDirection = "down";
+        movementQueue = "";     
+        movementQueue = "down"
+        moved = true;
+        mapBoundaries(boundaryType);
+        return;
   } if (e.key == 'w' && snekDirection !== "down" && moved == false
     || e.key == 'ArrowUp' && snekDirection !== "down" && moved == false ||
     e.key == 'W' && snekDirection !== "up" && moved == false) {
-    snekDirection = "up";
-    moved = true;
-    mapBoundaries(boundaryType);
-    return;
-  } if (moved = true) {
+        // snekDirection = "up";
+        movementQueue = "";      
+        movementQueue = "up"
+        moved = true;
+        mapBoundaries(boundaryType);
+        return;
+  } /* if (moved = true || snekCoords.snekHead.x % 32 !== 0) {
     if (e.key == 'w' || e.key == 'ArrowUp' || e.key == 'W') {
       if (movementQueues[1] == snekDirection) {
         return;
@@ -294,39 +275,62 @@ document.onkeydown = function controls(e) {
           mapBoundaries(boundaryType);            
         }
     }
-  } console.log(e.key);
+  } */ if (e.key == "Escape"
+  || e.key == "Delete") {
+    let playbox = document.querySelector('.playbox');
+    let gameSnek = document.querySelector('.container-game');
+    document.exitFullscreen();
+    trackStop = true;
+    gameStop = true;
+    gameSnek.style.transform = "scale(0%)";
+    setTimeout((() => {
+    playbox.style.transform = "scale(100%)";
+    setTimeout((() => {
+    gameSnek.style.zIndex = "-1";
+  }), 250);
+  }), 550);
+  }
 }
+
+let gameStop = false;
 
 let movementQueueLimit = 1;
 
 function movementQueues() {
+  let gridCheckX = snekCoords.snekHead.x;
+  let gridCheckY = snekCoords.snekHead.y;
   if (movementQueue.length > 0) {
-    snekDirection = movementQueue[movementQueue.length];
-    movementQueue.pop();
-    // console.log("movementQueueRun!")
+    while (gridCheckX > 0) {
+      gridCheckX -= 32;
+    } while (gridCheckY > 0) {
+      gridCheckY -= 32;
+    } if (gridCheckX == 0) {
+      if (gridCheckY == 0) {
+    snekDirection = movementQueue;
+    movementQueue = "";
     checkCollision();
-    mapBoundaries(boundaryType)
+   mapBoundaries(boundaryType);
+   return;
+      }
+    }
   }
 }
 
 mapWon = false;
 
 let map = "meadows";
-let flashCooldown = document.querySelector('#flashCooldown');
 let flashCoolNum = 30;
 
 function flashTimer() {
     let interval = setInterval((() => {
-    flashCooldown.textContent = 'Q: Flash Cooldown: ' + flashCoolNum + 's';
     if (flashCoolNum == 0) {
-      flashCooldown.textContent = 'Q: Flash Cooldown: Ready';
       clearInterval(interval);
       return;
     } flashCoolNum--;
   }), 1000);
 }
 
-let flashSound = new Audio("/Flash.wav");
+let flashSound = new Audio("/flash.wav");
 
 function turnSound() {
   let turnSound1 = new Audio("/TurnLeft.mp3")
@@ -347,11 +351,14 @@ function turnSound() {
 }
 
 function snek() {
+  if (gameStop == true) {
+    clearInterval(snekGameLoop);
+    return;
+  }
   checkWin();
   if (mapWon == true) {
     return;
   } mapBoundaries(boundaryType);
-  movementQueues();
   // turnSound();
   if (flashActive) {
     if (flashNum == 0) {
@@ -375,21 +382,87 @@ function snek() {
   flashNum++;
   }
   moved = false;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawFrame++;
+  drawFrameStatic++;
+  // Temp fix below
+  drawFrame = 16;
+  drawFrameStatic = 32;
+  movementQueues();
+  if (drawFrameStatic == 32) {
+    ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+  } if (drawFrame == 16) {
+    ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+  } ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+  ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
+  for (let x = 1; x < 5; x++) {
+    foodCollisions(x);
+  }
   if (map == "cliffsides") {
     ctx.filter = "brightness(80%)";
-    drawFood();
     drawSnek();
+    if (drawFrame == 16) {
+    drawFood();
+    }
     ctx.filter = "brightness(100%)";
   } else {
-    drawFood();
     drawSnek();
+    if (drawFrame == 16)
+    drawFood();
   }
   updateSnekCollider();
-  moveSnek()
+  moveSnek();
+  // windCycle();
+  if (drawFrameStatic == 32) {
   drawObjects();
-  updateScore();
+  drawFrameStatic = 0;
+  }
   enemyCollisions();
+  foodGui();
+}
+
+let drawFrame = 15;
+let drawFrameStatic = 31;
+
+let windCycleNum = 0;
+let windCycleTransition = false;
+let windCycleActive = false;
+let windCycleDelay = 1500;
+
+
+
+function windCycle() {
+  if (windCycleActive) {
+    return;
+  }
+  if (windCycleTransition) {
+    windCycleActive = true;
+    setTimeout((() => {
+      windCycleNum++;
+    windCycleTransition = false;
+    windCycleActive = false;
+    windCycleActive = false; }), windCycleDelay);
+     return;
+  }
+  if (windCycleNum == 0) {
+    windCycleActive = true;
+    setTimeout((() => {
+     windCycleNum--;
+     windCycleActive = false; }), windCycleDelay);
+    return;
+  } if (windCycleNum == -1) {
+    windCycleActive = true;
+    setTimeout((() => {
+      windCycleNum++;
+      windCycleTransition = true;
+    windCycleActive = false; }), windCycleDelay);
+    return;
+  } if (windCycleNum == 1) {
+    windCycleActive = true;
+    setTimeout((() => {
+      windCycleNum--;
+      windCycleActive = false; }), windCycleDelay);
+     return;
+  }
 }
 
 let maps = ["meadows", "forest", "autumnForest", "cliffsides", "mountains"];
@@ -405,14 +478,16 @@ function checkWin() {
     map = maps[mapCount];
     setTimeout((() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height,);
+      ctx2.clearRect(0, 0, canvas2.width, canvas2.height,);
+      ctx3.clearRect(0, 0, canvas3.width, canvas3.height,);
       snekGame.style.backgroundImage = 'url(/snekLoading2-export.gif)';
       mapWon = true;
     }), 50);
-    snekCoords.snekHead.x = 192;
+    snekCoords.snekHead.x = 416;
     snekCoords.snekHead.y = 224;
-    snekCoords.snekLength.x = 224;
+    snekCoords.snekLength.x = 448;
     snekCoords.snekLength.y = 224;
-    snekCoords.snekEnd.x = 256;
+    snekCoords.snekEnd.x = 480;
     snekCoords.snekEnd.y = 224;
     Objects = {};
     arrX = [];
@@ -436,32 +511,55 @@ function checkWin() {
     foodTimerRespawn3 = "";
     foodTimerRespawn2 = "";
     foodTimerRespawn1 = "";
-    let rockValue = Math.floor(Math.random() * 500);
+    let rockValue2 = Math.floor(Math.random() * 500);
+    signY = -160;
+    foodGuiActive = false;
+    trackStop = true;
+    rockValue2 = rockValue;
+    drawFrame = 31;
+    checkGrid = 15;
+    for (let foodNum = 1; foodNum < 5; foodNum++) {
+    foods[`food${foodNum}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+    foods[`food${foodNum}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+    foods[`food${foodNum}`].foodType = Math.floor(Math.random() * 10) * 10;
+    foods[`food${foodNum}`].eaten = false;
+    foodOnSnek(foodNum);
+    foodOnFood(foodNum);
+    foodTimer(foodNum);
+    foodCollisions(foodNum);
+    }
+    
     clearTimeout(foodTimerRespawn1, foodTimerRespawn2, foodTimerRespawn3, foodTimerRespawn4);
     for (let x = 1; x <= 4; x++) {
       respawnFood(x);
     } if (map == "forest") {
       setTimeout((() => {
         requiredScore = 25;
-        snekGame.style.backgroundImage = 'url(/GrassV2.png)'; mapWon = false;
-        setTimeout((() => { inGame = true; movementQueue = []; }), 500);
-      }), 9000);
+        snekGame.style.backgroundImage = 'url(/forestGrass3.png)'; mapWon = false;
+        setTimeout((() => { inGame = true; movementQueue = ""; trackStop = false;
+           track = new Audio("/Forest2.mp3");
+        trackStop = false; }), 500);
+      }), 7500);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
         foodOnSnek(x);
+        foodCollisions(x);
         foodCollisions(x);
       } foxFrame = 0;
       foxState = "idle";
     } if (map == "autumnForest") {
       setTimeout((() => {
         requiredScore = 30;
-        snekGame.style.backgroundImage = 'url(/GrassV2AF.png)'; mapWon = false;
+        snekGame.style.backgroundImage = 'url(/aForestGrass.png)'; mapWon = false;
         owlTimer();
-        setTimeout((() => { inGame = true; movementQueue = []; }), 500);
+        setTimeout((() => { inGame = true; movementQueue = ""; trackStop = false;
+           track = new Audio("/Track4.mp3");
+        trackStop = false; }), 500);
       }), 9000);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
         foodOnSnek(x);
+        foodCollisions(x);
         foodCollisions(x);
       } foxFrame = 0;
       foxState = "idle";
@@ -475,8 +573,29 @@ function checkWin() {
       setTimeout((() => {
         requiredScore = 35;
         snekGame.style.backgroundImage = 'url(/cliffgrass.png)'; mapWon = false;
-        owlTimer(); setTimeout((() => { inGame = true; movementQueue = []; }), 500);
-      }), 9000);
+        owlTimer(); setTimeout((() => { inGame = true; movementQueue = ""; trackStop = false;
+           track = new Audio("/Track7.mp3"); }), 500);
+      }), 7500);
+      for (let x = 1; x <= 4; x++) {
+        foodOnFood(x);
+        foodOnSnek(x);
+        foodCollisions(x);
+        foodCollisions(x);
+      }  foxFrame = 0;
+      foxState = "idle";
+      owlFrame = 0;
+      owlDirection = "normal";
+      owlX = -64;
+      owlState = "idle";
+      walkDistance = 0;
+      flightDistance = 0;
+    } if (map == "mountains") {
+      setTimeout((() => {
+        requiredScore = 40;
+        snekGame.style.backgroundImage = 'url(/mountaingrass2.png)'; mapWon = false;
+        owlTimer(); setTimeout((() => { inGame = true; movementQueue = ""; trackStop = false;
+           track = new Audio("/mountains2.mp3"); }), 500);
+      }), 7500);
       for (let x = 1; x <= 4; x++) {
         foodOnFood(x);
         foodOnSnek(x);
@@ -497,25 +616,25 @@ let food = new Image();
 food.src = '/Foods.png';
 let foods = {
   food1: {
-    spawnLocationX: Math.floor(Math.random() * 15) * 32,
-    spawnLocationY: Math.floor(Math.random() * 15) * 32,
+    spawnLocationX: Math.floor(Math.random() * 27 + 1) * 32,
+    spawnLocationY: Math.floor(Math.random() * 15 + 1) * 32,
     foodType: Math.floor(Math.random() * 10) * 10,
     score: 0,
     eaten: false,
   }, food2: {
-    spawnLocationX: Math.floor(Math.random() * 15) * 32,
-    spawnLocationY: Math.floor(Math.random() * 15) * 32,
+    spawnLocationX: Math.floor(Math.random() * 27 + 1) * 32,
+    spawnLocationY: Math.floor(Math.random() * 15 + 1) * 32,
     foodType: Math.floor(Math.random() * 10) * 10,
     score: 0,
     eaten: false,
   }, food3: {
-    spawnLocationX: Math.floor(Math.random() * 15 + 1) * 32,
+    spawnLocationX: Math.floor(Math.random() * 27 + 1) * 32,
     spawnLocationY: Math.floor(Math.random() * 15 + 1) * 32,
     foodType: Math.floor(Math.random() * 10) * 10,
     score: 0,
     eaten: false,
   }, food4: {
-    spawnLocationX: Math.floor(Math.random() * 15 + 1) * 32,
+    spawnLocationX: Math.floor(Math.random() * 27 + 1) * 32,
     spawnLocationY: Math.floor(Math.random() * 15 + 1) * 32,
     foodType: Math.floor(Math.random() * 10) * 10,
     score: 0,
@@ -529,16 +648,40 @@ function drawFood() {
   }
   for (let x = 1; x < 5; x++) {
     foodCollisions(x);
+    if (map == "cliffsides") {
+      ctx3.filter = "brightness(80%)";
+    }
     if (foods[`food${x}`].foodType >= 70) {
-      ctx.drawImage(food, 32, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
+        ctx3.filter = "opacity(50%) brightness(0%)";
+        ctx3.drawImage(food, 32, 0, 32, 32, foods[`food${x}`].spawnLocationX + shadowValFood, foods[`food${x}`].spawnLocationY - shadowValFood, 32, 32);
+        ctx3.filter = "opacity(100%) brightness(100%)";
+        if (map == "cliffsides") {
+          ctx3.filter = "brightness(80%)";
+        }
+      ctx3.drawImage(food, 32, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
       foods[`food${x}`].score = 2;
     } if (foods[`food${x}`].foodType <= 10) {
-      ctx.drawImage(food, 64, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
+        ctx3.filter = "opacity(50%) brightness(0%)";
+        ctx3.drawImage(food, 64, 0, 32, 32, foods[`food${x}`].spawnLocationX + shadowValFood, foods[`food${x}`].spawnLocationY - shadowValFood, 32, 32);
+        ctx3.filter = "opacity(100%) brightness(100%)";
+        if (map == "cliffsides") {
+          ctx3.filter = "brightness(80%)";
+        }
+      ctx3.drawImage(food, 64, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
       foods[`food${x}`].score = 5;
     } if (foods[`food${x}`].foodType > 10 && foods[`food${x}`].foodType < 70) {
-      ctx.drawImage(food, 0, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
+        ctx3.filter = "opacity(50%) brightness(0%)";
+        ctx3.drawImage(food, 0, 0, 32, 32, foods[`food${x}`].spawnLocationX + shadowValFood, foods[`food${x}`].spawnLocationY - shadowValFood, 32, 32);
+        ctx3.filter = "opacity(100%) brightness(100%)";
+        if (map == "cliffsides") {
+          ctx3.filter = "brightness(80%)";
+        }
+      ctx3.drawImage(food, 0, 0, 32, 32, foods[`food${x}`].spawnLocationX, foods[`food${x}`].spawnLocationY, 32, 32);
       foods[`food${x}`].score = 1;
     }
+  }
+  if (map == "cliffsides") {
+    ctx3.filter = "brightness(100%)";
   }
   // ctx.drawImage(food, foods.food1.foodType, 0, 32, 32, foods.food1.spawnLocationX, foods.food1.spawnLocationY, 32, 32);
 }
@@ -563,11 +706,17 @@ function moveSnek() {
     checkCollision();
     mapBoundaries(boundaryType);
     for (let x = 1; x <= 4; x++) {
-      if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
-        if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
+      if (snekCoords.snekHead.x == foods[`food${x}`].spawnLocationX) {
+        if (snekCoords.snekHead.y == foods[`food${x}`].spawnLocationY) {
           mapScore = mapScore + foods[`food${x}`].score;
+          if (foodGuiActive == true) {
+            foodGuiCancel = true;
+          }
+          foodGuiActive = true;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten = true;
+          ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+          drawFood();
           let sfx2 = new Audio("/Eat.mp3");
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
@@ -575,29 +724,46 @@ function moveSnek() {
       }
     }
     if (isColliding == false) {
+      
       snekCoords.snekHead.x -= 32;
       snekCoords.snekLength.x = snekCoords.snekHead.old.x;
       snekCoords.snekLength.y = snekCoords.snekHead.old.y;
       snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
       snekCoords.snekEnd.y = snekCoords.snekLength.old.y;
-      oldDirection = "left"
+      /*
+      snekCoords.snekHead.x -= 2;
+      snekCoords.snekLength.x = snekCoords.snekHead.old.x;
+      snekCoords.snekLength.y = snekCoords.snekHead.old.y;
+      snekCoords.snekEnd.x = snekCoords.snekLength.old.x;
+      snekCoords.snekEnd.y = snekCoords.snekLength.old.y; */
+      oldDirection = "left";
       if (map == "forest" || map == "autumnForest") {
         foxStates();
       }
       return;
     } else {
-      killSnake()
+      if (isDead == true) {
+      } else {
+      killSnake();
+      isDead = true;
+      }
       return;
     }
   } if (snekDirection == "right") {
     checkCollision();
     mapBoundaries(boundaryType);
     for (let x = 1; x <= 4; x++) {
-      if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
-        if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
+      if (snekCoords.snekHead.x == foods[`food${x}`].spawnLocationX) {
+        if (snekCoords.snekHead.y == foods[`food${x}`].spawnLocationY) {
           mapScore = mapScore + foods[`food${x}`].score;
+          if (foodGuiActive == true) {
+            foodGuiCancel = true;
+          }
+          foodGuiActive = true;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten = true;
+          ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+          drawFood();
           let sfx2 = new Audio("/Eat.mp3");
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
@@ -616,18 +782,28 @@ function moveSnek() {
       }
       return;
     } else {
-      killSnake()
+      if (isDead == true) {
+      } else {
+      killSnake();
+      isDead = true;
+      }
       return;
     }
   } if (snekDirection == "down") {
     checkCollision();
     mapBoundaries(boundaryType);
     for (let x = 1; x <= 4; x++) {
-      if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
-        if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
+      if (snekCoords.snekHead.x == foods[`food${x}`].spawnLocationX) {
+        if (snekCoords.snekHead.y == foods[`food${x}`].spawnLocationY) {
           mapScore = mapScore + foods[`food${x}`].score;
+          if (foodGuiActive == true) {
+            foodGuiCancel = true;
+          }
+          foodGuiActive = true;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten = true;
+          ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+          drawFood();
           let sfx2 = new Audio("/Eat.mp3");
           setTimeout((() => { sfx2.play(); }), 250);
           setTimeout(respawnFood, 3250, x);
@@ -646,18 +822,28 @@ function moveSnek() {
       }
       return;
     } else {
-      killSnake()
+      if (isDead == true) {
+      } else {
+      killSnake();
+      isDead = true;
+      }
       return;
     }
   } if (snekDirection == "up") {
     checkCollision();
     mapBoundaries(boundaryType);
     for (let x = 1; x <= 4; x++) {
-      if (snekCollider.x == foods[`food${x}`].spawnLocationX) {
-        if (snekCollider.y == foods[`food${x}`].spawnLocationY) {
+      if (snekCoords.snekHead.x == foods[`food${x}`].spawnLocationX) {
+        if (snekCoords.snekHead.y == foods[`food${x}`].spawnLocationY) {
           mapScore = mapScore + foods[`food${x}`].score;
+          if (foodGuiActive == true) {
+            foodGuiCancel = true;
+          }
+          foodGuiActive = true;
           foods[`food${x}`].spawnLocationX = -512;
           foods[`food${x}`].eaten = true;
+          ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+          drawFood();
           let sfx2 = new Audio("/Eat.mp3");
           /*
           let sfx2 = 0;
@@ -690,7 +876,11 @@ function moveSnek() {
       }
       return;
     } else {
-      killSnake()
+      if (isDead == true) {
+      } else {
+      killSnake();
+      isDead = true;
+      }
       return;
     }
   }
@@ -714,8 +904,7 @@ imageF.src = '/SnekHeadsF.png';
 imageF2.src = '/SnekLengthsF.png';
 imageF3.src = '/SnekEndsF.png';
 
-
-function drawSnek() {
+function drawSnek2() {
   if (flashNum % 2 == 1) {
     selectedImage = imageF;
     selectedImage2 = imageF2;
@@ -730,102 +919,261 @@ function drawSnek() {
   let tailCheck3 = false;
   // Snek Head
   if (oldDirection == "left") {
-    ctx.drawImage(selectedImage, 32, 0, 32, 32, snekCoords.snekHead.x + snekCutAmount * 2, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+    ctx2.filter = "opacity(50%) brightness(0%)";
+    ctx2.drawImage(selectedImage, 32, 0, 32, 32, snekCoords.snekHead.x + shadowValSnek, snekCoords.snekHead.y - shadowValSnek, snekDrawSize, snekDrawSize);
+    ctx2.filter = "opacity(100%) brightness(100%)";
   } if (oldDirection == "down") {
-    ctx.drawImage(selectedImage, 128, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+      ctx2.filter = "opacity(50%) brightness(0%)";
+      ctx2.drawImage(selectedImage, 128, 0, 32, 32, snekCoords.snekHead.x + shadowValSnek, snekCoords.snekHead.y - shadowValSnek, snekDrawSize, snekDrawSize);
+      ctx2.filter = "opacity(100%) brightness(100%)";
   } if (oldDirection == "right") {
-    ctx.drawImage(selectedImage, 96, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+      ctx2.filter = "opacity(50%) brightness(0%)";
+      ctx2.drawImage(selectedImage, 96, 0, 32, 32, snekCoords.snekHead.x + shadowValSnek, snekCoords.snekHead.y - shadowValSnek, snekDrawSize, snekDrawSize);
+      ctx2.filter = "opacity(100%) brightness(100%)";
   } if (oldDirection == "up") {
-    ctx.drawImage(selectedImage, 0, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+      ctx2.filter = "opacity(50%) brightness(0%)";
+      ctx2.drawImage(selectedImage, 0, 0, 32, 32, snekCoords.snekHead.x + shadowValSnek, snekCoords.snekHead.y - shadowValSnek, snekDrawSize, snekDrawSize);
+      ctx2.filter = "opacity(100%) brightness(100%)";
   }
   // Snek Length
-  if (snekCoords.snekHead.x == snekCoords.snekLength.x - 32 || snekCoords.snekHead.x == 512
+  if (snekCoords.snekHead.x == snekCoords.snekLength.x - 32 || snekCoords.snekHead.x == 896
      && snekCoords.snekLength.x == 0) {
     if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
       snekCoords.snekEnd.x == -32) {
-      ctx.drawImage(selectedImage2, 0, 0, 32, 32, snekCoords.snekLength.x + snekCutAmount, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 0, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
       snekCoords.snekEnd.y == -32) {
-      ctx.drawImage(selectedImage2, 256, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 256, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
       snekCoords.snekEnd.y == 512) {
-      ctx.drawImage(selectedImage2, 448, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 448, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     }
   } if (snekCoords.snekHead.x == snekCoords.snekLength.x + 32 || oldDirection == "right") {
     if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
-      snekCoords.snekEnd.x == 512) {
-      ctx.drawImage(selectedImage2, 128, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      snekCoords.snekEnd.x == 896) {
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 128, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
       snekCoords.snekEnd.y == -32) {
-      ctx.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
       tailCheck3 = true;
     } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
       snekCoords.snekEnd.y == 512) {
-      ctx.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
       tailCheck2 = true;
     }
   } if (snekCoords.snekHead.y == snekCoords.snekLength.y - 32 || oldDirection == "up") {
     if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
       snekCoords.snekEnd.y == -32) {
-      ctx.drawImage(selectedImage2, 32, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 32, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
       snekCoords.snekEnd.y == -32 && snekDirection !== "up") {
-      ctx.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
       snekCoords.snekEnd.y == 512 && snekDirection !== "up") {
-      ctx.drawImage(selectedImage2, 320, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 320, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
       tailCheck = true;
     }
   } if (snekCoords.snekHead.y == snekCoords.snekLength.y + 32 || oldDirection == "down") {
     if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
       snekCoords.snekEnd.y == 512) {
-      ctx.drawImage(selectedImage2, 64, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 64, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
       snekCoords.snekEnd.x == -32) {
-      ctx.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
     } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
-      snekCoords.snekEnd.x == 512) {
-      ctx.drawImage(selectedImage2, 384, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      snekCoords.snekEnd.x == 896) {
+          ctx2.filter = "opacity(50%) brightness(0%)";
+          ctx2.drawImage(selectedImage2, 384, 0, 32, 32, snekCoords.snekLength.x + shadowValSnek, snekCoords.snekLength.y - shadowValSnek, snekDrawSize, snekDrawSize);
+          ctx2.filter = "opacity(100%) brightness(100%)";
       tailCheck = true;
     } 
   }
   
   // Snek End
   if (tailCheck) {
-    ctx.drawImage(selectedImage3, 192, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 192, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
     return;
   } if (tailCheck2) {
-    ctx.drawImage(selectedImage3, 160, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 160, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
     return;
   } if (tailCheck3) {
-    ctx.drawImage(selectedImage3, 128, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 128, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
     return;
-  } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 || snekCoords.snekLength.x == 512
+  } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 || snekCoords.snekLength.x == 896
     && snekCoords.snekEnd.x == 0) {
-    ctx.drawImage(selectedImage3, 32, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 32, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
     return;
   } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 || oldDirection == "right") {
-    ctx.drawImage(selectedImage3, 0, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 0, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
     return;
   } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 || oldDirection == "up") {
-    ctx.drawImage(selectedImage3, 96, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 96, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
     return;
   } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 || oldDirection == "down") {
-    ctx.drawImage(selectedImage3, 64, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(50%) brightness(0%)";
+        ctx2.drawImage(selectedImage3, 64, 0, 32, 32, snekCoords.snekEnd.x + shadowValSnek, snekCoords.snekEnd.y - shadowValSnek, snekDrawSize, snekDrawSize);
+        ctx2.filter = "opacity(100%) brightness(100%)";
+    return;
+  }
+}
+
+function drawSnek() {
+  if (flashNum % 2 == 1) {
+    selectedImage = imageF;
+    selectedImage2 = imageF2;
+    selectedImage3 = imageF3;
+  } if (flashActive == false || flashNum % 2 == 0) {
+    selectedImage = image;
+    selectedImage2 = image2;
+    selectedImage3 = image3;
+  }
+  let tailCheck = false;
+  let tailCheck2 = false;
+  let tailCheck3 = false;
+  drawSnek2();
+  if (map == "cliffsides") {
+    ctx2.filter = "brightness(80%)";
+  }
+  // Snek Head
+  if (oldDirection == "left") {
+    ctx2.drawImage(selectedImage, 32, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+  } if (oldDirection == "down") {
+    ctx2.drawImage(selectedImage, 128, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+  } if (oldDirection == "right") {
+    ctx2.drawImage(selectedImage, 96, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+  } if (oldDirection == "up") {
+    ctx2.drawImage(selectedImage, 0, 0, 32, 32, snekCoords.snekHead.x, snekCoords.snekHead.y, snekDrawSize, snekDrawSize);
+  }
+  // Snek Length
+  if (snekCoords.snekHead.x == snekCoords.snekLength.x - 32 || snekCoords.snekHead.x == 896
+     && snekCoords.snekLength.x == 0) {
+    if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
+      snekCoords.snekEnd.x == -32) {
+      ctx2.drawImage(selectedImage2, 0, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
+      snekCoords.snekEnd.y == -32) {
+      ctx2.drawImage(selectedImage2, 256, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
+      snekCoords.snekEnd.y == 512) {
+      ctx2.drawImage(selectedImage2, 448, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    }
+  } if (snekCoords.snekHead.x == snekCoords.snekLength.x + 32 || oldDirection == "right") {
+    if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
+      snekCoords.snekEnd.x == 896) {
+      ctx2.drawImage(selectedImage2, 128, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
+      snekCoords.snekEnd.y == -32) {
+      ctx2.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      tailCheck3 = true;
+    } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
+      snekCoords.snekEnd.y == 512) {
+      ctx2.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      tailCheck2 = true;
+    }
+  } if (snekCoords.snekHead.y == snekCoords.snekLength.y - 32 || oldDirection == "up") {
+    if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 ||
+      snekCoords.snekEnd.y == -32) {
+      ctx2.drawImage(selectedImage2, 32, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
+      snekCoords.snekEnd.y == -32 && snekDirection !== "up") {
+      ctx2.drawImage(selectedImage2, 480, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
+      snekCoords.snekEnd.y == 512 && snekDirection !== "up") {
+      ctx2.drawImage(selectedImage2, 320, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      tailCheck = true;
+    }
+  } if (snekCoords.snekHead.y == snekCoords.snekLength.y + 32 || oldDirection == "down") {
+    if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 ||
+      snekCoords.snekEnd.y == 512) {
+      ctx2.drawImage(selectedImage2, 64, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 ||
+      snekCoords.snekEnd.x == -32) {
+      ctx2.drawImage(selectedImage2, 288, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+    } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 ||
+      snekCoords.snekEnd.x == 896) {
+      ctx2.drawImage(selectedImage2, 384, 0, 32, 32, snekCoords.snekLength.x, snekCoords.snekLength.y, snekDrawSize, snekDrawSize);
+      tailCheck = true;
+    } 
+  }
+  
+  // Snek End
+  if (tailCheck) {
+    ctx2.drawImage(selectedImage3, 192, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    return;
+  } if (tailCheck2) {
+    ctx2.drawImage(selectedImage3, 160, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    return;
+  } if (tailCheck3) {
+    ctx2.drawImage(selectedImage3, 128, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    return;
+  } if (snekCoords.snekLength.x == snekCoords.snekEnd.x - 32 || snekCoords.snekLength.x == 896
+    && snekCoords.snekEnd.x == 0) {
+    ctx2.drawImage(selectedImage3, 32, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    return;
+  } if (snekCoords.snekLength.x == snekCoords.snekEnd.x + 32 || oldDirection == "right") {
+    ctx2.drawImage(selectedImage3, 0, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    return;
+  } if (snekCoords.snekLength.y == snekCoords.snekEnd.y - 32 || oldDirection == "up") {
+    ctx2.drawImage(selectedImage3, 96, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
+    return;
+  } if (snekCoords.snekLength.y == snekCoords.snekEnd.y + 32 || oldDirection == "down") {
+    ctx2.drawImage(selectedImage3, 64, 0, 32, 32, snekCoords.snekEnd.x, snekCoords.snekEnd.y, snekDrawSize, snekDrawSize);
     return;
   }
 }
 
 let collidables = new Image();
-collidables.src = '/Collidables.png';
+collidables.src = '/collidables.png';
 let foxIdle = new Image();
-foxIdle.src = '/FoxIdle-export.png';
+foxIdle.src = '/foxIdle-export.png';
+/*
+let foxIdleAlt = new Image();
+foxIdle2.src = "/foxIdleAlternate-export.png";
+*/
 let foxWalking = new Image();
 foxWalking.src = '/foxWalking.png';
 let foxAttacking = new Image();
 foxAttacking.src = '/foxAttacking.png'
+/*
+let foxAttackingAlt = new Image();
+foxAttacking.src = "/foxAttackingAlternate.png"
+*/
 let foxReturning = new Image();
-foxReturning.src = '/Foxreturning.png'
+foxReturning.src = '/foxReturning.png'
 let foxState = "idle";
 foxFrame = 0;
 let walkDistance = 0;
@@ -850,7 +1198,7 @@ function owlTimer() {
       if (map == "autumnForest") {
         owlState = "flying"; lockedY = snekCoords.snekHead.y;
       }
-    }), 28000);
+    }), 7500);
   } if (map == "cliffsides") {
     setTimeout((() => {
       if (map == "cliffsides") {
@@ -863,13 +1211,12 @@ function owlTimer() {
 function owlStates() {
   if (map == "autumnForest") {
     if (owlDirection == "normal") {
-      if (owlState == "flying" && owlX == 512 || owlState == "returning" && owlX == 512) {
+      if (owlState == "flying" && owlX >= 896 || owlState == "returning" && owlX >= 896) {
         owlDirection = "alternate";
         owlState = "idle";
         owlTimer();
         return;
-      }
-      if (owlX == snekCoords.snekHead.x && owlState == "flying" ||
+      } if (owlX == snekCoords.snekHead.x && owlState == "flying" ||
         owlState == "flying" && owlX == snekCoords.snekHead.x + 32 ||
         owlState == "flying" && owlX == snekCoords.snekHead.x - 32) {
         owlState = "attacking";
@@ -880,7 +1227,7 @@ function owlStates() {
         owlState = "attacking";
         owlFrame = 1728;
       }
-      if (owlState == "flying" && owlX == -64 || owlState == "returning" && owlX == -64) {
+      if (owlState == "flying" && owlX <= -64 || owlState == "returning" && owlX <= -64) {
         owlState = "idle"
         owlDirection = "normal";
         owlFrame = 0;
@@ -889,7 +1236,7 @@ function owlStates() {
     }
   } if (map == "cliffsides") {
     if (owlDirection == "normal") {
-      if (owlState == "flying" && owlX == 512 || owlState == "returning" && owlX == 512) {
+      if (owlState == "flying" && owlX == 896 || owlState == "returning" && owlX == 896) {
         owlDirection = "alternate";
         owlState = "idle";
         owlTimer();
@@ -913,7 +1260,7 @@ function owlStates() {
         owlTimer();
       }
     }
-  } if (owlX <= -64 || owlX >= 512) {
+  } if (owlX <= -64 || owlX >= 896) {
     lockedY = snekCoords.snekHead.y;
   }
 }
@@ -921,80 +1268,24 @@ function owlStates() {
 function foxStates() {
   if (map == "forest") {
     if (foxState == "returning") {
-      if (Objects[1].x <= 0) {
-        foxFrame = 0;
-        foxState = "idle";
-        if (Objects[1].x >= 192) {
-          return;
-        }
-      } if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
-        || snekCollider.x == 128 || snekCollider.x == 288) {
-        if (snekCollider.y == 160 || snekCollider.y == 192) {
-          foxState = "walking";
-          foxFrame = 0;
-        }
-      }
-    }
-    if (foxState == "idle") {
-      if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
-        || snekCollider.x == 128 || snekCollider.x == 288) {
-        if (snekCollider.y == 160 || snekCollider.y == 192) {
-          foxState = "walking";
-          foxFrame = 0;
-        }
-      }
-    }
-  } if (foxState == "walking") {
-    if (snekCollider.x == Objects[1].x + 128) {
-      if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
-        foxFrame = 0;
-        foxState = "attacking";
-      }
-    } if (snekCoords.snekHead.x == Objects[1].x + 128) {
-      if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
-        foxFrame = 0;
-        foxState = "attacking";
-      }
-    } if (snekCoords.snekLength.x == Objects[1].x + 128) {
-      if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
-        foxFrame = 0;
-        foxState = "attacking";
-      }
-    } if (snekCoords.snekEnd.x == Objects[1].x + 128) {
-      if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
-        foxFrame = 0;
-        foxState = "attacking";
-      }
-    }
-  } if (foxState == "walking") {
-    if (Objects[1].x >= 192) {
-      foxFrame = 0;
-      foxState = "idle";
-      setTimeout((() => {
-        foxFrame = 1024;
-        foxState = "returning";
-      }), 1000);
-    }
-  } if (map == "autumnForest") {
-    if (foxState == "returning") {
-      if (Objects[1].x <= 0) {
+      if (Objects[1].x <= 192) {
         foxFrame = 0;
         foxState = "idle";
         if (Objects[1].x >= 384) {
           return;
         }
-      } if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
-        || snekCollider.x == 128 || snekCollider.x == 288) {
-        if (snekCollider.y == 128 || snekCollider.y == 160) {
+      } if (snekCollider.x == 320 || snekCollider.x == 352 || snekCollider.x == 384 || snekCollider.x == 416
+        || snekCollider.x == 448 || snekCollider.x == 480) {
+        if (snekCollider.y == 160 || snekCollider.y == 192) {
           foxState = "walking";
           foxFrame = 0;
         }
       }
     }
     if (foxState == "idle") {
-      if (snekCollider.x == 160 || snekCollider.x == 192 || snekCollider.x == 224 || snekCollider.x == 256
-        || snekCollider.x == 128 || snekCollider.x == 288) {
-        if (snekCollider.y == 128 || snekCollider.y == 160) {
+      if (snekCollider.x == 320 || snekCollider.x == 352 || snekCollider.x == 384 || snekCollider.x == 416
+        || snekCollider.x == 448 || snekCollider.x == 480) {
+        if (snekCollider.y == 160 || snekCollider.y == 192) {
           foxState = "walking";
           foxFrame = 0;
         }
@@ -1031,91 +1322,210 @@ function foxStates() {
         foxState = "returning";
       }), 1000);
     }
+  } if (map == "autumnForest") {
+    if (foxState == "returning") {
+      if (Objects[1].x <= 288) {
+        foxFrame = 0;
+        foxState = "idle";
+        if (Objects[1].x >= 320) {
+          return;
+        }
+      } if (snekCollider.x == 384 || snekCollider.x == 416 || snekCollider.x == 448 || snekCollider.x == 480
+        || snekCollider.x == 512 || snekCollider.x == 544) {
+        if (snekCollider.y == 352 || snekCollider.y == 384) {
+          foxState = "walking";
+          foxFrame = 0;
+        }
+      }
+    }
+    if (foxState == "idle") {
+      if (snekCollider.x == 384 || snekCollider.x == 416 || snekCollider.x == 448 || snekCollider.x == 480
+        || snekCollider.x == 512 || snekCollider.x == 544) {
+        if (snekCollider.y == 352 || snekCollider.y == 384) {
+          foxState = "walking";
+          foxFrame = 0;
+        }
+      }
+    }
+  } if (foxState == "walking") {
+    if (snekCollider.x == Objects[1].x + 128) {
+      if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+      }
+    } if (snekCoords.snekHead.x == Objects[1].x + 128) {
+      if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+      }
+    } if (snekCoords.snekLength.x == Objects[1].x + 128) {
+      if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+      }
+    } if (snekCoords.snekEnd.x == Objects[1].x + 128) {
+      if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+        foxFrame = 0;
+        foxState = "attacking";
+      }
+    }
+  } if (foxState == "walking") {
+    if (Objects[1].x >= 544) {
+      foxFrame = 0;
+      foxState = "idle";
+      setTimeout((() => {
+        foxFrame = 1024;
+        foxState = "returning";
+      }), 1000);
+    }
   }
 }
+
 
 function drawObjects() {
   if (map == "meadows") {
     Objects = {};
     objCount = 0;
-    drawObject("bush", 96, 32);
-    drawObject("rock", 288, 32);
-    drawObject("oTree", 32, 64);
-    drawObject("rock", 352, 128);
-    drawObject("pTree", 416, 32);
-    drawObject("pTree", 0, 384);
-    drawObject("bush", 64, 320);
-    drawObject("oTree", 352, 256);
-    drawObject("bush", 224, 448);
+    drawObject("bush", 128, 64);
+    drawObject("bush", 288, 32);
+    drawObject("oTree", 32, 96);
+    drawObject("oTree", 224, 64);
+    drawObject("rock", 480, 32);
+    drawObject("rock", 640, 0);
+    drawObject("pTree", 736, 0);
+    drawObject("rock", 608, 128);
+    drawObject("pTree", 800, 192);
+    drawObject("oTree", 544, 288);
+    drawObject("oTree", 672, 352);
+    drawObject("rock", 768, 384);
+    drawObject("bush", 416, 448);
+    drawObject("pTree", 96, 256);
+    drawObject("bush", 64, 416);
+    drawObject("pTree", 192, 384);
+    drawObject("bush", 256, 352);
   } if (map == "forest") {
     Objects = {};
     objCount = 0;
-    drawObject("fox", 0, 128);
-    drawObject("rock", 0, 0);
-    drawObject("oTree", 32, 32);
-    drawObject("bush", 96, 96);
-    drawObject("rock", 224, 32);
-    drawObject("pTree", 320, 32);
-    drawObject("pTree", 448, 0);
-    drawObject("oTree", 384, 64);
-    drawObject("bush", 320, 160);
-    drawObject("pTree", 416, 192);
-    drawObject("rock", 448, 352);
-    drawObject("pTree", 320, 288);
-    drawObject("oTree", 416, 384);
-    drawObject("pTree", 96, 192);
-    drawObject("oTree", 128, 256);
-    drawObject("oTree", 0, 224);
-    drawObject("pTree", 32, 352);
-    drawObject("bush", 128, 448);
-    drawObject("barrier", 320, 128);
+    drawObject("fox", 192, 128);
+    drawObject("bush", 0, 32);
+    drawObject("pTree", 128, 32);
+    drawObject("bush", 256, 0);
+    drawObject("rock", 384, 64);
+    drawObject("oTree", 480, -32);
+    drawObject("oTree", 0, 160);
+    drawObject("bush", 32, 288);
+    drawObject("oTree", 96, 384);
+    drawObject("pTree", 192, 256);
+    drawObject("bush", 320, 256);
+    drawObject("rock", 256, 416);
+    drawObject("oTree", 384, 320);
+    drawObject("pTree", 608, 32);
+    drawObject("bush", 736, 32);
+    drawObject("rock", 512, 224);
+    drawObject("pTree", 480, 384);
+    drawObject("oTree", 608, 352);
+    drawObject("bush", 704, 448);
+    drawObject("pTree", 800, 352);
+    drawObject("oTree", 672, 256);
+    drawObject("pTree", 608, 192);
+    drawObject("pTree", 800, 160);
+    drawObject("oTree", 704, 64);
+    drawObject("rock", 832, 96);
   } if (map == "autumnForest") {
     Objects = {};
     objCount = 0;
-    drawObject("fox", 0, 96);
-    drawObject("reTree", 0, 0);
-    drawObject("pTree", 128, 0,);
-    drawObject("rock", 288, 32);
-    drawObject("orTree", 384, 0,);
-    drawObject("pTree", 32, 160);
-    drawObject("orTree", 160, 192);
-    drawObject("aBush", 96, 320);
-    drawObject("yeTree", 320, 96);
-    drawObject("reTree", 448, 128);
-    drawObject("pTree", 384, 224);
-    drawObject("yeTree", 352, 320);
-    drawObject("aBush", 288, 448);
-    drawObject("yeTree", 0, 320);
-    drawObject("rock", 0, 448);
-    drawObject("orTree", 416, 384);
-    drawObject("orTree", 96, 384);
-    drawObject("reTree", 192, 320);
+    drawObject("fox", 288, 320);
+    drawObject("yeTree", 96, -32);
+    drawObject("reTree", 32, 64);
+    drawObject("rock", 192, 32);
+    drawObject("pTree", 288, 32);
+    drawObject("rock", 416, 32);
+    drawObject("orTree", 608, 0);
+    drawObject("rock", 736, 32);
+    drawObject("rock", 0, 224);
+    drawObject("yeTree", 64, 352);
+    drawObject("rock", 288, 448);
+    drawObject("orTree", 576, 384);
+    drawObject("pTree", 768, 384);
+    drawObject("reTree", 672, 224);
+    drawObject("yeTree", 704, 96);
+    drawObject("aBush", 224, 224);
+    drawObject("aBush", 832, 160);
+    drawObject("aBush", 800, 288);
+    drawObject("orTree", 96, 224);
+    drawObject("pTree", 480, 64);
+    drawObject("yeTree", 544, 192);
+    drawObject("aBush", 480, 416);
+    drawObject("aBush", 192, 384);
     drawObject("owl", -64, 256);
   } if (map == "cliffsides") {
     Objects = {};
     objCount = 0;
     drawObject("cliffside", 0, 0);
-    drawObject("cliffside", 416, 0);
-    drawObject("oTree", 0, 32);
+    drawObject("cliffside", 64, 0);
+    drawObject("cliffside", 736, 0);
+    drawObject("cliffside", 800, 0);
+    drawObject("oTree", 32, 0);
+    drawObject("bush", 32, 160);
     drawObject("rock", 0, 224);
-    drawObject("bush", 0, 320);
+    drawObject("oTree", 64, 288);
     drawObject("pTree", 0, 384);
-    drawObject("pTree", 96, 0);
-    drawObject("rock", 128, 160);
-    drawObject("rock", 96, 288);
-    drawObject("rock", 448, 0);
-    drawObject("pTree", 448, 96);
-    drawObject("bush", 448, 288);
-    drawObject("oTree", 448, 352);
-    drawObject("rock", 352, 32);
-    drawObject("oTree", 288, 64);
-    drawObject("rock", 352, 224);
-    drawObject("pTree", 224, 256);
-    drawObject("oTree", 320, 352);
-    drawObject("rock", 128, 448);
+    drawObject("rock", 832, 0);
+    drawObject("pTree", 800, 96);
+    drawObject("bush", 768, 256);
+    drawObject("rock", 832, 352);
+    drawObject("oTree", 768, 384);
+    ctx.filter = "brightness(80%)";
+    drawObject("rock", 192, 0);
+    drawObject("pTree", 288, 0);
+    drawObject("rock", 416, 32);
+    drawObject("rock", 544, 32);
+    drawObject("rock", 672, 0);
+    drawObject("pTree", 160, 64);
+    drawObject("rock", 320, 160);
+    drawObject("oTree", 480, 64);
+    drawObject("pTree", 576, 96);
+    drawObject("rock", 672, 128);
+    drawObject("rock", 544,  224);
+    drawObject("pTree", 640, 224);
+    drawObject("rock", 288, 288);
+    drawObject("oTree", 224, 288);
+    drawObject("pTree", 416, 288);
+    drawObject("pTree", 256, 352);
+    drawObject("rock", 160, 448);
+    drawObject("rock", 320, 448);
+    drawObject("oTree", 512, 352);
+    drawObject("pTree", 608, 384);
+    drawObject("rock", 672, 384);
+    ctx.filter = "brightness(100%)";
     drawObject("owl", -64, 64);
+  } if (map == "mountains") {
+    Objects = {};
+    objCount = 0;
+    drawObject("cRock",  0, 0);
+    drawObject("oTree", 224, -32);
+    drawObject(" pTree", 576, -32);
+    drawObject("cRock", 736, 0);
+    drawObject("bush", 64, 96);
+    drawObject("pTree", 32, 192);
+    drawObject("cRock", 0, 352);
+    // ---
+    drawObject("cRock", 192, 192);
+    drawObject("cRock", 224, 288);
+    drawObject("cRock", 192, 352);
+    drawObject("cRock", 608, 160);
+    drawObject("bush", 800, 192);
+    drawObject("cRock", 640, 288);
+    drawObject("bush", 576, 352);
+    drawObject("oTree", 736, 288);
+    drawObject("cRock", 832, 352);
   }
 }
+
+let shadowVal = 8;
+let shadowVal2 = 6;
+let shadowValFood = 2;
+let shadowValSnek = 2;
 
 let rockType = Math.floor(Math.random() * 3) * 64;
 rockType == 0 ? rockType = 64 : rockType = rockType;
@@ -1124,9 +1534,14 @@ let rockValue = Math.floor(Math.random() * 500);
 let size = 64;
 let objCount = 0;
 let foxSpeed = 32;
-
 function drawObject(type, xCoords, yCoords) {
+  if (type == "filter") {
+    
+  }
   if (type == "bush") {
+    ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 0, 0, 64, 64, xCoords + shadowVal2, yCoords - shadowVal2, size, size,);
+    ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, 0, 0, 64, 64, xCoords, yCoords, size, size,);
     objCount++;
     Objects[objCount] = {};
@@ -1139,6 +1554,10 @@ function drawObject(type, xCoords, yCoords) {
   } if (type == "rock") {
     if (rockValue == 0) {
       if (moaiType == 1) {
+          ctx.filter = "opacity(50%) brightness(0%)";
+          ctx.drawImage(collidables, 704, 0, 64, 64, xCoords + shadowVal, yCoords - shadowVal, size, size);
+        ctx.drawImage(collidables, 640, 0, 64, 64, xCoords + shadowVal, yCoords + size - shadowVal, size, size);
+          ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(collidables, 704, 0, 64, 64, xCoords, yCoords, size, size);
         ctx.drawImage(collidables, 640, 0, 64, 64, xCoords, yCoords + size, size, size);
         objCount++;
@@ -1150,6 +1569,10 @@ function drawObject(type, xCoords, yCoords) {
         Objects[objCount].type = "1x2";
         return;
       }
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(collidables, 576, 0, 64, 64, xCoords + shadowVal, yCoords - shadowVal, size, size);
+      ctx.drawImage(collidables, 512, 0, 64, 64, xCoords + shadowVal, yCoords + size - shadowVal, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
       ctx.drawImage(collidables, 576, 0, 64, 64, xCoords, yCoords, size, size);
       ctx.drawImage(collidables, 512, 0, 64, 64, xCoords, yCoords + size, size, size);
       objCount++;
@@ -1161,6 +1584,9 @@ function drawObject(type, xCoords, yCoords) {
       Objects[objCount].type = "1x2";
       return;
     }
+      ctx.filter = "opacity(50%) brightness(0%)";
+      ctx.drawImage(collidables, rockType, 0, 64, 64, xCoords + shadowVal2, yCoords - shadowVal2, size, size);
+      ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, rockType, 0, 64, 64, xCoords, yCoords, size, size);
     objCount++;
     Objects[objCount] = {};
@@ -1171,8 +1597,12 @@ function drawObject(type, xCoords, yCoords) {
     Objects[objCount].type = "1x2";
     return;
   } if (type == "pTree") {
-    ctx.drawImage(collidables, 256, 0, 64, 64, xCoords, yCoords, size, size);
-    ctx.drawImage(collidables, 320, 0, 64, 64, xCoords, yCoords + size, size, size);
+      ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 320, 0, 64, 128, xCoords + shadowVal2, yCoords + size - shadowVal2, size, 128);
+    ctx.drawImage(collidables, 256, 0, 64, 128, xCoords + shadowVal + windCycleNum, yCoords - shadowVal - windCycleNum, size, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
+    ctx.drawImage(collidables, 320, 0, 64, 128, xCoords, yCoords + size, size, 128);
+    ctx.drawImage(collidables, 256, 0, 64, 128, xCoords + windCycleNum, yCoords - windCycleNum, size, 128);
     objCount++;
     Objects[objCount] = {};
     Objects[objCount].x = xCoords;
@@ -1181,9 +1611,47 @@ function drawObject(type, xCoords, yCoords) {
     Objects[objCount].height = 32;
     Objects[objCount].type = "1x2";
     return;
+  } if (type == "cRock") {
+    if (rockValue == 0) {
+      if (moaiType == 1) {
+        ctx.drawImage(collidables, 1600, 0, 64, 64, xCoords, yCoords, size, size);
+        ctx.drawImage(collidables, 1536, 0, 64, 64, xCoords, yCoords + size, size, size);
+        objCount++;
+        Objects[objCount] = {};
+        Objects[objCount].x = xCoords;
+        Objects[objCount].y = yCoords + 96;
+        Objects[objCount].width = 64;
+        Objects[objCount].height = 32;
+        Objects[objCount].type = "1x2";
+        return;
+      }
+      ctx.drawImage(collidables, 1472, 0, 64, 64, xCoords, yCoords, size, size);
+      ctx.drawImage(collidables, 1408, 0, 64, 64, xCoords, yCoords + size, size, size);
+      objCount++;
+      Objects[objCount] = {};
+      Objects[objCount].x = xCoords;
+      Objects[objCount].y = yCoords + 96;
+      Objects[objCount].width = 64;
+      Objects[objCount].height = 32;
+      Objects[objCount].type = "1x2";
+      return;
+    }
+    ctx.drawImage(collidables, rockType + 1216, 0, 64, 64, xCoords, yCoords, size, size);
+    objCount++;
+    Objects[objCount] = {};
+    Objects[objCount].x = xCoords;
+    Objects[objCount].y = yCoords + 32;
+    Objects[objCount].width = 64;
+    Objects[objCount].height = 64;
+    Objects[objCount].type = "1x2";
+    return;
   } if (type == "oTree") {
-    ctx.drawImage(collidables, 384, 0, 64, 64, xCoords, yCoords, size, size);
+      ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 448, 0, 64, 64, xCoords + shadowVal, yCoords + size - shadowVal, size, size);
+    ctx.drawImage(collidables, 384, 0, 64, 128, xCoords + shadowVal + windCycleNum, yCoords - shadowVal - windCycleNum, size, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, 448, 0, 64, 64, xCoords, yCoords + size, size, size);
+    ctx.drawImage(collidables, 384, 0, 64, 128, xCoords + windCycleNum, yCoords - windCycleNum, size, 128);
     objCount++;
     Objects[objCount] = {};
     Objects[objCount].x = xCoords;
@@ -1224,11 +1692,22 @@ function drawObject(type, xCoords, yCoords) {
     Objects[objCount].type = "1x2";
     Objects[objCount].barrier = true;
     return;
+  } if (type == "slopes") {
+    objCount++;
+    Objects[objCount] = {};
+    Objects[objCount].x = xCoords;
+    Objects[objCount].y = yCoords;
+    Objects[objCount].width = 512;
+    Objects[objCount].height = 128;
+    Objects[objCount].type = "slopes";
   } if (type == "fox") {
     if (foxState == "idle") {
-      if (walkDistance == 32 || walkDistance == -32) {
-        walkDistance = 0;
+      if (walkDistance == 224 || walkDistance == 160) {
+        walkDistance = 192;
       }
+      ctx.filter = "opacity(50%) brightness(0%)";
+      ctx.drawImage(foxIdle, foxFrame, 0, 128, 128, xCoords + walkDistance + shadowVal2, yCoords - shadowVal2, 128, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
       ctx.drawImage(foxIdle, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
       foxFrame += 128;
       if (foxFrame == 512) {
@@ -1243,6 +1722,9 @@ function drawObject(type, xCoords, yCoords) {
       Objects[objCount].type = "4x2 Disabled";
       enemyCollisions();
     } if (foxState == "walking") {
+      ctx.filter = "opacity(50%) brightness(0%)";
+      ctx.drawImage(foxWalking, foxFrame, 0, 128, 128, xCoords + walkDistance + shadowVal2, yCoords - shadowVal2, 128, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
       ctx.drawImage(foxWalking, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
       foxFrame += 128;
       for (let x = 1; x <= 4; x++) {
@@ -1270,11 +1752,14 @@ function drawObject(type, xCoords, yCoords) {
       Objects[objCount].type = "4x2";
       } */
     } if (foxState == "attacking") {
+      ctx.filter = "opacity(50%) brightness(0%)";
+      ctx.drawImage(foxAttacking, foxFrame, 0, 128, 128, xCoords + walkDistance + shadowVal2, yCoords - shadowVal2, 128, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
       ctx.drawImage(foxAttacking, foxFrame, 0, 192, 128, xCoords + walkDistance, yCoords, 192, 128);
       foxFrame += 768;
       for (let x = 1; x <= 4; x++) {
         foodCollisions(x);
-      } if (foxFrame >= 5088) {
+      } if (foxFrame >= 5088 || foxFrame == 5376) {
         foxState = "idle";
         foxFrame = 0;
         if (xCoords + walkDistance !== 0) {
@@ -1295,6 +1780,9 @@ function drawObject(type, xCoords, yCoords) {
         enemyCollisions();
       }
     } if (foxState == "returning") {
+      ctx.filter = "opacity(50%) brightness(0%)";
+      ctx.drawImage(foxReturning, foxFrame, 0, 128, 128, xCoords + walkDistance + shadowVal2, yCoords - shadowVal2, 128, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
       ctx.drawImage(foxReturning, foxFrame, 0, 128, 128, xCoords + walkDistance, yCoords, 128, 128);
       foxFrame -= 128;
       for (let x = 1; x <= 4; x++) {
@@ -1323,6 +1811,9 @@ function drawObject(type, xCoords, yCoords) {
       } */
     }
   } if (type == "aBush") {
+    ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 768, 0, 64, 64, xCoords + shadowVal2, yCoords - shadowVal2, size, size,);
+    ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, 768, 0, 64, 64, xCoords, yCoords, size, size);
     objCount++;
     Objects[objCount] = {};
@@ -1333,8 +1824,12 @@ function drawObject(type, xCoords, yCoords) {
     Objects[objCount].type = "1x2";
     return;
   } if (type == "orTree") {
-    ctx.drawImage(collidables, 1088, 0, 64, 64, xCoords, yCoords, size, size);
+    ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 1152, 0, 64, 64, xCoords + shadowVal, yCoords + size - shadowVal, size, size);
+    ctx.drawImage(collidables, 1088, 0, 64, 128, xCoords + shadowVal + windCycleNum, yCoords - shadowVal - windCycleNum, size, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, 1152, 0, 64, 64, xCoords, yCoords + size, size, size);
+    ctx.drawImage(collidables, 1088, 0, 64, 128, xCoords + windCycleNum, yCoords - windCycleNum, size, 128);
     objCount++;
     Objects[objCount] = {};
     Objects[objCount].x = xCoords;
@@ -1344,8 +1839,12 @@ function drawObject(type, xCoords, yCoords) {
     Objects[objCount].type = "1x2";
     return;
   } if (type == "reTree") {
-    ctx.drawImage(collidables, 960, 0, 64, 64, xCoords, yCoords, size, size);
+    ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 1024, 0, 64, 64, xCoords + shadowVal, yCoords + size - shadowVal, size, size);
+    ctx.drawImage(collidables, 960, 0, 64, 128, xCoords + shadowVal + windCycleNum, yCoords - shadowVal - windCycleNum, size, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, 1024, 0, 64, 64, xCoords, yCoords + size, size, size);
+    ctx.drawImage(collidables, 960, 0, 64, 128, xCoords + windCycleNum, yCoords - windCycleNum, size, 128);
     objCount++;
     Objects[objCount] = {};
     Objects[objCount].x = xCoords;
@@ -1355,8 +1854,12 @@ function drawObject(type, xCoords, yCoords) {
     Objects[objCount].type = "1x2";
     return;
   } if (type == "yeTree") {
-    ctx.drawImage(collidables, 832, 0, 64, 64, xCoords, yCoords, size, size);
+    ctx.filter = "opacity(50%) brightness(0%)";
+    ctx.drawImage(collidables, 896, 0, 64, 64, xCoords + shadowVal, yCoords + size - shadowVal, size, size);
+    ctx.drawImage(collidables, 832, 0, 64, 128, xCoords + shadowVal + windCycleNum, yCoords - shadowVal - windCycleNum, size, 128);
+      ctx.filter = "opacity(100%) brightness(100%)";
     ctx.drawImage(collidables, 896, 0, 64, 64, xCoords, yCoords + size, size, size);
+    ctx.drawImage(collidables, 832, 0, 64, 128, xCoords + windCycleNum, yCoords - windCycleNum, size, 128);
     objCount++;
     Objects[objCount] = {};
     Objects[objCount].x = xCoords;
@@ -1378,6 +1881,8 @@ function drawObject(type, xCoords, yCoords) {
     owlStates();
     if (owlDirection == "normal") {
       if (owlState == "idle") {
+        owlStates();
+        owlX = -64;
         ctx.drawImage(owlFlying, owlFrame, 0, 64, 64, xCoords + flightDistance, lockedY - 64, size, size);
         if (owlFrame >= 320) {
           owlFrame = 0;
@@ -1386,6 +1891,9 @@ function drawObject(type, xCoords, yCoords) {
         }
       } if (owlState == "flying") {
         owlStates();
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlFlying, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlFlying, owlFrame, 0, 64, 64, xCoords + flightDistance, lockedY - 64, size, size);
         if (owlFrame >= 320) {
           owlFrame = 0;
@@ -1393,9 +1901,17 @@ function drawObject(type, xCoords, yCoords) {
           owlFrame += 64;
         } flightDistance += 64;
         owlX = xCoords + flightDistance;
+        if (owlX >= 896) {
+          owlState = "idle";
+          owlTimer();
+          owlDirection = "alternate";
+        }
         return;
       } if (owlState == "returning") {
         owlStates();
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlFlying, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlFlying, owlFrame, 0, 64, 64, xCoords + flightDistance, lockedY - 64, size, size);
         if (owlFrame >= 320) {
           owlFrame = 0;
@@ -1405,6 +1921,9 @@ function drawObject(type, xCoords, yCoords) {
         owlX = xCoords + flightDistance;
         return;
       } if (owlState == "attacking") {
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlAttacking, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlAttacking, owlFrame, 0, 64, 96, xCoords + flightDistance, lockedY - 64, size, 96);
         if (owlFrame >= 1472) {
           owlFrame = 0;
@@ -1422,6 +1941,9 @@ function drawObject(type, xCoords, yCoords) {
         } if (owlFrame == 1408) {
           owlFrame = 1472;
         }
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlAttacking2, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlAttacking2, owlFrame, 0, -64, 96, xCoords + flightDistance, lockedY - 64, size, 96);
         if (owlFrame <= 256) {
           owlFrame = 384;
@@ -1434,6 +1956,9 @@ function drawObject(type, xCoords, yCoords) {
       }
       if (owlState == "flying") {
         owlStates();
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlFlying2, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlFlying2, owlFrame, 0, -64, 64, xCoords + flightDistance, lockedY - 64, size, size);
         if (owlFrame == 64) {
           owlFrame = 384;
@@ -1441,9 +1966,17 @@ function drawObject(type, xCoords, yCoords) {
           owlFrame -= 64;
         } flightDistance -= 64;
         owlX = xCoords + flightDistance;
+        if (owlX <= -64) {
+          owlState = "idle";
+          owlTimer();
+          owlDirection = "normal";
+        }
         return;
       } if (owlState == "returning") {
         owlStates();
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlFlying2, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlFlying2, owlFrame, 0, -64, 64, xCoords + flightDistance, lockedY - 64, size, size);
         if (owlFrame == 64) {
           owlFrame = 384;
@@ -1454,6 +1987,10 @@ function drawObject(type, xCoords, yCoords) {
         return;
       } if (owlState == "idle") {
         owlStates();
+        owlX = 896;
+        ctx.filter = "opacity(50%) brightness(0%)";
+        ctx.drawImage(owlFlying2, owlFrame, 0, 64, 64, xCoords + flightDistance + shadowVal2, lockedY - 64 - shadowVal2, size, size);
+        ctx.filter = "opacity(100%) brightness(100%)";
         ctx.drawImage(owlFlying2, owlFrame, 0, -64, 64, xCoords + flightDistance, lockedY - 64, size, size);
         if (owlFrame == 64) {
           owlFrame = 384;
@@ -1479,6 +2016,8 @@ let arrX = [];
 let arrY = [];
 let arrType = [];
 
+
+
 function enemyCollisions() {
   if (map == "autumnForest") {
     if (owlState == "attacking") {
@@ -1487,29 +2026,41 @@ function enemyCollisions() {
           if (snekCollider.y == lockedY) {
             if (flashActive || respawnImmunity) {
               return;
-            }
+            } if (isDead == true) {
+            } else {
             killSnake();
+            isDead = true;
+            }
           }
         } if (snekCoords.snekHead.x == owlX || snekCoords.snekHead.x == owlX + 32) {
           if (snekCoords.snekHead.y == lockedY) {
             if (flashActive || respawnImmunity) {
               return;
-            }
+            } if (isDead == true) {
+            } else {
             killSnake();
+            isDead = true;
+            }
           }
         } if (snekCoords.snekLength.x == owlX || snekCoords.snekLength.x == owlX + 32) {
           if (snekCoords.snekLength.y == lockedY) {
             if (flashActive || respawnImmunity) {
               return;
-            }
+            } if (isDead == true) {
+            } else {
             killSnake();
+            isDead = true;
+            } 
           }
         } if (snekCoords.snekEnd.x == owlX || snekCoords.snekEnd.x == owlX + 32) {
           if (snekCoords.snekEnd.y == lockedY) {
             if (flashActive || respawnImmunity) {
               return;
-            }
+            } if (isDead == true) {
+            } else {
             killSnake();
+            isDead = true;
+            }
           }
         }
       }), 350)
@@ -1517,22 +2068,62 @@ function enemyCollisions() {
     if (snekCollider.x == Objects[1].x || snekCollider.x == Objects[1].x + 32 ||
       snekCollider.x == Objects[1].x + 64 || snekCollider.x == Objects[1].x + 96) {
       if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+        if (flashActive || respawnImmunity) {
+          if (isDead == true) {
+          } else {
+          killSnake();
+          isDead = true;
+          }
+        } if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     } if (snekCoords.snekHead.x == Objects[1].x || snekCoords.snekHead.x == Objects[1].x + 32 ||
       snekCoords.snekHead.x == Objects[1].x + 64 || snekCoords.snekHead.x == Objects[1].x + 96) {
       if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+        if (flashActive || respawnImmunity) {
+          if (isDead == true) {
+          } else {
+          killSnake();
+          isDead = true;
+          }
+        } if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     } if (snekCoords.snekLength.x == Objects[1].x || snekCoords.snekLength.x == Objects[1].x + 32 ||
       snekCoords.snekLength.x == Objects[1].x + 64 || snekCoords.snekLength.x == Objects[1].x + 96) {
       if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+        if (flashActive || respawnImmunity) {
+          if (isDead == true) {
+          } else {
+          killSnake();
+          isDead = true;
+          }
+        } if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        } 
       }
     } if (snekCoords.snekEnd.x == Objects[1].x || snekCoords.snekEnd.x == Objects[1].x + 32 ||
       snekCoords.snekEnd.x == Objects[1].x + 64 || snekCoords.snekEnd.x == Objects[1].x + 96) {
       if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+        if (flashActive || respawnImmunity) {
+          if (isDead == true) {
+          } else {
+          killSnake();
+          isDead = true;
+          }
+        } if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     }
     if (foxState == "attacking") {
@@ -1543,7 +2134,11 @@ function enemyCollisions() {
               if (flashActive || respawnImmunity) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1556,7 +2151,11 @@ function enemyCollisions() {
               if (flashActive || respawnImmunity) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1569,7 +2168,11 @@ function enemyCollisions() {
               if (flashActive) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1582,7 +2185,11 @@ function enemyCollisions() {
               if (flashActive) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1592,22 +2199,38 @@ function enemyCollisions() {
     if (snekCollider.x == Objects[1].x || snekCollider.x == Objects[1].x + 32 ||
       snekCollider.x == Objects[1].x + 64 || snekCollider.x == Objects[1].x + 96) {
       if (snekCollider.y == Objects[1].y || snekCollider.y == Objects[1].y + 32) {
+        if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     } if (snekCoords.snekHead.x == Objects[1].x || snekCoords.snekHead.x == Objects[1].x + 32 ||
       snekCoords.snekHead.x == Objects[1].x + 64 || snekCoords.snekHead.x == Objects[1].x + 96) {
       if (snekCoords.snekHead.y == Objects[1].y || snekCoords.snekHead.y == Objects[1].y + 32) {
+        if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     } if (snekCoords.snekLength.x == Objects[1].x || snekCoords.snekLength.x == Objects[1].x + 32 ||
       snekCoords.snekLength.x == Objects[1].x + 64 || snekCoords.snekLength.x == Objects[1].x + 96) {
       if (snekCoords.snekLength.y == Objects[1].y || snekCoords.snekLength.y == Objects[1].y + 32) {
+        if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     } if (snekCoords.snekEnd.x == Objects[1].x || snekCoords.snekEnd.x == Objects[1].x + 32 ||
       snekCoords.snekEnd.x == Objects[1].x + 64 || snekCoords.snekEnd.x == Objects[1].x + 96) {
       if (snekCoords.snekEnd.y == Objects[1].y || snekCoords.snekEnd.y == Objects[1].y + 32) {
+        if (isDead == true) {
+        } else {
         killSnake();
+        isDead = true;
+        }
       }
     }
     if (foxState == "attacking") {
@@ -1618,7 +2241,11 @@ function enemyCollisions() {
               if (flashActive || respawnImmunity) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1631,7 +2258,11 @@ function enemyCollisions() {
               if (flashActive || respawnImmunity) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1644,7 +2275,11 @@ function enemyCollisions() {
               if (flashActive || respawnImmunity) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1657,7 +2292,11 @@ function enemyCollisions() {
               if (flashActive || respawnImmunity) {
                 return;
               }
-            killSnake();
+              if (isDead == true) {
+              } else {
+              killSnake();
+              isDead = true;
+              }
           }
         }
       }), 250);
@@ -1671,19 +2310,35 @@ function enemyCollisions() {
       setTimeout((() => {
         if (snekCollider.x == owlX || snekCollider.x == owlX + 32) {
           if (snekCollider.y == lockedY) {
-            killSnake();
+            if (isDead == true) {
+      } else {
+        killSnake();
+        isDead = true;
+        }
           }
         } if (snekCoords.snekHead.x == owlX || snekCoords.snekHead.x == owlX + 32) {
           if (snekCoords.snekHead.y == lockedY) {
-            killSnake();
+            if (isDead == true) {
+      } else {
+        killSnake();
+        isDead = true;
+        }
           }
         } if (snekCoords.snekLength.x == owlX || snekCoords.snekLength.x == owlX + 32) {
           if (snekCoords.snekLength.y == lockedY) {
-            killSnake();
+            if (isDead == true) {
+      } else {
+        killSnake();
+        isDead = true;
+        }
           }
         } if (snekCoords.snekEnd.x == owlX || snekCoords.snekEnd.x == owlX + 32) {
           if (snekCoords.snekEnd.y == lockedY) {
-            killSnake();
+            if (isDead == true) {
+      } else {
+        killSnake();
+        isDead = true;
+        }
           }
         }
       }), 350)
@@ -1746,6 +2401,11 @@ function checkCollision() {
         snekCollider.x == arrX[x] + 64) {
         isColliding = true;
       }
+    } if (arrType[x] == "slopes") {
+       if (snekCollider.y >= 0 && snekCollider.y <= 128
+        || snekCollider.y >= 416) {
+        isColliding = true;
+       }
     }
   }
 
@@ -1756,25 +2416,25 @@ function updateSnekCollider() {
     snekCollider.x = snekCoords.snekHead.x - 32;
     snekCollider.y = snekCoords.snekHead.y;
     if (snekCollider.x == -32) {
-      snekCollider.x = 480;
+      //snekCollider.x = 864;
     }
   } if (snekDirection == "down") {
     snekCollider.x = snekCoords.snekHead.x;
     snekCollider.y = snekCoords.snekHead.y + 32;
-    if (snekCollider.y == 512) {
-      snekCollider.y = 0;
+    if (snekCollider.y == 896) {
+      //snekCollider.y = 0;
     }
   } if (snekDirection == "right") {
     snekCollider.x = snekCoords.snekHead.x + 32;
     snekCollider.y = snekCoords.snekHead.y;
-    if (snekCollider.x == 512) {
-      snekCollider.x = 0;
+    if (snekCollider.x == 896) {
+      //snekCollider.x = 0;
     }
   } if (snekDirection == "up") {
     snekCollider.x = snekCoords.snekHead.x;
     snekCollider.y = snekCoords.snekHead.y - 32;
     if (snekCollider.y == -32) {
-      snekCollider.y = 480;
+      //snekCollider.y = 864;
     }
   }
   // console.log(snekCollider);
@@ -1782,14 +2442,15 @@ function updateSnekCollider() {
 
 let deaths = 0;
 let trackStop = false;
+let isDead = false;
 
 function killSnake() {
   deaths++;
-  snekCoords.snekHead.x = 224;
+  snekCoords.snekHead.x = 416;
   snekCoords.snekHead.y = 224;
-  snekCoords.snekLength.x = 256;
+  snekCoords.snekLength.x = 448;
   snekCoords.snekLength.y = 224;
-  snekCoords.snekEnd.x = 288;
+  snekCoords.snekEnd.x = 480;
   snekCoords.snekEnd.y = 224;
   snekDirection = "left";
   oldDirection = "left";
@@ -1800,89 +2461,99 @@ function killSnake() {
   let sfx1 = new Audio('/Death2.mp3');
   trackStop = true;
   sfx1.play();
-  respawnImmunity = true; 
+  respawnImmunity = true;
   setTimeout(() => { alert("You Died! Try Again"); sfx1.pause();
-  trackStop = false; setTimeout((() => { respawnImmunity = false; }), 1000) }, 50);
+  trackStop = false; isDead = false;
+   setTimeout((() => { respawnImmunity = false; }), 1500) }, 50);
+  /*
+  for (let foodNum = 1; foodNum < 5; foodNum++) {
+    foods[`food${foodNum}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+    foods[`food${foodNum}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+    foods[`food${foodNum}`].foodType = Math.floor(Math.random() * 10) * 10;
+    foods[`food${foodNum}`].eaten = false;
+    foodOnSnek(foodNum);
+    foodOnFood(foodNum);
+    foodTimer(foodNum);
+    }
+    */
 }
 
 function mapBoundaries(type) {
   if (type == "walls") {
-    if (snekCoords.snekHead.x == 0 || snekCoords.snekHead.x == 512) {
+    if (snekCoords.snekHead.x == 0 || snekCoords.snekHead.x == 896) {
       isColliding = true;
     } if (snekCoords.snekHead.y == 512 || snekCoords.snekHead.y == 0) {
       isColliding = true;
     }
   } if (type == "pacman") {
-    if (snekCoords.snekHead.x == 512 && snekDirection == "right" ||
-    snekCoords.snekHead.x == 512 && snekDirection == "up" ||
-    snekCoords.snekHead.x == 512 && snekDirection == "down") {
+    if (snekCoords.snekHead.x == 896 && snekDirection == "right" ||
+    snekCoords.snekHead.x == 896 && snekDirection == "up" ||
+    snekCoords.snekHead.x == 896 && snekDirection == "down") {
       snekCoords.snekHead.x = -32;
-      movementQueue = [];
+      movementQueue = "";
       snekDirection = "right";
     } if (snekCoords.snekHead.x <= -32 && snekDirection == "left" ||
     snekCoords.snekHead.x == -32 && snekDirection == "up" ||
     snekCoords.snekHead.x == -32 && snekDirection == "down") {
-      snekCoords.snekHead.x = 512;
-      movementQueue = [];
+      snekCoords.snekHead.x = 896;
+      movementQueue = "";
       snekDirection = "left";
     } if (snekCoords.snekHead.y == -32 && snekDirection == "up" ||
     snekCoords.snekHead.y == -32 && snekDirection == "left" ||
     snekCoords.snekHead.y == -32 && snekDirection == "right") {
       snekCoords.snekHead.y = 512;
-      movementQueue = [];
+      movementQueue = "";
       snekDirection = "up";
     } if (snekCoords.snekHead.y == 512 && snekDirection == "down" ||
     snekCoords.snekHead.y == 512 && snekDirection == "left" ||
     snekCoords.snekHead.y == 512 && snekDirection == "right") {
       snekCoords.snekHead.y = -32;
-      movementQueue = [];
+      movementQueue = "";
       snekDirection = "down";
     }
   }
 }
 
 let mapScore = 0;
-let scoreText = document.getElementById('scoreText');
 let requiredScore = 20;
-
-function updateScore() {
-  scoreText.textContent = 'Score:\n' + mapScore + '/' + requiredScore;
-}
 
 function foodCollisions(y) {
   for (let x = 1; x <= objLength; x++) {
     if (map == "forest") {
-      if (foods[`food${y}`].spawnLocationX == 0 || foods[`food${y}`].spawnLocationX == 32 ||
-        foods[`food${y}`].spawnLocationX == 64 || foods[`food${y}`].spawnLocationX == 96 ||
-        foods[`food${y}`].spawnLocationX == 128 || foods[`food${y}`].spawnLocationX == 160
-        || foods[`food${y}`].spawnLocationX == 192 || foods[`food${y}`].spawnLocationX == 224
-        || foods[`food${y}`].spawnLocationX == 256
+      if (foods[`food${y}`].spawnLocationX == 192 || foods[`food${y}`].spawnLocationX == 224 ||
+        foods[`food${y}`].spawnLocationX == 256 || foods[`food${y}`].spawnLocationX == 288 ||
+        foods[`food${y}`].spawnLocationX == 320 || foods[`food${y}`].spawnLocationX == 352
+        || foods[`food${y}`].spawnLocationX == 384 || foods[`food${y}`].spawnLocationX == 416
+        || foods[`food${y}`].spawnLocationX == 448 || foods[`food${y}`].spawnLocationY == 448 ||
+        foods[`food${y}`].spawnLocationX == 480
       ) {
         if (foods[`food${y}`].spawnLocationY == 160 || foods[`food${y}`].spawnLocationY == 192) {
-          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
           foodOnFood(y);
           foodCollisions(y);
+          foodOnSnek(y);
         }
       }
     } if (map == "autumnForest") {
-      if (foods[`food${y}`].spawnLocationX >= 0) {
-        if (foods[`food${y}`].spawnLocationY == 128 || foods[`food${y}`].spawnLocationY == 160) {
-          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+      if (foods[`food${y}`].spawnLocationX >= 288 || foods[`food${y}`].spawnLocationX <= 544) {
+        if (foods[`food${y}`].spawnLocationY == 352 || foods[`food${y}`].spawnLocationY == 384) {
+          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
           foodOnFood(y);
           foodCollisions(y);
+          foodOnSnek(y);
         }
       }
     }
     if (arrType[x] == "1x2") {
       if (foods[`food${y}`].spawnLocationX == arrX[x] || foods[`food${y}`].spawnLocationX == arrX[x] + 32) {
         if (foods[`food${y}`].spawnLocationY == arrY[x] || foods[`food${y}`.spawnLocationY == arrY[x] + 32]) {
-          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
           foodOnFood(y);
           foodCollisions(y);
-          // console.log("foodCollisions run!")
+          // console.log("foodCollisions run!");
           foodOnSnek(y);
         }
       }
@@ -1890,25 +2561,35 @@ function foodCollisions(y) {
       if (foods[`food${y}`].spawnLocationX == arrX[x] || foods[`food${y}`].spawnLocationX == arrX[x] + 32 ||
         foods[`food${y}`].spawnLocationX == arrX[x] + 64 || foods[`food${y}`].spawnLocationX == arrX[x] + 96) {
         if (foods[`food${y}`].spawnLocationY == arrY[x] || foods[`food${y}`].spawnLocationY == arrY[x] + 32) {
-          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+          foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+          foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
           foodOnFood(y);
           foodCollisions(y);
-          // console.log("foodCollisions run!")
+          // console.log("foodCollisions run!");
           foodOnSnek(y);
         }
       }
     } if (arrType[x] == "3x16") {
       if (foods[`food${y}`].spawnLocationX == arrX[x] || foods[`food${y}`].spawnLocationX == arrX[x] + 32 ||
         foods[`food${y}`].spawnLocationX == arrX[x] + 64) {
-        foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-        foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+        foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+        foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
         foodOnFood(y);
         foodCollisions(y)
-        // console.log("foodCollisions run!")
-        foodOnSnek(y);
+        // console.log("foodCollisions run!");
+          foodOnSnek(y);
       }
-    }
+    } if (arrType[x] == "slopes") {
+      if (snekCollider.y >= 0 && snekCollider.y <= 128
+       || snekCollider.y >= 416) {
+        foods[`food${y}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+        foods[`food${y}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
+        foodOnFood(y);
+        foodCollisions(y)
+        // console.log("foodCollisions run!");
+          foodOnSnek(y);
+      }
+   }
   }
 }
 
@@ -1923,7 +2604,7 @@ function foodOnFood(food) {
         if (foods.food1.eaten == true) {
           return;
         }
-        foods.food1.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+        foods.food1.spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
         foods.food1.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
         // console.log("foodOnFood run!")
         foodOnSnek(food);
@@ -1941,7 +2622,7 @@ function foodOnFood(food) {
         if (foods.food1.eaten == true) {
           return;
         }
-        foods.food2.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+        foods.food2.spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
         foods.food2.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
         // console.log("foodOnFood run!")
         foodOnSnek(food);
@@ -1959,7 +2640,7 @@ function foodOnFood(food) {
         if (foods.food1.eaten == true) {
           return;
         }
-        foods.food3.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+        foods.food3.spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
         foods.food3.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
         // console.log("foodOnFood run!")
         foodOnSnek(food);
@@ -1977,7 +2658,7 @@ function foodOnFood(food) {
         if (foods.food1.eaten == true) {
           return;
         }
-        foods.food4.spawnLocationX = Math.floor(Math.random() * 15 + 1) * 32;
+        foods.food4.spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
         foods.food4.spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
         // console.log("foodOnFood run!")
         foodOnSnek(food);
@@ -1992,8 +2673,8 @@ function foodOnFood(food) {
 function foodOnSnek(x) {
   if (foods[`food${x}`].spawnLocationX == snekCoords.snekHead.x &&
     foods[`food${x}`].spawnLocationY == snekCoords.snekHead.y) {
-    foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-    foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+    foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+    foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
     // console.log("foodOnSnekHead run!")
     foodOnSnek(x);
     foodCollisions(x);
@@ -2001,8 +2682,8 @@ function foodOnSnek(x) {
     foodTimer(x);
   } if (foods[`food${x}`].spawnLocationX == snekCoords.snekLength.x &&
     foods[`food${x}`].spawnLocationY == snekCoords.snekLength.y) {
-    foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-    foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+    foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+    foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
     // console.log("foodOnSnekLength run!")
     foodOnSnek(x);
     foodCollisions(x);
@@ -2010,8 +2691,8 @@ function foodOnSnek(x) {
     foodTimer(x);
   } if (foods[`food${x}`].spawnLocationX == snekCoords.snekEnd.x &&
     foods[`food${x}`].spawnLocationY == snekCoords.snekEnd.y) {
-    foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-    foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+    foods[`food${x}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+    foods[`food${x}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
     // console.log("foodOnSnekEnd run!")
     foodOnSnek(x);
     foodCollisions(x);
@@ -2023,10 +2704,12 @@ function foodOnSnek(x) {
 let song1 = new Audio('/grandTheme.mp3');
 let song2 = new Audio('/Forest Troubles.mp3');
 let song3 = new Audio('/guitarSong.mp3');
-let track = new Audio('/Snek OST.mp3')
+let track = new Audio('/MeadowsTheme.mp3');
 let sfx1 = new Audio('/Death.mp3');
 let sfx3 = new Audio('/Death2.mp3');
 let sfx2 = new Audio('/Eat.mp3');
+
+// Important: track.volume = 0 - 1;
 
 function music(song) {
   if (trackStop == true) {
@@ -2036,8 +2719,6 @@ function music(song) {
   track.play();
   
 }
-
-  setInterval(music, 0)
 
 let eggTimer = 7500;
 let foodTimerRespawn1 = "";
@@ -2057,7 +2738,11 @@ function foodTimer(x) {
       }
       if (foods[`food${x}`].foodType <= 10 && foods[`food${x}`].eaten == false) {
         foods[`food${x}`].spawnLocationX = -512;
-      foodOnFood();
+        ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+          drawFood(x);
+      foodOnFood(x);
+      foodOnSnek(x);
+      foodCollisions(x);
       foods[`food${x}`].eaten = true;
       if (x == 1) {
       foodTimerRespawn1 = setTimeout(respawnFood, 3500, x);
@@ -2091,32 +2776,74 @@ function respawnFood(foodNum) {
         clearTimeout(foodTimerRespawn4);
       }
     }
-  foods[`food${foodNum}`].spawnLocationX = Math.floor(Math.random() * 15) * 32;
-  foods[`food${foodNum}`].spawnLocationY = Math.floor(Math.random() * 15) * 32;
+  foods[`food${foodNum}`].spawnLocationX = Math.floor(Math.random() * 27 + 1) * 32;
+  foods[`food${foodNum}`].spawnLocationY = Math.floor(Math.random() * 15 + 1) * 32;
   foods[`food${foodNum}`].foodType = Math.floor(Math.random() * 10) * 10;
   foods[`food${foodNum}`].eaten = false;
   foodOnSnek(foodNum);
   foodOnFood(foodNum);
   foodTimer(foodNum);
+  foodCollisions(foodNum);
 }
 }
 
 for (let x = 1; x <= 4; x++) {
-  foodOnSnek(x);
-  foodOnFood(x);
-  foodTimer(x);
-  foodCollisions(x);
+  
 }
 
 setTimeout((() => { /* setInterval(snek, 1000 / 5); */ snek(); }), 2900);
 let updateSpeed2 = 0.1;
+let snekGameLoop = 0;
 
+let foodText = new Image();
+foodText.src = "/sign.png";
+let signX = 704; // 704 32 384
+let signY = -160;
+let foodGuiActive = false;
+let foodGuiCancel = false;
+
+function foodGui() {
+  if (foodGuiActive == true) {
+    if (signY == -64) {
+      setTimeout((() => { if (foodGuiActive == true) {
+        if (foodGuiCancel == false) {
+        foodGuiActive = false;
+        } else {
+          foodGuiCancel = false;
+        }
+      }}), 500);
+    }
+    signY += 24;
+    if (signY > -64) {
+      signY = -64;
+    }
+  } if (foodGuiActive == false && signY !== -160) {
+    signY -= 18;
+    // SignY used to be 24 (3 for smooth movement)
+  }
+  ctx4.drawImage(foodText, 0, 0, 128, 160, signX, signY, 128, 160);
+  ctx4.fillStyle = "white";
+  ctx4.font = "17px Pixel";
+  ctx4.fillText(`${mapScore}/${requiredScore}`, signX + 42, signY + 136); 
+}
+
+
+function runSnek() {
+  document.body.requestFullscreen();
 setTimeout((() => {
-  let updateSpeed = prompt("Choose your speed: Easy: 3.5, Normal: 4.5 and Hard: 5.5 or customize it");
-  parseInt(updateSpeed, 10);
-  if (updateSpeed <= 10 && updateSpeed > 0) {
+  let info = alert("WASD or Arrow Keys to move")
+  //let updateSpeed = prompt("Choose your speed: Easy: 3.5, Normal: 4.5 and Hard: 5.5 or customize it");
+  //parseInt(updateSpeed, 10);
+  let updateSpeed = 4.5
+  if (updateSpeed > 0) {
     updateSpeed2 = updateSpeed;
+    updateSpeed2 /*
+    smooth movement code here *= 16; */
+    snekGameLoop =
     setInterval(snek, 1000 / updateSpeed2);
+    /*
+    setInterval(snek, 1000 / 60);
+    */
     setTimeout((() => {
       if (updateSpeed2 <= 3.5) {
         eggTimer = 15000;
@@ -2139,9 +2866,13 @@ setTimeout((() => {
       }
     }
   }
-}), 3150);
+}), 800); //3150
+
+setInterval(music, 0);
 
 }
+
+// }
 
 /*
 let encoder = new TextEncoder();
