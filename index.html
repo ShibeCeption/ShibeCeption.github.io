@@ -7,8 +7,8 @@
     <meta name="keywords" content="HTML, CSS" />
     <meta name="description" content="An Arcade with games" />
     <title>The Arcade</title>
-    <link rel="icon" type="image/x-icon" href="/ArcadeLogo6.png" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="/images/ArcadeLogo6.png" />
+    <link rel="stylesheet" href="/arcade-styles.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
@@ -17,51 +17,41 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;900&display=swap"
       rel="stylesheet" />
-    <script defer src="/scripts.js"></script>
+    <script defer src="/arcade_scripts.js"></script>
   </head>
   <body>
-    <div id="top" class="top-bar">
-      <i id="menu" class="fa-solid fa-bars nav-bar-option"></i>
-      <p class="logo-text top-bar-item">
-        <a class="top-bar-item" href="/index.html">
-          The Arcade
-          <img
-            class="logo top-bar-item"
-            src="/ArcadeLogo2Trim.gif"
-            alt="The Arcade" />
-        </a>
+    <div class="arcade-top">
+      <p class="arcade-text"><a href="/arcade.html">The Arcade</a>
+        <div class="games-dropdown">
+          <a href="/snake.html">Snek</a>
+        </div>
       </p>
-      <p class="games">
-        <a id="gamesLink" href="#games-selection">Games <i class="fa-solid fa-gamepad"></i></a>
-      </p>
-      <p class="contact">
-        <a id="contactLink" href="/contact.html">Contact <i class="fa-solid fa-phone"></i></a>
-      </p>
-    </div>
-    <nav class="nav-bar">
-      <p class="toggle-text">
-        &nbsp;Toggle Theme&nbsp;<i
-          class="fa-solid fa-toggle-off toggleTheme"></i>
-      </p>
-    </nav>
-    <div id="games-selection" class="games-selection">
-      <div class="item one">
-        <a class="snakeLink" href="/snake.html">
-          <img
-            class="snakeimg"
-            src="/SnekCover-export.png"
-            alt="a image of a snake" />
-        </a>
+      <p class="games">Games&nbsp;&nbsp;<p class="turn-angle">></p>
+    <div class="contact-dropdown">
+      <a href="mailto:shibeception@proton.me" class="email">Email</a>
+      <a href="https://discord.gg/uXnKS2jQm4">Discord</a>
+    </div></a>
+      <p class="contact">Contact&nbsp;<p class="turn-angle-2">></p></p>
       </div>
-      <div class="item two cm">
-        <img src="/CMtext.png" alt="Coming soon" />
+      <div class="games-section">
+        <div class="game one">
+          <a href="/snake.html">
+            <img src="/SnekCover2.png" alt="Snek"/>
+          </a>
+        </div>
+        <div class="game two">
+          
+          <img src="/CMtext-export.png" alt="Coming Soon" />
+        </div>
+        <div class="game three">
+          <img src="/CMtext-export.png" alt="Coming Soon" />
+        </div>
+        <div class="game four">
+          <div class="pShiba">
+            <img src="/peekingshiba-export.gif" alt="shiba" />
+          </div>
+          <img src="/CMtext-export.png" alt="Coming Soon" />
+        </div>
       </div>
-      <div class="item three cm">
-        <img src="/CMtext.png" alt="Coming soon" />
-      </div>
-      <div class="item four cm">
-        <img src="/CMtext.png" alt="Coming soon" />
-      </div>
-    </div>
   </body>
 </html>
