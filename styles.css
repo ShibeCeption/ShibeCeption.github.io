@@ -1,143 +1,229 @@
 body {
-  background-color: rgb(245, 245, 245);
-  font-family: Aldrich, monospace;
-  margin: 0;
-}
-.top-bar {
-  width: 100vw;
-  height: 7.5vh;
-  position: fixed;
-  top: 0;
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-  background-color: rgb(211, 211, 211);
-  padding-left: 1.5vw;
-  overflow: hidden;
-  z-index: 12;
+    margin: 0;
+    overflow: hidden;
+    font-family: Pixel;
+    font-size: 100%;
+    background-color: rgb(50, 50, 50);
 }
 
-@media (max-width: 1000px) {
-  .top-bar {
-    height: 10vh;
-    flex-shrink: 2;
+
+
+@font-face {
+    font-family: "Pixel"; /*a name to be used later*/
+    src: url("/04B_30__.TTF"); /*URL to font*/
   }
-}
-@media (max-width: 1500px) {
-  .top-bar {
-    height: 10vh;
-  }
-}
-@media (max-width: 500px) {
-  .top-bar {
-    gap: 15px;
-  }
-}
-.home:hover,
-.logo-text:hover,
-.nav-bar-option:hover,
-.games:hover,
-.contact:hover {
-  transform: scale(125%);
-  font-weight: bold;
-}
-.nav-bar-option:hover {
-  top: 25px;
-}
-a {
-  color: black;
-  text-decoration: none;
-}
-.nav-bar-option {
-  position: relative;
-  top: 17.5px;
+
+.arcade-top {
+    width: 93.25%;
+    padding-left: 3%;
+    padding-right: 4%;
+    height: 15%;
+    display: flex;
+    padding-bottom: 1vh;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    border-bottom: 2.5vh solid rgb(35, 35, 35);
+    gap: 1vw;
+    transform: scale(100%);
+    background-color: rgb(50, 50, 50);
 }
 
-.logo {
-  position: relative;
-  top: 10px;
-  left: 0px;
-  font-weight: bold;
+.arcade-text {
+    visibility: visible;
+    color: yellowgreen;
+    font-size: 175%;
+    text-shadow: 0px 0px 3px yellowgreen;
+    position: relative;
+    left: 0%;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.logo-text {
-  position: relative;
-  top: -20px;
+.arcade-text a {
+    color: yellowgreen;
+    text-shadow: 0px 0px 3px yellowgreen;
+    text-decoration: none;
+    transition: all 0.25s ease-in-out;
 }
 
-.fa-gamepad {
-  position: relative;
-  top: 2px;
+.contact, .games {
+    color: yellowgreen;
+    font-size: 175%;
+    text-shadow: 0px 0px 3px yellowgreen;
 }
 
-/*
-.home,
-.logo-text,
-.logo,
-.nav-bar-option,
-.games,
 .contact {
-  transition: all 1s ease-out;
-} */
-
-.games-selection {
-  display: flex;
-  padding-top: 20vh;
-  padding-left: 5vw;
-  width: 90vw;
-  height: 80vh;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5vw;
-}
-.item {
-  width: 25vh;
-  height: 25vh;
-  background-color: #c9c9c9;
-  border: 4vh double rgb(230, 230, 230);
-  border-radius: 10%;
-  display: inherit;
-  justify-content: center;
-  align-items: center;
-  object-fit: cover;
+    position: relative;
+    left: -35.25%;
 }
 
-.item:hover {
-  animation: wiggle 5s;
-}
-.item img {
-  width: 100%;
-  height: 100%;
+.games {
+    position: relative;
+    left: -15.5%;
 }
 
-@keyframes wiggle {
-  40% {
-    transform: rotateZ(5deg);
-  }
-  60% {
-    transform: rotateZ(-5deg);
-  }
+.arcade-text, .games {
+    padding-right: 1.5vw;
+    border-right: 0.5vh solid rgb(30, 30, 30);
 }
 
-.nav-bar {
-  width: 12.5vw;
-  height: 10vh;
-  border-radius: 5%;
-  z-index: 10;
-  background-color: rgb(211, 211, 211);
-  position: fixed;
-  top: 5%;
-  left: 0%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1vw;
-  display: none;
+.turn-angle {
+    transform: rotateZ(0deg);
+    color: yellowgreen;
+    font-size: 175%;
+    text-shadow: 0px 0px 3px yellowgreen;
+    position: relative;
+    left: -20%;
+    transition: all 0.33s ease-in-out;
 }
 
-@media all and (max-width: 1367px) {
-  .nav-bar {
-    align-items: flex-end;
-    height: 12vh;
-  }
+.games-section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+    z-index: -1;
+}
+
+.game {
+    background-color: rgb(37, 37, 37);
+    width: 28.5vh;
+    height: 28.5vh;
+    border: 1vw double rgb(20, 20, 20);
+    object-fit: cover;
+    border-radius: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s ease-in-out;
+}
+
+.one img {
+    border-radius: 10%;
+    transition: all 1s ease-in-out;
+}
+
+.game img, .game a,
+.game a img {
+    width: 100%;
+    height: 100%;
+    transition: all 1s ease-in-out;
+}
+
+.game:nth-child(1):hover,
+.game:nth-child(2):hover,
+.game:nth-child(3):hover {
+    transform: scale(105%);
+    filter: brightness(110%);
+}
+
+.two, .three, .four {
+    cursor: progress;
+}
+
+.games-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14%;
+    height: 45%;
+    position: relative;
+    top: 45%;
+    background-color: rgb(35, 35, 35);
+    box-shadow: 0px 0px 10px 5px black;
+    left: 0.5%;
+    transition: all 0.33s ease-in-out;
+    filter: opacity(0%);
+    transform: scaleY(0%);
+}
+
+.games-dropdown a {
+    width: 100%;
+    color: yellowgreen;
+    font-size: 185%;
+    text-shadow: 0px 0px 3px yellowgreen;
+    text-decoration: none;
+    transition: all 0.33s ease-in-out;
+    filter: opacity(0%);
+    transform: scaleY(0%);
+    padding-top: 5vh;
+    position: relative;
+    top: -35%;
+    left: 20%;
+}
+
+a:hover {
+    --green: rgb(202, 253, 101);
+    color: var(--green);
+    text-shadow: 0px 0px 3px var(--green);
+}
+
+.contact-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 17%;
+    height: 95%;
+    position: relative;
+    top: 70%;
+    background-color: rgb(35, 35, 35);
+    box-shadow: 0px 0px 10px 5px black;
+    left: -18%;
+    transition: all 0.33s ease-in-out;
+    filter: opacity(0%);
+    transform: scaleY(0%);
+}
+
+.contact-dropdown a {
+    color: yellowgreen;
+    font-size: 185%;
+    text-shadow: 0px 0px 3px yellowgreen;
+    text-decoration: none;
+    transition: all 0.33s ease-in-out;
+    filter: opacity(0%);
+    transform: scaleY(0%);
+    padding-top: 5vh;
+    position: relative;
+    top: -40%;
+    left: 42%;
+}
+
+.email {
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.contact-dropdown a:last-child {
+    top: 15%;
+    left: -52.5%;
+    padding-top: 0vh;
+    filter: opacity(0%);
+    transform: scaleY(0%);
+}
+
+.contact-dropdown a:hover {
+    --green: rgb(202, 253, 101);
+    color: var(--green);
+    text-shadow: 0px 0px 3px var(--green);
+}
+
+.turn-angle-2 {
+    transform: rotateZ(0deg);
+    color: yellowgreen;
+    font-size: 175%;
+    text-shadow: 0px 0px 3px yellowgreen;
+    position: relative;
+    left: -36.5%;
+    transition: all 0.33s ease-in-out;
+}
+
+.pShiba {
+    width: 11vw;
+    height: 5vw;
+    position: absolute;
+    top: 22.5%;
 }
